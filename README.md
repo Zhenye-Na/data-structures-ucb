@@ -7,11 +7,9 @@
 ## Overview
 
 <p align="justify">
-<span style="font-family: Trebuchet MS">
 The CS 61 series is an introduction to computer science, with particular emphasis on software and machines from a programmer’s point of view. CS 61A covered high-level approaches to problem-solving, providing you with a variety of ways to organize solutions to programming problems as compositions of functions, collections of objects, or sets of rules. In CS 61B, we move to a somewhat more detailed (and to some extent, more basic) level of programming.
 <br>
 In 61A, the correctness of a program was our primary goal. In CS61B, we’re concerned also with engineering. An engineer, it is said, is someone who can do for a dime what any fool can do for a dollar. Much of 61B will be concerned with the tradeoffs in time and memory for a variety of methods for structuring data. We’ll also be concerned with the engineering knowledge and skills needed to build and maintain moderately large programs.
-</span>
 </p>
 
 ## HW and Labs
@@ -29,9 +27,11 @@ Homework will be graded on a rigorous suite of correctness tests while labs will
 </p>
 
 ## Programming Projects
+<p align="justify">
 In addition to the HWs and labs, there will be 4 programming projects. In these projects you will build an entire system. For project 0, you will be able to work with a partner. For project 2 you will be required to work with a partner, unless you specifically request otherwise (details TBA).
-
+<br>
 Project 0 and 1 will be relatively easier than projects 2 and 3, taking less time and with greater levels of scaffolding. Project 2 will be a very difficult project (on par with what you might expect from Hilfinger’s harder projects). Project 3 will be challenging, but not as time consuming as project 2.
+</p>
 
 Each project has a specific theme:
 
@@ -40,9 +40,11 @@ Each project has a specific theme:
 - Project 2: Large Scale Design and Testing
 - Project 3: Working with an Existing Code Base
 
+<p align="justify">
 For all projects, we will ultimately release all tests that determine your grade. In other words, passing all tests on Gradescope will allow you to earn full points for the autograded portion of the project.
-
+<br>
 Projects 0, 1, 2, and 3 will be worth 50, 80, 200, and 150 points respectively. For projects 2 and 3, there are opportunities for “gold points” described in each project specification.
+</p>
 
 ## Reference
 * [Gitbook for CS 61B](https://joshhug.gitbooks.io/hug61b/content/)
