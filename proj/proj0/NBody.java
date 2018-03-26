@@ -22,7 +22,7 @@ public class NBody {
         Args:
             dir(String): Directory path to txt file.
         Returns:
-            blablabal
+            planet[](Array): array which contains all of the planets.
     */
     public static Planet[] readPlanets(String dir) {
         In in = new In(dir);
@@ -75,6 +75,12 @@ public class NBody {
     // }
 
 
+    /** Main function
+        Args:
+            args[0](double): 0th command line arguments as T. 
+            args[1](double): 1st command line arguments as dt.
+            args[2](String): txt filename.
+    */
     public static void main(String[] args) {
         // Collect All Needed Input
         double T = Double.parseDouble(args[0]);
