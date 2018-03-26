@@ -8,7 +8,15 @@ public class Planet {
     public String imgFileName; // The name of the file that corresponds to the image that depicts the planet 
 
 
-    // Initialize a Planet object
+    /** Initialize a Planet object
+        Args:
+            xP(double): current x position of planet p.
+            yP(double): current y position of planet p.
+            xV(): current velocity in the x direction of planet p
+            yV(): current velocity in the y direction of planet p
+            m(double): mass of planet p
+            img(String): name of the file that corresponds to the image that depicts the planet p
+    */
     public Planet(double xP, double yP, double xV, 
                   double yV, double m, String img) {
         xxPos = xP;
@@ -18,6 +26,7 @@ public class Planet {
         mass = m;
         imgFileName = img;
     }
+
 
     /** Initialize an identical Planet object as Planet p
         Args: 
@@ -127,7 +136,6 @@ public class Planet {
     }
 
 
-
     /** Determine how much the forces exerted on the planet will cause 
         that planet to accelerate, and the resulting change in the 
         planet’s velocity and position in a small period of time dt.
@@ -152,15 +160,17 @@ public class Planet {
     }
 
 
-
-
-
-
-
-
-
-
-
-
+    /** Uses the StdDraw API mentioned above to draw the Planet’s image at the Planet’s position
+        Args:
+            None
+        Returns:
+            None
+    */
+    public void draw() {
+        String imgpath = "./images/" + this.imgFileName;
+        StdDraw.picture(this.xxPos, this.yyPos, imgpath);
+    }
 
 }
+
+
