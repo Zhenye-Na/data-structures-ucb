@@ -39,27 +39,22 @@ public class NBody {
             } catch (java.lang.NumberFormatException e) {
             	break;
             }
-            String yyPs = in.readString();
-            String xxVs = in.readString();
-            String yyVs = in.readString();
-            String masss = in.readString();
-            String imgfile = in.readString();
-            // String planetName = imgfile.split("\\.")[0];
             double xxP = Double.parseDouble(xxPs);
-            double yyP = Double.parseDouble(yyPs);
-            double xxV = Double.parseDouble(xxVs);
-            double yyV = Double.parseDouble(yyPs);
-            double mass = Double.parseDouble(masss);
+            double yyP = Double.parseDouble(in.readString());
+            double xxV = Double.parseDouble(in.readString());
+            double yyV = Double.parseDouble(in.readString());
+            double mass = Double.parseDouble(in.readString());
+            String imgfile = in.readString();
+            String planetName = imgfile.split("\\.")[0];
 
             Planet p = new Planet(xxP, yyP, xxV, yyV, mass, imgfile);
             planets.add(p);
         }
-        // Planet[] planets = {planetName}
+
         Planet planet[] = new Planet[planets.size()];
         planets.toArray(planet);
 
         return planet;
-
     }
 
 
