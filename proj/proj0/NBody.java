@@ -58,19 +58,75 @@ public class NBody {
     }
 
 
+    // public static Planet[] readPlanets(String dir){
+    //     In in = new In(dir);
+    //     int num = in.readInt();
+    //     in.readDouble();
+    //     Planet[] planets = new Planet[num];
+    //     for (int row = 0; row < num; row++){
+    //         planets[row] = new Planet(in.readDouble(),
+    //         	                      in.readDouble(),
+    //         	                      in.readDouble(),
+    //         	                      in.readDouble(),
+    //         	                      in.readDouble(),
+    //         	                      in.readString());
+    //     }
+    //     return planets;
+    // }
 
 
     public static void main(String[] args) {
+        // Collect All Needed Input
         double T = Double.parseDouble(args[0]);
         double dt = Double.parseDouble(args[1]);
         String filename = args[2];
+
         double radius = readRadius(filename);
-        Planet planets = readPlanets(filename);
+        Planet[] planets = readPlanets(filename);
+
+        // Draw the Background
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setScale(-radius, radius);
+        StdDraw.clear();
+        // StdDraw.picture(0, 0, "images/starfield.jpg");
+
+        // // Draw all of the Planets
+        // for (int i = 0; i < planets.length; i++) {
+        //     planets[i].draw();
+        // }
+
+        for (int t = 0; t <= T; t += dt) {
+            double[] xForces = new double[planets.length];
+            double[] yForces = new double[planets.length];
+
+            for (int p = 0; p < planets.length; p++) {
+                xForces[p] = planets[p].calcNetForceExertedByX(planets);
+                yForces[p] = planets[p].calcNetForceExertedByY(planets);
+            }
+
+            for (int p = 0; p < planets.length; p++) {
+                planets[p].update(dt, xForces[p], yForces[p]);
+            }
+
+            StdDraw.picture(0, 0, "images/starfield.jpg");
+
+            // Draw all of the Planets
+            for (int i = 0; i < planets.length; i++) {
+                planets[i].draw();
+            }
+            StdDraw.show();
+            StdDraw.pause(10);
+        }
+
+        StdOut.printf("%d\n", planets.length);
+        StdOut.printf("%.2e\n", radius);
+        for (int i = 0; i < planets.length; i++) {
+            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+            	planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
+            	planets[i].yyVel, planets[i].mass, planets[i].imgFileName);   
+        }
+
     }
-
-
-
-
 
 
 
