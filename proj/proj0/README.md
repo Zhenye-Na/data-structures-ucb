@@ -16,3 +16,5 @@ Ultimately, you will be creating a program NBody.java that draws an animation of
 ## Instructions
 
 More details please [See this page](https://sp18.datastructur.es/materials/proj/proj0/proj0).
+
+![](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/proj/proj0/finalstate.jpg)
