@@ -323,20 +323,209 @@ public int get(int i) {
 **Note:** the method here takes linear time! That is, if you have a list that is 1,000,000 items long, then getting the last item is going to take much longer than it would if we had a small list. We'll see an alternate way to implement a list that will avoid this problem in a future lecture.
 
 
+## 2.2 - SLLists, Nested Classes, Sentinel Nodes
+
+```java
+public class IntNode {
+    public int item;
+    public IntNode next;
+
+    public IntNode(int i, IntNode n) {
+        item = i;
+        next = n;
+    }
+}
+
+
+public class SLList {
+    public IntNode first;
+
+    public SLList(int x) {
+    	first = new IntNode(x, null);
+    }
+}
+
+```
+
+Difference between IntList and SLList (Singly-Linked List) when Instatiating:
+
+```java
+IntList L1 = new IntList(5, null);
+SLList L2  = new SLList(5);
+```
+
+### addFirst and getFirst
+
+```java
+public class IntNode {
+    public int item;
+    public IntNode next;
+
+    public IntNode(int i, IntNode n) {
+        item = i;
+        next = n;
+    }
+}
+
+public class SLList {
+    public IntNode first;
+
+    public SLList(int x) {
+        first = new IntNode(x, null);
+    }
+
+    /** Adds an item to the front of the list. */
+    public void addFirst(int x) {
+        first = new IntNode(x, first);
+    }
+    
+    /** Retrieves the front item from the list. */
+    public int getFirst() {
+        return first.item;
+    }
+    
+    public static void main (String[] args) {
+        SLList L = new SLList(15);
+        L.addFirst(10);
+        L.addFirst(5);
+        int x = L.getFirst();
+        System.out.println(x);
+    }
+}
+```
+
+**Note:** What I am confused for a while is why we can call `first.item` in `getFirst`. THe reason why is that:  
+In SLList init function, `first` is a `IntNode` and `IntNode` has two 'variable', one is `int item`, another is `IntNode next`. So as what I added following, "An SLList (Singly-Linked List) is a _sequence of Nodes_."
+
+
+#### Singly-Linked List
+An SLList (Singly-Linked List) is a _sequence of Nodes_. Each node $\mathtt{u}$ stores a data value $\mathtt{u.x}$ and a reference $\mathtt{u.next}$ to the next node in the sequence. For the last node $\mathtt{w}$ in the sequence, $\mathtt{w.next} = \mathtt{null}$.
+
+A sequence of `Stack` and `Queue` operations on an `SLList` is illustrated in this Figure.  
+
+![](http://opendatastructures.org/ods-java/img1195.png)
+
+An SLList can efficiently implement the Stack operations $ \mathtt{push()}$ and $ \mathtt{pop()}$ by adding and removing elements at the head of the sequence. The $ \mathtt{push()}$ operation simply creates a new node $ \mathtt{u}$ with data value $ \mathtt{x}$, sets $ \mathtt{u.next}$ to the old head of the list and makes $ \mathtt{u}$ the new head of the list. Finally, it increments $ \mathtt{n}$ since the size of the SLList has increased by one:
+
+```
+T push(T x) {
+    Node u = new Node();
+    u.x = x;
+    u.next = head;
+    head = u;
+    if (n == 0)
+        tail = u;
+    n++;
+    return x;
+}
+
+```
+
+The $ \mathtt{pop()}$ operation, after checking that the SLList is not empty, removes the head by setting $ \mathtt{head=head.next}$ and decrementing $ \mathtt{n}$. A special case occurs when the last element is being removed, in which case $ \mathtt{tail}$ is set to $ \mathtt{null}$:
+
+```
+T pop() {
+    if (n == 0)
+        return null;
+    T x = head.x;
+    head = head.next;
+    if (--n == 0) 
+        tail = null;
+    return x;
+}
+```
 
 
 
+### Public vs. Private
+
+```java
+SLList L = new SLList(15);
+L.addFirst(10);
+L.first.next.next = L.first.next;
+```
+
+![](https://joshhug.gitbooks.io/hug61b/content/chap2/fig22/bad_SLList.png)
+
+This results in a malformed list with an infinite loop. To deal with this problem, we can modify the SLList class so that the first variable is declared with the private keyword.
+
+```java
+public class SLList {
+    private IntNode first;
+...
+```
+
+Private variables and methods can only be accessed by code inside the same `.java` file, e.g. in this case `SLList.java`. That means that a class like `SLLTroubleMaker` below will fail to compile, yielding a **first has private access in SLList** error.
+
+```java
+public class SLLTroubleMaker {
+    public static void main(String[] args) {
+        SLList L = new SLList(15);
+        L.addFirst(10);
+        L.first.next.next = L.first.next;
+    }
+}
+```
+
+### Nested Classes
+Java provides us with the ability to embed a class declaration inside of another for just this situation. The syntax is straightforward and intuitive:
+
+```java
+public class SLList {
+    public class IntNode {
+        public int item;
+        public IntNode next;
+        public IntNode(int i, IntNode n) {
+            item = i;
+            next = n;
+        }
+    }
+
+    private IntNode first; 
+
+    public SLList(int x) {
+        first = new IntNode(x, null);
+    } 
+...
+```
+
+- If the nested class has no need to use any of the instance methods or variables of outer class, you may declare the nested class `static`.
 
 
+### addLast() and size()
 
+Iterative `addLast` method, create a pointer variable p and have it iterate through the list to the end.
 
+```java
+/** Adds an item to the end of the list. */
+public void addLast(int x) {
+    IntNode p = first;
 
+    /* Advance p to the end of the list. */
+    while (p.next != null) {
+        p = p.next;
+    }
+    /* Make p.next point to the item we wanna append. */
+    p.next = new IntNode(x, null);
+}
+```
 
+`size` function: create a private helper method that interacts with the underlying naked recursive data structure.
 
+```java
+/** Returns the size of the list starting at IntNode p. */
+private static int size(IntNode p) {
+    if (p.next == null) {
+        return 1;
+    }
 
+    return 1 + size(p.next);
+}
 
-
-
+public int size() {
+    return size(first);
+}
+```
 
 
 
