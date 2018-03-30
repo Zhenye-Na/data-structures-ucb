@@ -8,8 +8,11 @@
 @ [Java Visualizer](https://cscircles.cemc.uwaterloo.ca/java_visualize/)
 * * *
 
+<div style="display: flex; justify-content: center;">
+  <img src="https://ak8.picdn.net/shutterstock/videos/25644788/thumb/12.jpg"/>
+</div>
 
-## 1.1 - Intro, Hello World Java
+## 1.1 - Intro to Java, `Hello World`
 ### Running a Java Program
 
 Given `HelloWorld.java` ->
@@ -131,7 +134,8 @@ System.out.println("y is: " + y);
 ```
 
 ### Bits
-8 primitive types in Java: byte, short, **int**, long, float, **double**, boolean, char. Everything else, including arrays, is not a primitive type but rather a `reference type`.  
+8 primitive types in Java: byte, short, **int**, long, float, **double**, boolean, char. **Everything else**, including arrays, is _not a primitive type_ but rather a `reference type`.
+
 All information in your computer is stored in `memory` as a sequence of ones and zeros
 
 * 72 is often stored as 01001000
@@ -526,6 +530,211 @@ public int size() {
     return size(first);
 }
 ```
+Here, we have two methods, both named `size`. This is _allowed_ in Java, since they have _different parameters_. We say that two methods with the same name but different signatures are **overloaded**.
+
+### Caching
+`Caching`: putting aside data to speed up _retrieval_.
+
+```java
+public class SLList {
+    ... /* IntNode declaration omitted. */
+    private IntNode first;
+    private int size;
+
+    public SLList(int x) {
+        first = new IntNode(x, null);
+        size = 1;
+    }
+
+    public void addFirst(int x) {
+        first = new IntNode(x, first);
+        size += 1;
+    }
+
+    public int size() {
+        return size;
+    }
+    ...
+}
+```
+
+### Empty SLList
+
+```java
+public SLList() {
+    first = null;
+    size = 0;
+}
+```
+Unfortunately, this causes our `addLast` method to crash if we insert into an empty list. Since `first` is `null`, the attempt to access `p.next` in `while (p.next != null)` below causes a **null pointer exception**.
+
+```java
+public void addLast(int x) {
+    size += 1;
+    IntNode p = first;
+    while (p.next != null) {
+        p = p.next;
+    }
+
+    p.next = new IntNode(x, null);
+}
+```
+
+One solution is to add a special case, where `first == null` we do something special - `first = new IntNode(x, null);`.
+
+
+```java
+public void addLast(int x) {
+    size += 1;
+
+    if (first == null) {
+    first = new IntNode(x, null);
+        return;
+    }
+
+    IntNode p = first;
+    while (p.next != null) {
+        p = p.next;
+    }
+
+    p.next = new IntNode(x, null);
+}
+```
+
+### Sentinel Nodes
+Add a "starting" node which contains whatever you wanna put in. But it is just the first node in the SLList. It does not affect your SLList. Only make sure that `while(p.next != null)` will not give you error.
+
+![](https://joshhug.gitbooks.io/hug61b/content/chap2/fig22/empty_sentinelized_SLList.png)  
+![](https://joshhug.gitbooks.io/hug61b/content/chap2/fig22/three_item_sentenlized_SLList.png)
+
+```java
+public void addLast(int x) {
+    size += 1;
+    IntNode p = sentinel;
+    while (p.next != null) {
+        p = p.next;
+    }
+
+    p.next = new IntNode(x, null);
+}
+```
+
+### Invariants
+An invariant is a condition that is _guaranteed to be true during code execution_ (assuming there are no bugs in your code).
+
+An `SLList` with a `sentinel` node has at least the following invariants:
+
+* The sentinel reference always points to a sentinel node.
+* The `first` node (if it exists), is always at `sentinel.next`.
+* The `size` variable is always the total number of items that have been added.
+
+Invariants make it easier to reason about code:
+
+* Can assume they are true to simplify code (e.g. addLast doesn’t need to worry about nulls).
+* Must ensure that methods preserve invariants.
+
+
+## 2.3 - DLLists, Arrays
+
+A `DLList` (doubly-linked list) is very similar to an `SLList` except that each node $ \mathtt{u}$ in a `DLList` has references to both the node $ \mathtt{u.next}$ that follows it and the node $ \mathtt{u.prev}$ that precedes it.
+
+When implementing an `SLList`, we saw that there were always several special cases to worry about. For example, removing the last element from an `SLList` or adding an element to an empty `SLList` requires care to ensure that $ \mathtt{head}$ and $ \mathtt{tail}$ are correctly updated. In a `DLList`, the number of these special cases increases considerably. Perhaps the cleanest way to take care of all these special cases in a `DLList` is to introduce a $ \mathtt{dummy}$ node. This is a node that does not contain any data, but acts as a placeholder so that there are no special nodes; every node has both a $ \mathtt{next}$ and a $ \mathtt{prev}$, with $ \mathtt{dummy}$ acting as the node that follows the last node in the list and that precedes the first node in the list. In this way, the nodes of the list are (doubly-)linked into a cycle, as illustrated in this figure.
+
+<div style="display: flex; justify-content: center;">
+  <img src="http://opendatastructures.org/ods-java/img1251.png"/>
+</div>
+
+### addLast
+
+```java
+public void addLast(int x) {
+    size += 1;
+    IntNode p = sentinel;
+    while (p.next != null) {
+        p = p.next;
+    }
+
+    p.next = new IntNode(x, null);
+}
+```
+
+The issue with this method is that it is slow. For a long list, the addLast method has to walk through the entire list. So like `size()` function using `Caching`, we can initialize a variable named `last` which indicates the last element in the SLList.
+
+```java
+public class SLList {
+    private IntNode sentinel;
+    private IntNode last;
+    private int size;    
+
+    public void addLast(int x) {
+        last.next = new IntNode(x, null);
+        last = last.next;
+        size += 1;
+    }
+    ...
+}
+```
+
+Note: This method is good for `addLast` and `getLast`. However, for `removeLast`, once we do remove the last element. How to move to second last element?
+
+
+### Generic DLLists
+The basic idea is that right after the name of the class in your class declaration, you use an arbitrary placeholder inside angle brackets: `<>`. Then anywhere you want to use the arbitrary type, you use that placeholder instead.
+
+Here is an example of the `DLList` we created before changing to Generic DLList. `<Beepblorp>` is just a placeholder for data type when you created (`new`) a `DLList` object.
+
+```java
+public class DLList<BleepBlorp> {
+    private IntNode sentinel;
+    private int size;
+
+    public class IntNode {
+        public IntNode prev;
+        public BleepBlorp item;
+        public IntNode next;
+        ...
+    }
+    ...
+}
+```
+
+To do so, we put the desired type inside of angle brackets during declaration, and also use empty angle brackets during instantiation. For example:
+
+```java
+DLList<String> d1 = new DLList<> ("hello");
+DLList<String> d2 = new DLList<String> ("hello");
+d2.addLast("world");
+```
+
+Since generics only work with `reference types` (recall what `reference types` are), we cannot put primitives like `int` or `double` inside of angle brackets, e.g. `<int>`. Instead, we use the reference version of the primitive type, which in the case of int case is `Integer`, e.g.
+
+```java
+DLList<Integer> d1 = new DLList<>(5);
+d1.insertFront(10);
+```
+
+* In the `.java` file implementing a data structure, specify your generic type name only once at the very top of the file after the class name.
+* In other `.java` files, which use your data structure, specify the specific desired type during declaration, and use the empty diamond operator during instantiation.
+* If you need to instantiate a generic over a primitive type, use `Integer`, `Double`, `Character`, `Boolean`, `Long`, `Short`, `Byte`, or `Float` instead of their primitive equivalents.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
