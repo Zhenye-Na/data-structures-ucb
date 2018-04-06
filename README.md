@@ -1,8 +1,12 @@
 # CS61B Data Structures 
+* * *
+
 @ UCB, Spring 2018  
-@ Instructor: [Josh Hug](https://www2.eecs.berkeley.edu/Faculty/Homepages/joshhug.html)  
-@ Lecture: MWF 3-4 PM, Wheeler 150  
-@ [Course Website](https://sp18.datastructur.es/index.html)
+@ Instructor: [Josh Hug](https://www2.eecs.berkeley.edu/Faculty/Homepages/joshhug.html)   
+@ [Course Website](https://sp18.datastructur.es/index.html)  
+@ [Java Visualizer](https://cscircles.cemc.uwaterloo.ca/java_visualize/)
+
+* * *
 
 ## Overview
 
@@ -47,6 +51,8 @@ Projects 0, 1, 2, and 3 will be worth 50, 80, 200, and 150 points respectively. 
 </p>
 
 ## Reference
-* [Gitbook for CS 61B](https://joshhug.gitbooks.io/hug61b/content/)
-* [Head First Java 2nd edition](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/docs/head-first-java-2nd-edition.pdf)
-* [A Java Reference - Assorted JAva Reference Material](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/docs/java.pdf)
+* [Gitbook CS 61B - Josh Hug](https://joshhug.gitbooks.io/hug61b/content/)
+* [Head First Java - 2nd edition (pdf)](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/docs/head-first-java-2nd-edition.pdf)
+* [A Java Reference - Assorted JAva Reference Material (pdf)](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/docs/java.pdf)
+* [Open Data Structures (in Java)](http://opendatastructures.org/ods-java/ods-java-html.html)
+* [GeeksforGeeks - Data Structures](https://www.geeksforgeeks.org/data-structures/)
