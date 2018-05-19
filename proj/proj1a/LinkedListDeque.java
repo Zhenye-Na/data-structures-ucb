@@ -270,38 +270,41 @@ public class LinkedListDeque<PlaceholderType> {
 
 
 
-
+    /**  Dummy main function for test.
+     *
+     * */
     public static void main(String[] args){
-        LinkedListDeque<Integer> list = new LinkedListDeque<>();
-        list.addFirst(666);
-        list.addLast(6666);
-        list.addLast(66666);
-        list.printDeque();                          // expected (666 6666 66666)
+        LinkedListDeque<Integer> Dllist = new LinkedListDeque<>();
+        Dllist.addFirst(666);
+        Dllist.addLast(6666);
+        Dllist.addLast(66666);
+        Dllist.printDeque();                        // expected (666 6666 66666)
         System.out.println( );
-        System.out.println(list.getIterative(0)); // expected 666
-        System.out.println(list.getIterative(1)); // expected 6666
-        System.out.println(list.getIterative(5)); // expected null
+        System.out.println(Dllist.getIterative(0)); // expected 666
+        System.out.println(Dllist.getIterative(1)); // expected 6666
+        System.out.println(Dllist.getIterative(5)); // expected null
         System.out.println( );
-        System.out.println(list.getRecursive(0)); // expected 666
-        System.out.println(list.getRecursive(1)); // expected 6666
+        System.out.println(Dllist.getRecursive(0)); // expected 666
+        System.out.println(Dllist.getRecursive(1)); // expected 6666
         System.out.println( );
-        list.removeFirst();
-        list.printDeque();                        // expected (6666 66666)
-        System.out.println( );
-        System.out.println(list.getIterative(0)); // expected 6666
-        System.out.println(list.getIterative(1)); // expected 66666
-        System.out.println( );
-        System.out.println(list.getRecursive(0)); // expected 6666
-        System.out.println(list.getRecursive(1)); // expected 66666
 
-        list.removeLast();
-        list.printDeque();                              // expected 6666
+        Dllist.removeFirst();
+        Dllist.printDeque();                        // expected (6666 66666)
         System.out.println( );
-        System.out.println(list.getIterative(0)); // expected 6666
-        System.out.println(list.getIterative(1)); // expected null
+        System.out.println(Dllist.getIterative(0)); // expected 6666
+        System.out.println(Dllist.getIterative(1)); // expected 66666
         System.out.println( );
-        System.out.println(list.getRecursive(0)); // expected 6666
-        System.out.println(list.getRecursive(1)); // expected null
+        System.out.println(Dllist.getRecursive(0)); // expected 6666
+        System.out.println(Dllist.getRecursive(1)); // expected 66666
+
+        Dllist.removeLast();
+        Dllist.printDeque();                        // expected 6666
+        System.out.println( );
+        System.out.println(Dllist.getIterative(0)); // expected 6666
+        System.out.println(Dllist.getIterative(1)); // expected null
+        System.out.println( );
+        System.out.println(Dllist.getRecursive(0)); // expected 6666
+        System.out.println(Dllist.getRecursive(1)); // expected null
     }
 
 
