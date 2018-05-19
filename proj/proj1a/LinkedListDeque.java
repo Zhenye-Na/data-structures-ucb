@@ -18,11 +18,7 @@ public class LinkedListDeque<PlaceholderType> {
         public ListNode prev;
         public ListNode next;
 
-
-        /**
-         *
-         *
-         * */
+        
         public ListNode (ListNode p, PlaceholderType i, ListNode n){
             prev = p;
             item = i;
@@ -38,14 +34,7 @@ public class LinkedListDeque<PlaceholderType> {
     private int size;
 
 
-    /**  Creates an empty linked list deque.
-     *
-     *   Args:
-     *
-     *
-     *   Returns:
-     *
-     * */
+    /**  Creates an empty linked list deque. */
     public LinkedListDeque() {
         sentinel = new ListNode(null, null , null);
         sentinel.next = sentinel;
@@ -59,10 +48,10 @@ public class LinkedListDeque<PlaceholderType> {
     /**  Adds an item of type <PlaceholderType> to the front of the deque.
      *
      *   Args:
-     *       item (PlaceholderType): new first item
+     *       item (PlaceholderType): new first item.
      *
      *   Returns:
-     *       Nothing to return
+     *       Nothing to return.
      * */
     public void addFirst(PlaceholderType item){
         sentinel.next = new ListNode(sentinel, item, sentinel.next);
@@ -75,10 +64,10 @@ public class LinkedListDeque<PlaceholderType> {
     /**  Adds an item of type <PlaceholderType> to the back of the deque.
      *
      *   Args:
-     *
+     *       item (PlaceholderType): new first item.
      *
      *   Returns:
-     *
+     *       Nothing to return.
      * */
     public void addLast(PlaceholderType item){
         sentinel.prev.next = new ListNode(sentinel.prev, item, sentinel);
@@ -89,41 +78,21 @@ public class LinkedListDeque<PlaceholderType> {
 
 
 
-    /**  Returns true if deque is empty, false otherwise.
-     *
-     *   Args:
-     *
-     *   Returns:
-     *
-     * */
+    /**  Returns true if deque is empty, false otherwise.*/
     public boolean isEmpty() {
         return (this.size == 0);
     }
 
 
 
-    /**  Returns the number of items in the deque in constant time.
-     *
-     *   Args:
-     *
-     *
-     *   Returns:
-     *
-     * */
+    /**  Returns the number of items in the deque in constant time. */
     public int size() {
         return size;
 
     }
 
 
-    /**  Prints the items in the deque from first to last, separated by a space.
-     *
-     *   Args:
-     *
-     *
-     *   Returns:
-     *
-     * */
+    /**  Prints the items in the deque from first to last, separated by a space. */
     public void printDeque() {
         ListNode node = sentinel;
         while (node.next != sentinel){
@@ -163,16 +132,14 @@ public class LinkedListDeque<PlaceholderType> {
     }
 
 
-
     /**  Removes and returns the item at the back of the deque.
      *   If no such item exists, returns null.
      *
-     *
      *   Args:
-     *
+     *       None
      *
      *   Returns:
-     *
+     *       Last item in Linked-List-Deque or null
      * */
     public PlaceholderType removeLast(){
 
