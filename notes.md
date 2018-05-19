@@ -944,10 +944,4 @@ This is because, since we only have references to the first and last items of th
 
 
 
-<style>
-body p,
-.sqs-layout .sqs-block.html-block p,
-.sqs-layout .sqs-block.markdown-block p {
-text-align: justify;
-}
-</style>
+{style="text-align:center"}
