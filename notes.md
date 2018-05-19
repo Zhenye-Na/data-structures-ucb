@@ -897,6 +897,12 @@ to get arrays with specific values.
 
 ## 3.1 ALists, Resizing, vs. SLists
 
+### Linked List Performance Puzzle Solution
+It turns out that no matter how clever you are, the get method will usually be slower than getBack if we're using the doubly linked list structure described in [section 2.3](#23---dllists-arrays).
+
+This is because, since we only have references to the first and last items of the list, we'll always need to scan the whole list from the front or back to get to the item that we're trying to retrieve.
+
+### Naive Array Based List
 
 
 
@@ -922,3 +928,26 @@ to get arrays with specific values.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+body p,
+.sqs-layout .sqs-block.html-block p,
+.sqs-layout .sqs-block.markdown-block p {
+text-align: justify;
+}
+</style>
