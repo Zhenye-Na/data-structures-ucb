@@ -18,7 +18,7 @@ public class LinkedListDeque<PlaceholderType> {
         public ListNode prev;
         public ListNode next;
 
-        
+
         public ListNode (ListNode p, PlaceholderType i, ListNode n){
             prev = p;
             item = i;
@@ -44,7 +44,6 @@ public class LinkedListDeque<PlaceholderType> {
     }
 
 
-
     /**  Adds an item of type <PlaceholderType> to the front of the deque.
      *
      *   Args:
@@ -58,7 +57,6 @@ public class LinkedListDeque<PlaceholderType> {
         sentinel.next.next.prev = sentinel.next;
         size += 1;
     }
-
 
 
     /**  Adds an item of type <PlaceholderType> to the back of the deque.
@@ -76,13 +74,10 @@ public class LinkedListDeque<PlaceholderType> {
     }
 
 
-
-
     /**  Returns true if deque is empty, false otherwise.*/
     public boolean isEmpty() {
         return (this.size == 0);
     }
-
 
 
     /**  Returns the number of items in the deque in constant time. */
@@ -126,7 +121,6 @@ public class LinkedListDeque<PlaceholderType> {
             size -= 1;
 
             return firstItem;
-
         }
 
     }
@@ -155,11 +149,9 @@ public class LinkedListDeque<PlaceholderType> {
             size -= 1;
 
             return lastItem;
-
         }
 
     }
-
 
 
     /**  Gets the item at the given index using <iteration>, where 0 is the front, 1 is the next item, and so forth.
@@ -235,8 +227,6 @@ public class LinkedListDeque<PlaceholderType> {
     }
 
 
-
-
     /**  Dummy main function for test.
      *
      * */
@@ -274,6 +264,5 @@ public class LinkedListDeque<PlaceholderType> {
         System.out.println(Dllist.getRecursive(1)); // expected null
     }
 
-
-
+    
 }
