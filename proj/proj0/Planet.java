@@ -1,3 +1,10 @@
+/** Project 0: NBody Simulation
+ *
+ *  src = "https://sp18.datastructur.es/materials/proj/proj0/proj0"
+ *
+ *  Zhenye Na 03/25/2018
+ */
+
 public class Planet {
 
     public double xxPos;       // Its current x position
@@ -8,7 +15,7 @@ public class Planet {
     public String imgFileName; // The name of the file that corresponds to the image that depicts the planet 
 
 
-    /** Initialize a Planet object
+    /** Initialize a Planet object.
         Args:
             xP(double): current x position of planet p.
             yP(double): current y position of planet p.
@@ -28,7 +35,7 @@ public class Planet {
     }
 
 
-    /** Initialize an identical Planet object as Planet p
+    /** Initialize an identical Planet object as Planet p.
         Args: 
             Planet Object p.
         Returns: 
@@ -68,7 +75,7 @@ public class Planet {
     }
 
 
-    /** Describe the force exerted in the X directions
+    /** Describe the force exerted in the X directions.
         Args(Planet):
             Planet Object p.
         Returns(double):
@@ -82,7 +89,7 @@ public class Planet {
     }
 
 
-    /** Describe the force exerted in the Y directions
+    /** Describe the force exerted in the Y directions.
         Args(Planet):
             Planet Object p.
         Returns(double):
@@ -96,7 +103,7 @@ public class Planet {
     }
 
 
-    /** Calculate the net X force exerted by all planets 
+    /** Calculate the net X force exerted by all planets.
         in that array upon the current Planet.
         Args(Array):
             Array of Planets.
@@ -116,7 +123,7 @@ public class Planet {
     }
 
 
-    /** Calculate the net Y force exerted by all planets 
+    /** Calculate the net Y force exerted by all planets.
         in that array upon the current Planet.
         Args(Array):
             Array of Planets.
@@ -160,7 +167,8 @@ public class Planet {
     }
 
 
-    /** Uses the StdDraw API mentioned above to draw the Planet’s image at the Planet’s position
+    /** Uses the StdDraw API mentioned above to draw the
+        Planet’s image at the Planet’s position.
         Args:
             None
         Returns:
@@ -172,5 +180,4 @@ public class Planet {
     }
 
 }
-
 

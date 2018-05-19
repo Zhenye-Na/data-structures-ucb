@@ -1,3 +1,10 @@
+/** Project 0: NBody Simulation
+ *
+ *  src = "https://sp18.datastructur.es/materials/proj/proj0/proj0"
+ *
+ *  Zhenye Na 03/25/2018
+ */
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -133,7 +140,6 @@ public class NBody {
         }
 
     }
-
 
 }
 
