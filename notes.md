@@ -1,4 +1,5 @@
 # CS61B Data Structures - lecture notes
+
 * * *
 
 @ UCB, Spring 2018  
@@ -6,6 +7,7 @@
 @ Lecture: MWF 3-4 PM, Wheeler 150  
 @ [Course Website](https://sp18.datastructur.es/index.html)  
 @ [Java Visualizer](https://cscircles.cemc.uwaterloo.ca/java_visualize/)
+
 * * *
 
 <div style="display: flex; justify-content: center;">
@@ -403,13 +405,13 @@ In SLList init function, `first` is a `IntNode` and `IntNode` has two 'variable'
 
 
 #### Singly-Linked List
-An SLList (Singly-Linked List) is a _sequence of Nodes_. Each node $\mathtt{u}$ stores a data value $\mathtt{u.x}$ and a reference $\mathtt{u.next}$ to the next node in the sequence. For the last node $\mathtt{w}$ in the sequence, $\mathtt{w.next} = \mathtt{null}$.
+An SLList (Singly-Linked List) is a _sequence of Nodes_. Each node $\mathtt{u` stores a data value $\mathtt{u.x` and a reference $\mathtt{u.next` to the next node in the sequence. For the last node $\mathtt{w` in the sequence, $\mathtt{w.next} = \mathtt{null`.
 
 A sequence of `Stack` and `Queue` operations on an `SLList` is illustrated in this Figure.  
 
 ![](http://opendatastructures.org/ods-java/img1195.png)
 
-An SLList can efficiently implement the Stack operations $ \mathtt{push()}$ and $ \mathtt{pop()}$ by adding and removing elements at the head of the sequence. The $ \mathtt{push()}$ operation simply creates a new node $ \mathtt{u}$ with data value $ \mathtt{x}$, sets $ \mathtt{u.next}$ to the old head of the list and makes $ \mathtt{u}$ the new head of the list. Finally, it increments $ \mathtt{n}$ since the size of the SLList has increased by one:
+An SLList can efficiently implement the Stack operations `push()` and `pop()` by adding and removing elements at the head of the sequence. The `push()` operation simply creates a new node `u` with data value `x`, sets `u.next` to the old head of the list and makes `u` the new head of the list. Finally, it increments `n` since the size of the SLList has increased by one:
 
 ```
 T push(T x) {
@@ -425,7 +427,7 @@ T push(T x) {
 
 ```
 
-The $ \mathtt{pop()}$ operation, after checking that the SLList is not empty, removes the head by setting $ \mathtt{head=head.next}$ and decrementing $ \mathtt{n}$. A special case occurs when the last element is being removed, in which case $ \mathtt{tail}$ is set to $ \mathtt{null}$:
+The `pop()` operation, after checking that the SLList is not empty, removes the head by setting `head=head.next` and decrementing `n`. A special case occurs when the last element is being removed, in which case `tail` is set to `null`:
 
 ```
 T pop() {
@@ -636,15 +638,17 @@ Invariants make it easier to reason about code:
 
 ## 2.3 - DLLists, Arrays
 
-A `DLList` (doubly-linked list) is very similar to an `SLList` except that each node $ \mathtt{u}$ in a `DLList` has references to both the node $ \mathtt{u.next}$ that follows it and the node $ \mathtt{u.prev}$ that precedes it.
+### DLLists
 
-When implementing an `SLList`, we saw that there were always several special cases to worry about. For example, removing the last element from an `SLList` or adding an element to an empty `SLList` requires care to ensure that $ \mathtt{head}$ and $ \mathtt{tail}$ are correctly updated. In a `DLList`, the number of these special cases increases considerably. Perhaps the cleanest way to take care of all these special cases in a `DLList` is to introduce a $ \mathtt{dummy}$ node. This is a node that does not contain any data, but acts as a placeholder so that there are no special nodes; every node has both a $ \mathtt{next}$ and a $ \mathtt{prev}$, with $ \mathtt{dummy}$ acting as the node that follows the last node in the list and that precedes the first node in the list. In this way, the nodes of the list are (doubly-)linked into a cycle, as illustrated in this figure.
+A `DLList` (doubly-linked list) is very similar to an `SLList` except that each node `u` in a `DLList` has references to both the node u.next that follows it and the node `u.prev` that precedes it.
+
+When implementing an `SLList`, we saw that there were always several special cases to worry about. For example, removing the last element from an `SLList` or adding an element to an empty `SLList` requires care to ensure that `head` and `tail` are correctly updated. In a `DLList`, the number of these special cases increases considerably. Perhaps the cleanest way to take care of all these special cases in a `DLList` is to introduce a `dummy` node. This is a node that does not contain any data, but acts as a placeholder so that there are no special nodes; every node has both a `next` and a `prev`, with `dummy` acting as the node that follows the last node in the list and that precedes the first node in the list. In this way, the nodes of the list are (doubly-)linked into a cycle, as illustrated in this figure.
 
 <div style="display: flex; justify-content: center;">
   <img src="http://opendatastructures.org/ods-java/img1251.png"/>
 </div>
 
-### addLast
+#### addLast
 
 ```java
 public void addLast(int x) {
@@ -678,19 +682,32 @@ public class SLList {
 Note: This method is good for `addLast` and `getLast`. However, for `removeLast`, once we do remove the last element. How to move to second last element?
 
 
-### Generic DLLists
-The basic idea is that right after the name of the class in your class declaration, you use an arbitrary placeholder inside angle brackets: `<>`. Then anywhere you want to use the arbitrary type, you use that placeholder instead.
+#### Sentinel Upgrade
 
-Here is an example of the `DLList` we created before changing to Generic DLList. `<Beepblorp>` is just a placeholder for data type when you created (`new`) a `DLList` object.
+* Add a second sentinel node to the back of the list.
+
+![](https://joshhug.gitbooks.io/hug61b/content/chap2/fig23/dllist_double_sentinel_size_2.png)
+
+We have two sentinel nodes we have access to in this case. The items are inserted in between the front sentinel node and back sentinel node.
+
+* An alternate approach is to implement the list so that it is circular, with the front and back pointers sharing the same sentinel node.
+
+![](https://joshhug.gitbooks.io/hug61b/content/chap2/fig23/dllist_circular_sentinel_size_2.png)
+
+
+#### Generic DLLists
+The basic idea is that right after the name of the class in your class declaration, you use an arbitrary _*placeholder*_ inside angle brackets: `<>`. Then anywhere you want to use the arbitrary type, you use that placeholder instead.
+
+Here is an example of the `DLList` we created before changing to Generic DLList. `<Beepblorp>` is just a _*placeholder*_ for data type when you created (`new`) a `DLList` object.
 
 ```java
-public class DLList<BleepBlorp> {
+public class DLList<placeholder> {
     private IntNode sentinel;
     private int size;
 
     public class IntNode {
         public IntNode prev;
-        public BleepBlorp item;
+        public placeholder item;
         public IntNode next;
         ...
     }
@@ -698,7 +715,7 @@ public class DLList<BleepBlorp> {
 }
 ```
 
-To do so, we put the desired type inside of angle brackets during declaration, and also use empty angle brackets during instantiation. For example:
+To do so, we put the *desired type inside of angle brackets* during declaration, and also use *empty angle brackets* during instantiation. For example:
 
 ```java
 DLList<String> d1 = new DLList<> ("hello");
@@ -715,7 +732,173 @@ d1.insertFront(10);
 
 * In the `.java` file implementing a data structure, specify your generic type name only once at the very top of the file after the class name.
 * In other `.java` files, which use your data structure, specify the specific desired type during declaration, and use the empty diamond operator during instantiation.
-* If you need to instantiate a generic over a primitive type, use `Integer`, `Double`, `Character`, `Boolean`, `Long`, `Short`, `Byte`, or `Float` instead of their primitive equivalents.
+* If you need to instantiate a generic over a primitive type, use **reference type** $\Rightarrow$ `Integer`, `Double`, `Character`, `Boolean`, `Long`, `Short`, `Byte`, or `Float` instead of their **primitive** equivalents.
+
+
+### Arrays
+
+There are three valid notations for array creation. 
+
+```java
+x = new int[3];  // ecah container got its own default value
+y = new int[]{1, 2, 3, 4, 5};
+int[] z = {9, 10, 11, 12, 13};
+```
+
+`System.arraycopy` takes five parameters:
+
+* The array to use as a source
+* Where to start in the source array
+* The array to use as a destination
+* Where to start in the destination array
+* How many items to copy
+
+For Python veterans, `System.arraycopy(b, 0,x, 3, 2)` is the equivalent of `x[3:5] = b[0:2]` in Python.
+
+
+#### 2D Arrays
+
+```java
+int[][] x = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+// share variables, so changing z will change x
+int[][] z = new int[3][];
+z[0] = x[0];
+z[1] = x[1];
+z[2] = x[2];
+z[0][0] = -z[0][0];
+
+// arraycopy does not share variables, changing z does not affect x
+int[][] w = new int[3][3];
+System.arraycopy(x[0], 0, w[0], 0, 3);
+System.arraycopy(x[1], 0, w[1], 0, 3);
+System.arraycopy(x[2], 0, w[2], 0, 3);
+w[0][0] = -w[0][0];
+```
+
+#### Arrays vs. Classes
+
+The key differences between memory boxes in arrays and classes:
+
+* Array boxes are numbered and accessed using `[]` notation, and class boxes are named and accessed using `dot` notation.
+* Array boxes must all be the same type. Class boxes can be different types.
+
+
+##### Overview
+
+###### `SLList` Drawbacks
+`addLast()` is slow! We can't add to the middle of our list. In addition, if our list is really large, we have to start at the front, and loop all the way to the back of our list before adding our element.
+
+###### A Naive Solution
+Recall that we cached the size of our list as an instance variable of `SLList`. What if we cached the last element in our list as well? All of a sudden, `addLast()` is fast again; we access the last element immediately, then add our element in. But `removeLast()` is still slow. In `removeLast()`, we have to know what our second-to-last element is, so we can point our cached last variable to it. We could then cache a second-to-last variable, but now if I ever want to remove the second-to-last element, I need to know where our third-to-last element is. How to solve _this_ problem?
+
+###### `DLList` 
+The solution is to give each `IntNode` a `prev` pointer, pointing to the previous item. This creates a *doubly-linked list*, or `DLList`. With this modification, adding and removing from the front and back of our list becomes fast (*although adding/removing from the middle remains slow*).
+
+###### Incorporating the Sentinel
+Recall that we added a `sentinel node` to our `SLList`. For DLList, we can either have **two sentinels** (one for the front, and one for the back), or we can use a **circular sentinel**. A `DLList` using a circular sentinel has one sentinel. The sentinel points to the first element of the list with `next` and the last element of the list with `prev`. In addition, the last element of the list's `next` points to the `sentinel` and the first element of the list's `prev` points to the `sentinel`. _For an empty list, the sentinel points to itself in both directions._
+
+###### Generic DLList 
+How can we modify our DLList so that it can be a list of whatever objects we choose? Recall that our class definition looks like this:
+
+```java
+public class DLList { ... }
+```
+
+We will change this to
+
+```java
+public class DLList<T> { ... }
+```
+
+where `T` is a placeholder object type. Notice the angle bracket syntax. Also note that we don't have to use `T`; any variable name is fine. In our `DLList`, our item is now of type `T`, and our methods now take `T` instances as parameters. We can also rename our `IntNode` class to `TNode` for accuracy.
+
+###### Using Generic DLList
+
+Recall that to create a `DLList`, we typed:
+
+```java
+DLList list = new DLList(10);
+```
+
+If we now want to create a `DLList` holding `String` objects, then we must say:
+
+```java
+DLList<String> list = new DLList<>("bone");
+```
+
+On list creation, the compiler replaces all instances of `T` with `String`! We will cover generic typing in more detail in later lectures.
+
+###### Arrays
+Recall that variables are just boxes of bits. For example, `int x;` gives us a memory box of 32 bits. Arrays are a special object which consists of a numbered sequence of memory boxes! To get the ith item of array `A`, use `A[i]`. The length of an array cannot change, and *_all the elements of the array must be of the same type_* (this is different from a Python list). The boxes are zero-indexed, meaning that for a list with `N` elements, the first element is at `A[0]` and the last element is at `A[N - 1]`. **Unlike regular classes, arrays do not have methods!** Arrays do have a `length` *variable* though.
+
+###### Instantiating Arrays
+There are three valid notations for creating arrays.
+
+* The first way specifies the size of the array, and fills the array with default values:
+
+    ```java
+    int[] y = new int[3];
+    ```
+    
+* The second fills up the array with specific values:
+
+    ```java
+    int[] x = new int[]{1, 2, 3, 4, 5};
+    ```
+
+* The third is similar to the second way:
+
+    ```java
+    int[] w = {1, 2, 3, 4, 5};
+    ```
+
+We can set a value in an array by using array indexing. For example, we can say `A[3] = 4;`. This will access the fourth element of array A and sets the value at that box to 4.
+
+###### Arraycopy
+In order to make a copy of an array, we can use `System.arraycopy`.
+
+###### 2D Arrays
+We can declare multidimensional arrays. For 2D integer arrays, we use the syntax:
+
+```java
+int[][] array = new int[4][];
+```
+
+This creates an array that holds integer arrays. Note that we have to manually create the inner arrays like follows:
+
+```java
+array[0] = new int[]{0, 1, 2, 3};
+```
+
+Java can also create multidemensional arrays with the inner arrays created automatically. To do this, use the syntax:
+
+```java
+int[][] array = new int[4][4];
+```
+
+We can also use the notation:
+
+```java
+int[][] array = new int[][]{{1}, {1, 2}, {1, 2, 3}}
+```
+
+to get arrays with specific values.
+
+###### Arrays vs. Classes
+
+* Both are used to organize a bunch of memory.
+* Both have a fixed number of "boxes".
+* Arrays are accessed via square bracket notation. Classes are accessed via dot notation.
+* Elements in the array must be all be the **same** type. Elements in a class may be of **different** types.
+* Array indices are computed at runtime. We cannot compute class member variable names.
+
+
+
+## 3.1 ALists, Resizing, vs. SLists
+
+
+
 
 
 
