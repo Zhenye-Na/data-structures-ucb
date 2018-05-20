@@ -2,7 +2,7 @@
  *
  *   ref = "https://sp18.datastructur.es/materials/proj/proj1a/proj1a"
  *
- *   Zhenye Na 05/18/2018
+ *   @author Zhenye Na 05/18/2018
  *
  * */
 
@@ -14,16 +14,14 @@ public class LinkedListDeque<PlaceholderType> {
      *
      * */
     private class ListNode {
-        public PlaceholderType item;
-        public ListNode prev;
-        public ListNode next;
+        private PlaceholderType item;
+        private ListNode prev;
+        private ListNode next;
 
-
-        public ListNode (ListNode p, PlaceholderType i, ListNode n){
+        private ListNode(ListNode p, PlaceholderType i, ListNode n) {
             prev = p;
             item = i;
             next = n;
-
         }
 
     }
@@ -36,11 +34,10 @@ public class LinkedListDeque<PlaceholderType> {
 
     /**  Creates an empty linked list deque. */
     public LinkedListDeque() {
-        sentinel = new ListNode(null, null , null);
+        sentinel = new ListNode(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
         size = 0;
-
     }
 
 
@@ -52,7 +49,7 @@ public class LinkedListDeque<PlaceholderType> {
      *   Returns:
      *       Nothing to return.
      * */
-    public void addFirst(PlaceholderType item){
+    public void addFirst(PlaceholderType item) {
         sentinel.next = new ListNode(sentinel, item, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
         size += 1;
@@ -67,7 +64,7 @@ public class LinkedListDeque<PlaceholderType> {
      *   Returns:
      *       Nothing to return.
      * */
-    public void addLast(PlaceholderType item){
+    public void addLast(PlaceholderType item) {
         sentinel.prev.next = new ListNode(sentinel.prev, item, sentinel);
         sentinel.prev = sentinel.prev.next;
         size += 1;
@@ -83,18 +80,16 @@ public class LinkedListDeque<PlaceholderType> {
     /**  Returns the number of items in the deque in constant time. */
     public int size() {
         return size;
-
     }
 
 
     /**  Prints the items in the deque from first to last, separated by a space. */
     public void printDeque() {
         ListNode node = sentinel;
-        while (node.next != sentinel){
+        while (node.next != sentinel) {
             System.out.print(node.next.item + " ");
             node = node.next;
         }
-
     }
 
 
@@ -107,13 +102,12 @@ public class LinkedListDeque<PlaceholderType> {
      *   Returns:
      *       First item in Linked-List-Deque or null
      * */
-    public PlaceholderType removeFirst(){
+    public PlaceholderType removeFirst() {
 
         if (size == 0) {
             // no such item exists, return null
             return null;
-        }
-        else {
+        } else {
             // remove first item and return that item
             PlaceholderType firstItem = sentinel.next.item;
             sentinel.next.next.prev = sentinel;
@@ -135,13 +129,12 @@ public class LinkedListDeque<PlaceholderType> {
      *   Returns:
      *       Last item in Linked-List-Deque or null
      * */
-    public PlaceholderType removeLast(){
+    public PlaceholderType removeLast() {
 
         if (size == 0) {
             // no such item exists, return null
             return null;
-        }
-        else {
+        } else {
             // remove last item and return that item
             PlaceholderType lastItem = sentinel.prev.item;
             sentinel.prev.prev.next = sentinel;
@@ -154,7 +147,8 @@ public class LinkedListDeque<PlaceholderType> {
     }
 
 
-    /**  Gets the item at the given index using <iteration>, where 0 is the front, 1 is the next item, and so forth.
+    /**  Gets the item at the given index using <iteration>
+     *   where 0 is the front, 1 is the next item, and so forth.
      *   If no such item exists, returns null.
      *
      *   <Must not alter the deque!>
@@ -165,15 +159,15 @@ public class LinkedListDeque<PlaceholderType> {
      *   Returns:
      *       index^{th} item in the deque.
      * */
-    public PlaceholderType getIterative(int index){
+    public PlaceholderType getIterative(int index) {
         int length = size;
         ListNode target = sentinel.next;
 
+        // no such item exists, returns null.
         if (index > length - 1) {
             return null;
-        }
-        else {
-            for (int i=0; i < index; i++) {
+        } else {
+            for (int i = 0; i < index; i++) {
                 target = target.next;
             }
 
@@ -183,7 +177,8 @@ public class LinkedListDeque<PlaceholderType> {
     }
 
 
-    /**  Gets the item at the given index using <recursion>, where 0 is the front, 1 is the next item, and so forth.
+    /**  Gets the item at the given index using <recursion>
+     *   where 0 is the front, 1 is the next item, and so forth.
      *   If no such item exists, returns null.
      *
      *   <Must not alter the deque!>
@@ -194,13 +189,13 @@ public class LinkedListDeque<PlaceholderType> {
      *   Returns:
      *       index^{th} item in the deque.
      * */
-    public PlaceholderType getRecursive(int index){
+    public PlaceholderType getRecursive(int index) {
         int length = size;
 
+        // no such item exists, returns null.
         if (index > length - 1) {
             return null;
-        }
-        else {
+        } else {
             return traverse(sentinel.next, index);
         }
 
@@ -220,8 +215,7 @@ public class LinkedListDeque<PlaceholderType> {
 
         if (i == 0) {
             return n.item;
-        }
-        else {
+        } else {
             return traverse(n.next, i - 1);
         }
     }
@@ -230,39 +224,37 @@ public class LinkedListDeque<PlaceholderType> {
     /**  Dummy main function for test.
      *
      * */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         LinkedListDeque<Integer> Dllist = new LinkedListDeque<>();
         Dllist.addFirst(666);
         Dllist.addLast(6666);
         Dllist.addLast(66666);
         Dllist.printDeque();                        // expected (666 6666 66666)
-        System.out.println( );
+        System.out.println("Test getIterative #1");
         System.out.println(Dllist.getIterative(0)); // expected 666
         System.out.println(Dllist.getIterative(1)); // expected 6666
         System.out.println(Dllist.getIterative(5)); // expected null
-        System.out.println( );
+        System.out.println("Test getIterative #1");
         System.out.println(Dllist.getRecursive(0)); // expected 666
         System.out.println(Dllist.getRecursive(1)); // expected 6666
-        System.out.println( );
+        System.out.println("Test done!");
 
         Dllist.removeFirst();
         Dllist.printDeque();                        // expected (6666 66666)
-        System.out.println( );
+        System.out.println("Test getIterative #2 removeFirst");
         System.out.println(Dllist.getIterative(0)); // expected 6666
         System.out.println(Dllist.getIterative(1)); // expected 66666
-        System.out.println( );
+        System.out.println("Test getRecursive #2 removeFirst");
         System.out.println(Dllist.getRecursive(0)); // expected 6666
         System.out.println(Dllist.getRecursive(1)); // expected 66666
 
         Dllist.removeLast();
         Dllist.printDeque();                        // expected 6666
-        System.out.println( );
+        System.out.println("Test getIterative #3 removeLast");
         System.out.println(Dllist.getIterative(0)); // expected 6666
         System.out.println(Dllist.getIterative(1)); // expected null
-        System.out.println( );
+        System.out.println("Test getRecursive #3 removeFirst");
         System.out.println(Dllist.getRecursive(0)); // expected 6666
         System.out.println(Dllist.getRecursive(1)); // expected null
     }
-
-    
 }
