@@ -165,12 +165,6 @@ public class ArrayDeque<PlaceholderType> {
                 nextLast = maxIndex - startIndex + 1;
             }
 
-            // System.arraycopy(Array, startIndex, NewArray, 1, maxIndex - startIndex);
-
-            // Array = NewArray;
-
-
-
         }
 
     }
@@ -378,3 +372,4 @@ public class ArrayDeque<PlaceholderType> {
     }
 
 }
+
