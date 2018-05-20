@@ -154,6 +154,81 @@ public class ArrayDequeTest {
 
 
     @Test
+    public void removeFirstLast3() {
+        System.out.println("Perform removeFirstLast3");
+
+        ArrayDeque<Integer> array = new ArrayDeque<>();
+
+        for (int i = 0; i < 16; i++) {
+            if (i % 2 == 0) {
+                array.addFirst(i);
+            } else {
+                array.addLast(i);
+            }
+
+        }
+
+        array.printDeque();
+        int x;
+        for (int i = 0; i < 10; i++) {
+            if (i % 2 == 0) {
+                x = array.removeFirst();
+            } else {
+                x = array.removeLast();
+            }
+
+            if ((i + 1) % 8 == 0) {
+                array.printDeque();
+            }
+
+            // System.out.println("nextFirst: " + array.nextFirst);
+            // System.out.println("nextLast: " + array.nextLast);
+
+        }
+
+    }
+
+
+    @Test
+    public void removeFirstLast4() {
+        System.out.println("Perform removeFirstLast4");
+
+        ArrayDeque<Integer> array = new ArrayDeque<>();
+
+        for (int i = 0; i <= 16; i++) {
+            if (i % 2 == 0) {
+                array.addFirst(i);
+            } else {
+                array.addLast(i);
+            }
+
+        }
+
+        array.printDeque();
+        int x;
+        for (int i = 0; i < 12; i++) {
+            if (i % 2 == 0) {
+                x = array.removeFirst();
+                array.printDeque();
+            } else {
+                x = array.removeLast();
+                array.printDeque();
+            }
+
+            if ((i + 1) % 8 == 0) {
+                System.out.println("ha!");
+                array.printDeque();
+            }
+
+            // System.out.println("nextFirst: " + array.nextFirst);
+            // System.out.println("nextLast: " + array.nextLast);
+
+        }
+
+    }
+
+
+    @Test
     public void getTest() {
         System.out.println("Perform getTest");
 

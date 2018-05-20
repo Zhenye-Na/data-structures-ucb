@@ -11,11 +11,11 @@ import java.util.Random;
 public class ArrayDeque<PlaceholderType> {
 
     /** Declare variables. */
-    private float usage;
-    private int size;
-    private int nextFirst;
-    private int nextLast;
-    private PlaceholderType[] Array;
+    private float usage;             // Usage factor
+    private int size;                // size of Array-Deque
+    private int nextFirst;           // First pointer
+    private int nextLast;            // Last pointer
+    private PlaceholderType[] Array; // Data Structure used in Array-Deque
 
 
     /** Create an empty Array Deque. */
@@ -23,7 +23,9 @@ public class ArrayDeque<PlaceholderType> {
         Array = (PlaceholderType[]) new Object[8];
         size = 0;
         usage = 0;
-//        nextFirst = getRandomNumberInRange(0, 7);
+
+        // whether initialize nextFirst randomly or manually.
+        // nextFirst = getRandomNumberInRange(0, 7);
         nextFirst = 2;
 
         // make sure that initial nextLast is on the RHS of nextFirst
@@ -44,7 +46,7 @@ public class ArrayDeque<PlaceholderType> {
      *       max (int): upper bound of the range.
      *
      *   Returns:
-     *       random number (int): random integer in range(min, max + 1) <- (Python notation for range).
+     *       random number (int): random integer in range(min, max + 1).
      *
      * */
     private static int getRandomNumberInRange(int min, int max) {
@@ -66,7 +68,7 @@ public class ArrayDeque<PlaceholderType> {
 
 //        System.out.println("usage factor: " + usage);
         // compare ratio with 0.25
-        return (usage < 0.25 && (Array.length >= 16));
+        return (usage < 0.25 && (Array.length > 16));
     }
 
 
@@ -87,6 +89,26 @@ public class ArrayDeque<PlaceholderType> {
      *
      *      Enlarge Factor = 2
      *
+     *
+     *   3. My strategy for adjusting capacity of Array:
+     *
+     *      1) shrinking size
+     *
+     *      2) increasing size
+     *
+     *      [current array]: (1 2 3 4 5 6 7 8)
+     *      whenever we want to add a new element, we need increase the capacity of
+     *      current array, the strategy I applied is as follows
+     *
+     *      (1 2 3 4 5 6 7 8) -> (null 1 2 3 4 5 6 7 8 null ...)
+     *
+     *      that means I use `System.arraycopy` function copy all the elements in oringinal
+     *      array to a new array with default starting index `1`. And I move the First pointer
+     *      to the first position of the new Array (nextFirst = 0;) and Last pointer to the last
+     *      element position of the new Array.
+     *
+     *      Though, it seems a little dummy... :)
+     *
      * */
     private void resize() {
 
@@ -106,20 +128,47 @@ public class ArrayDeque<PlaceholderType> {
 
             // Copy from the first to the last element of the original array.
             // Start index setting
-            int maxIndex;
+            int maxIndex = 0;
+            int startIndex = 0;
+
             if (checkUsageR()) {
-                maxIndex = Math.max(nextFirst, nextLast) + 1;
+                // maxIndex = Math.max(nextFirst, nextLast) + 1;
+
+                // Deal with startIndex when usage is pretty low -> Dummy approach
+                for (int i = 0; i < Array.length - 1; i++) {
+                    if (Array[i] == null && Array[i + 1] != null) {
+                        startIndex = i + 1;
+                    }
+                    if (Array[i] != null && Array[i + 1] == null) {
+                        maxIndex = i;
+                    }
+                }
+
+                System.arraycopy(Array, startIndex, NewArray, 1, maxIndex - startIndex + 1);
+
+                Array = NewArray;
+
+                // pointers setting
+                nextFirst = 0;
+                nextLast = maxIndex - startIndex + 2;
+
             } else {
                 maxIndex = Array.length;
+                startIndex = 0;
+
+                System.arraycopy(Array, startIndex, NewArray, 1, maxIndex - startIndex);
+
+                Array = NewArray;
+
+                // pointers setting
+                nextFirst = 0;
+                nextLast = maxIndex - startIndex + 1;
             }
 
-            System.arraycopy(Array, 0, NewArray, 1, maxIndex);
+            // System.arraycopy(Array, startIndex, NewArray, 1, maxIndex - startIndex);
 
-            Array = NewArray;
+            // Array = NewArray;
 
-            // pointers setting
-            nextFirst = 0;
-            nextLast = maxIndex + 1;
 
 
         }
@@ -127,9 +176,9 @@ public class ArrayDeque<PlaceholderType> {
     }
 
 
-    /**
+    /**  private helper function.
      *
-     *
+     *   move First pointer when adding element.
      * */
     private int addpointerFirst(int nextFirst) {
         if (nextFirst != 0) {
@@ -143,10 +192,9 @@ public class ArrayDeque<PlaceholderType> {
     }
 
 
-
-    /**
+    /**  private helper function.
      *
-     *
+     *   move Last pointer when adding element.
      * */
     private int addpointerLast(int nextLast) {
         if (nextLast != Array.length - 1) {
@@ -168,7 +216,7 @@ public class ArrayDeque<PlaceholderType> {
      *   Returns:
      *       Nothing to return.
      * */
-    public void addFirst(PlaceholderType item){
+    public void addFirst(PlaceholderType item) {
 
         // Check usage factor.
         resize();
@@ -190,7 +238,7 @@ public class ArrayDeque<PlaceholderType> {
      *   Returns:
      *       Nothing to return.
      * */
-    public void addLast(PlaceholderType item){
+    public void addLast(PlaceholderType item) {
 
         // Check usage factor.
         resize();
@@ -225,12 +273,12 @@ public class ArrayDeque<PlaceholderType> {
     }
 
 
-    /**
+    /**  private helper function.
      *
-     *
+     *   move First pointer when removing element.
      * */
     private int rmpointerFirst(int nextFirst) {
-        if (nextFirst != Array.length) {
+        if (nextFirst != Array.length - 1) {
             nextFirst += 1;
         } else {
             nextFirst = 0;
@@ -239,9 +287,9 @@ public class ArrayDeque<PlaceholderType> {
     }
 
 
-    /**
+    /**  private helper function.
      *
-     *
+     *   move Last pointer when removing element.
      * */
     private int rmpointerLast(int nextLast) {
         if (nextLast != 0) {
@@ -262,24 +310,23 @@ public class ArrayDeque<PlaceholderType> {
      *       None
      *
      *   Returns:
-     *       First item in Circular ArrayDeque or null
+     *       First item in Circular ArrayDeque or null.
      * */
     public PlaceholderType removeFirst() {
 
         int index = rmpointerFirst(nextFirst);
-        PlaceholderType returnvalue = Array[index];
+        PlaceholderType returnValue = Array[index];
         Array[index] = null;
-
-        // Check usage factor.
-        resize();
-
         size -= 1;
         usage = (float) size / (float) Array.length;
 
         // move pointer
-        nextFirst = rmpointerFirst(nextFirst);
+        nextFirst = index;
 
-        return returnvalue;
+        // Check usage factor.
+        resize();
+
+        return returnValue;
     }
 
 
@@ -295,21 +342,18 @@ public class ArrayDeque<PlaceholderType> {
     public PlaceholderType removeLast() {
 
         int index = rmpointerLast(nextLast);
-        PlaceholderType returnvalue = Array[index];
+        PlaceholderType returnValue = Array[index];
         Array[index] = null;
-
-        // Check usage factor.
-        resize();
-
         size -= 1;
         usage = (float) size / (float) Array.length;
 
         // move pointer
-        nextFirst = rmpointerLast(nextLast);
+        nextLast = index;
 
-        return returnvalue;
+        // Check usage factor.
+        resize();
 
-
+        return returnValue;
 
     }
 
