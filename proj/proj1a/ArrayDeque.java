@@ -41,6 +41,8 @@ public class ArrayDeque<PlaceholderType> {
      *
      *   Get random integer in given range.
      *
+     *   @source "https://www.mkyong.com/java/java-generate-random-integers-in-a-range/"
+     *
      *   Args:
      *       min (int): lower bound of the range.
      *       max (int): upper bound of the range.
