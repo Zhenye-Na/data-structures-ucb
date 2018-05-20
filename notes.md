@@ -405,7 +405,7 @@ In SLList init function, `first` is a `IntNode` and `IntNode` has two 'variable'
 
 
 #### Singly-Linked List
-An SLList (Singly-Linked List) is a _sequence of Nodes_. Each node $\mathtt{u` stores a data value $\mathtt{u.x` and a reference $\mathtt{u.next` to the next node in the sequence. For the last node $\mathtt{w` in the sequence, $\mathtt{w.next} = \mathtt{null`.
+An SLList (Singly-Linked List) is a _sequence of Nodes_. Each node `u` stores a data value `u.x` and a reference `u.next` to the next node in the sequence. For the last node `w` in the sequence, `w.next = null`.
 
 A sequence of `Stack` and `Queue` operations on an `SLList` is illustrated in this Figure.  
 
@@ -902,7 +902,239 @@ It turns out that no matter how clever you are, the get method will usually be s
 
 This is because, since we only have references to the first and last items of the list, we'll always need to scan the whole list from the front or back to get to the item that we're trying to retrieve.
 
-### Naive Array Based List
+### Naive Resizing Arrays
+
+When the `Array` is full and the function `addLast()` can be implemented by `resizing an array`, that is
+
+* duplicate the current array but make the size larger;
+* insert to the new array
+
+```java
+int[] a = new int[size + 1];            // Initialize a new larger array
+System.arraycopy(items, 0, a, 0, size); // Duplicate the array
+a[size] = 11;                           // Insert into the new array
+items = a;
+size = size + 1;
+```
+
+
+### Generic ALists
+
+There is one significant syntactical difference: `Java` **does not** allow us to create an array of generic objects due to an obscure issue with the way generics are implemented. That is, we cannot do something like:
+
+```java
+Glorp[] items = new Glorp[8];
+```
+
+Instead, we have to use the awkward syntax shown below:
+
+```java
+Glorp[] items = (Glorp []) new Object[8];
+```
+
+This will yield a compilation warning, but it's just something we'll have to live with. We'll discuss this in more details in a later chapter.
+
+The other change we make is that we null out any items that we "delete". Whereas before, we had no reason to zero out elements that were deleted, with generic objects, we do want to null out references to the objects that we're storing. This is to avoid "loitering". Recall that `Java` only destroys objects when the last reference has been lost. If we fail to null out the reference, then Java will not garbage collect the objects that have been added to the list.
+
+This is a subtle performance bug that you're unlikely to observe unless you're looking for it, but in certain cases could result in a significant wastage of memory.
+
+
+## 3.2 Testing and Selection Sort
+
+**Important note**:
+
+When we test for equality of two objects, we cannot simply use the `==` operator. The `==` operator compares the literal bits in the memory boxes, e.g. `input == expected` would test **whether or not the addresses of input and expected are the same, not whether the values in the arrays are the same**. Instead, we used a `loop` in testSort, and print out the first mismatch. You could also use the built-in method `java.util.Arrays.equals` instead of a loop.
+
+### JUnit Testing
+
+```java
+public static void testSort() {
+    String[] input = {"i", "have", "an", "egg"};
+    String[] expected = {"an", "egg", "have", "i"};
+    Sort.sort(input);
+    org.junit.Assert.assertArrayEquals(expected, input);
+}
+
+^
+Exception in thread "main" arrays first differed at element [0]; expected:<[an]> but was:<[i]>
+    at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:55)
+    at org.junit.Assert.internalArrayEquals(Assert.java:532)
+    ...
+
+```
+
+### Selection Sort
+
+**Selection Sort** consists of three steps:
+
+* Find the smallest item.
+* Move it to the front.
+* Selection sort the remaining `N-1` items (without touching the front item).
+
+![](http://interactivepython.org/runestone/static/pythonds/_images/selectionsortnew.png)
+
+
+#### findSmallest
+First, we'll create a dummy `findSmallest` method that simply returns some arbitrary value:
+
+```java
+public class Sort {
+    /** Sorts strings destructively. */
+    public static void sort(String[] x) { 
+           // find the smallest item
+           // move it to the front
+           // selection sort the rest (using recursion?)
+    }
+
+    /** Returns the smallest string in x. */
+    public static String findSmallest(String[] x) {
+        return x[2];
+    }
+}
+```
+
+Obviously this is not a correct implementation, but we've chosen to defer actually thinking about how `findSmallest` works until after we've written a test. Using the `org.junit` library, adding such a test to our `TestSort` class is very easy, as shown below:
+
+```java
+public class TestSort {
+    ...
+    public static void testFindSmallest() {
+        String[] input = {"i", "have", "an", "egg"};
+        String expected = "an";
+
+        String actual = Sort.findSmallest(input);
+        org.junit.Assert.assertEquals(expected, actual);        
+    }
+
+    public static void main(String[] args) {
+        testFindSmallest(); // note: we changed this from testSort!
+    }
+}
+```
+
+**Notice:** Java does not allow comparisons between `Strings` using the `<` operator.
+
+`str1.compareTo(str2)` method will return a *negative number* if `str1 < str2`, `0` if they are `equal`, and a *positive number* if `str1 > str2`.
+
+```java
+/** Returns the smallest string in x. 
+  * @source Got help with string compares from https://goo.gl/a7yBU5. */
+public static String findSmallest(String[] x) {
+    String smallest = x[0];
+    for (int i = 0; i < x.length; i += 1) {
+        int cmp = x[i].compareTo(smallest);
+        if (cmp < 0) {
+            smallest = x[i];
+        }
+    }
+    return smallest;
+}
+```
+
+
+#### Swap
+
+```java
+public static void swap(String[] x, int a, int b) {
+    String temp = x[a];
+    x[a] = x[b];
+    x[b] = temp;
+}
+```
+
+```java
+public class TestSort {
+    ...    
+
+    /** Test the Sort.swap method. */
+    public static void testSwap() {
+        String[] input = {"i", "have", "an", "egg"};
+        int a = 0;
+        int b = 2;
+        String[] expected = {"an", "have", "i", "egg"};
+
+        Sort.swap(input, a, b);
+        org.junit.Assert.assertArrayEquals(expected, input);
+    }
+
+    public static void main(String[] args) {
+        testSwap();
+    }
+}
+```
+
+#### Recursive Helper Methods
+
+To begin this section, consider how you might make the recursive call needed to complete sort:
+
+```java
+/** Sorts strings destructively. */
+public static void sort(String[] x) { 
+   int smallestIndex = findSmallest(x);
+   swap(x, 0, smallestIndex);
+   // recursive call??
+}
+```
+
+For those of you who are used to a language like `Python`, it might be tempting to try and use something like slice notation, e.g.
+
+```java
+/** Sorts strings destructively. */
+public static void sort(String[] x) { 
+   int smallestIndex = findSmallest(x);
+   swap(x, 0, smallestIndex);
+   sort(x[1:])
+}
+```
+
+However, there is no such thing in `Java` as a reference to a sub-array, i.e. we can't just pass the address of the next item in the array.
+
+This problem of needing to consider only a subset of a larger array is very common. A typical solution is to create a private helper method that has an additional parameter (or parameters) that delineate which part of the array to consider. For example, we might write a private helper method also called sort that consider only the items starting with item start.
+
+```java
+/** Sorts strings destructively starting from item start. */
+private static void sort(String[] x, int start) { 
+    // TODO
+}
+```
+
+Unlike our `public sort` method, it's relatively straightforward to use recursion now that we have the additional parameter start, as shown below. We'll test this method in the next section.
+
+```java
+/** Sorts strings destructively starting from item start. */
+private static void sort(String[] x, int start) { 
+   int smallestIndex = findSmallest(x);
+   swap(x, start, smallestIndex);
+   sort(x, start + 1);
+}
+```
+
+Now that we have a helper method, we need to set up the correct original call. If we set the start to 0, we effectively sort the entire array.
+
+```java
+/** Sorts strings destructively. */
+public static void sort(String[] x) { 
+   sort(x, 0);
+}
+```
+
+This approach is quite common when trying to use recursion on a data structure that is not inherently recursive, e.g. arrays.
+
+
+### JUnit Reflection
+
+First, let's reflect on the new syntax we've seen today, namely `org.junit.Assert.assertEquals(expected, actual)`. This method (with a very long name) tests that expected and actual are equal, and if they are not, terminates the program with a verbose error message.
+
+The first enhancement is to use what is known as a "test annotation". To do this, we:
+
+* Precede each method with `@org.junit.Test` (no semi-colon).
+* Change each test method to be **non-static**.
+* Remove our `main` method from the `TestSort class`.
+
+The second enhancement will let us use shorter names for some of the very lengthy method names, as well as the annotation name. Specifically, we'll use what is known as an `"import statement"`.
+We first add the import statement `import org.junit.Test`; to the top of our file. After doing this, we can replace all instances of `@org.junit.Test` with simply `@Test`.
+
+We then add our second import statement `import static org.junit.Assert.*`. After doing this, anywhere we can omit anywhere we had `org.junit.Assert..` For example, we can replace `org.junit.Assert.assertEquals(expected2, actual2);` with simply `assertEquals(expected2, actual2);`
 
 
 
@@ -944,4 +1176,27 @@ This is because, since we only have references to the first and last items of th
 
 
 
-{style="text-align:center"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
