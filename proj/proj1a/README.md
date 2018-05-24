@@ -1,4 +1,7 @@
-# Project Tasks
+# Project 1A: Data Structures
+
+> *Rather than simulating the glorious gravitational physics of our universe, we’ll instead be building data structures. Not the most glamorous thing, but this will provide you with plenty of opportunities to practice everything we’ve been doing in lecture before our midterm rolls around.*
+
 ## Linked List Deque
 
 Implement all the methods:
