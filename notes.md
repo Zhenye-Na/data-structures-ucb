@@ -1137,26 +1137,131 @@ We first add the import statement `import org.junit.Test`; to the top of our fil
 We then add our second import statement `import static org.junit.Assert.*`. After doing this, anywhere we can omit anywhere we had `org.junit.Assert..` For example, we can replace `org.junit.Assert.assertEquals(expected2, actual2);` with simply `assertEquals(expected2, actual2);`
 
 
+## 3.3 Inheritance, Implements
+
+### Hypernyms, Hyponyms, and Interface Inheritance
+
+In Java, in order to express this hierarchy, we need to do two things:
+
+- Step 1: Define a type for the general list hypernym -- we will choose the name `List61B`.
+- Step 2: Specify that `SLList` and `AList` are hyponyms of that type.
+
+The new List61B is what Java calls an **interface**.
+
+```java
+public interface List61B<Item> {
+    public void addFirst(Item x);
+    public void add Last(Item y);
+    public Item getFirst();
+    public Item getLast();
+    public Item removeLast();
+    public Item get(int i);
+    public void insert(Item x, int position);
+    public int size();
+}
+```
+
+*`interface` is what you should do, not how you do it.* So how we do it? we need `implements`.
+
+We will add to
+
+```java
+public class AList<Item> {...}
+```
+
+a relationship-defining word: `implements`.
+
+```java
+public class AList<Item> implements List61B<Item>{...}
+```
+
+If you are still confused about `interface`, check out this wonderful video explanation of interface in Java by [Navin Reddy](https://www.youtube.com/watch?v=Yaa3QroWe7Q).
+
+### Overriding
+
+When implementing the required functions in the subclass, it's useful (and actually required in 61B) to include the `@Override` tag right on top of the method signature. Here, we have done that for just one method.
+
+```java
+@Override
+public void addFirst(Item x) {
+    insert(x, 0);
+}
+```
+
+- Even if you don’t write `@Override`, subclass still overrides the method.
+- `@Override` is just an **optional** reminder that you’re overriding.
 
 
 
 
+### Implementation Inheritance
+
+If we define this method in `List61B`, make sure you include the **`default`** keyword in the method signature.
+
+```java
+default public void print() {
+    for (int i = 0; i < size(); i += 1) {
+        System.out.print(get(i) + " ");
+    }
+    System.out.println();
+}
+```
+
+Java is able to do this due to something called "dynamic method selection".
+
+We know that variables in java have a type.
+
+```java
+List61B<String> lst = new SLList<String>();
+```
+
+In the above declaration and instantiation, lst is of type "List61B". This is called the `"static type"`.
+
+However, the objects themselves have types as well. the object that lst points to is of type `SLList`. Although this object is intrinsically an `SLList` (since it was declared as such), it is also a `List61B`, because of the "is-a" relationship we explored earlier. But, because the object itself was instantiated using the SLList constructor, We call this its `"dynamic type"`.
+
+Aside: the name "dynamic type" is actually quite semantic in its origin! Should lst be reassigned to point to an object of another type, say a `AList` object, lst’s dynamic type would now be `AList` and not `SLList`! It’s dynamic because it changes based on the type of the object it's currently referring to.
+
+When Java runs a method that is overriden, it searches for the appropriate method signature in it's dynamic type and runs it.
 
 
+Say there are two methods in the same class
+
+```java
+public static void peek(List61B<String> list) {
+    System.out.println(list.getLast());
+}
+public static void peek(SLList<String> list) {
+    System.out.println(list.getFirst());
+}
+```
+
+and you run this code
+
+```java
+SLList<String> SP = new SLList<String>();
+List61B<String> LP = SP;
+SP.addLast("elk");
+SP.addLast("are");
+SP.addLast("cool");
+peek(SP);
+peek(LP);
+```
+
+The first call to `peek()` will use the *second peek* method that takes in an `SLList`. The second call to `peek()` will use the **first peek method** which takes in a `List61B`.
+
+This is because the only distinction between two **overloaded methods** is the types of the parameters. When Java checks to see which method to call, it checks the `static type` and calls the method with the parameter of the same type.
 
 
+### Interface Inheritance vs Implementation Inheritance
 
+How do we differentiate between "interface inheritance" and "implementation inheritance"? Well, you can use this simple distinction:
 
+- Interface inheritance (what): Simply **tells** what the subclasses should be able to do.
+    - EX) all lists should be able to print themselves, how they do it is up to them.
+- Implementation inheritance (how): Tells the subclasses **how** they should behave.
+    - EX) Lists should print themselves exactly this way: by getting each element in order and then printing them.
 
-
-
-
-
-
-
-
-
-
+> When you are creating these hierarchies, remember that the relationship between a subclass and a superclass should be an "is-a" relationship. AKA Cat should only implement Animal Cat is an Animal. You should not be defining them using a "has-a" relationship. Cat has-a Claw, but Cat definitely should not be implementing Claw.
 
 
 
