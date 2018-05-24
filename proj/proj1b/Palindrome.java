@@ -20,28 +20,55 @@ public class Palindrome {
     }
 
 
+    /**
+     *
+     * */
     public boolean isPalindrome(String word) {
 
-        
-        if (word.length() == 0 || word.length() == 1) {
+        Deque<Character> worddeque = wordToDeque(word);
+
+        if (worddeque.size() == 0 || worddeque.size() == 1) {
             return true;
         } else {
 
-            if (word.charAt(0) == word.charAt(word.length() - 1)) {
-                return true;
+            if (worddeque.removeFirst() == worddeque.removeLast()) {
+                return isPalindrome(DequeToString(worddeque));
             } else {
-                isPalindrome(isPalindromeRecursive(word));
+                return false;
             }
-
-
         }
 
     }
 
 
-    private String isPalindromeRecursive(String word) {
-
-
+    /**
+     *
+     * */
+    private String DequeToString(Deque d) {
+        String string = "";
+        for (int i = 0; i < d.size(); i++) {
+            string += d.removeFirst();
+        }
+        return string;
     }
+
+
+    /**
+     *
+     *
+     * */
+    public boolean isPalindrome(String word, CharacterComparator cc) {
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
 
 }

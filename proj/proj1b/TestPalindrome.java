@@ -20,7 +20,7 @@ public class TestPalindrome {
 
     @Test
     public void TestPalindrome1() {
-        assertFalse(palindrome.isPalindrome("cat"));
+        assertTrue(palindrome.isPalindrome("a"));
     }
 
     @Test
@@ -32,5 +32,11 @@ public class TestPalindrome {
     public void TestPalindrome3() {
         assertFalse(palindrome.isPalindrome("Aca"));
     }
+
+    @Test
+    public void TestPalindrome4() {
+        assertTrue(palindrome.isPalindrome("sttts"));
+    }
+
 
 }
