@@ -66,4 +66,7 @@ In addition, you also need to implement:
 `public ArrayDeque()`: Creates an empty array deque.
 
 
+## Highlight of implementation
 
+- Initial `nextFirst` and `nextLast` can be randomly initialized or user-determined.
+- ArrayDeque `resize` function are defined not in a "normal" way. XD
