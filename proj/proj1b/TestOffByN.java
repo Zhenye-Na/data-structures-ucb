@@ -8,8 +8,6 @@ import static org.junit.Assert.*;
 
 public class TestOffByN {
 
-    // static CharacterComparator OffByN = new OffByN(5);
-
 
     @Test
     public void testequalChars1() {

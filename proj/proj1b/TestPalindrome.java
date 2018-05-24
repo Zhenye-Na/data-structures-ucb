@@ -6,6 +6,7 @@ public class TestPalindrome {
     // new Palindromes, or the autograder might be upset.
     static Palindrome palindrome = new Palindrome();
 
+    /** unit test for wordToDeque. */
     @Test
     public void testWordToDeque() {
         Deque d = palindrome.wordToDeque("persiflage");
@@ -17,7 +18,7 @@ public class TestPalindrome {
     }
 
 
-
+    /** unit tests for isPalindrome. */
     @Test
     public void TestPalindrome1() {
         assertTrue(palindrome.isPalindrome("a"));
@@ -36,6 +37,58 @@ public class TestPalindrome {
     @Test
     public void TestPalindrome4() {
         assertTrue(palindrome.isPalindrome("sttts"));
+    }
+
+
+    /** unit tests for isPalindrome with OffByOne. */
+    @Test
+    public void TestPalindromeOffByOne1() {
+        CharacterComparator cc = new OffByOne();
+        assertTrue(palindrome.isPalindrome("a", cc));
+    }
+
+    @Test
+    public void TestPalindromeOffByOne2() {
+        CharacterComparator cc = new OffByOne();
+        assertFalse(palindrome.isPalindrome("AcA", cc));
+    }
+
+    @Test
+    public void TestPalindromeOffByOne3() {
+        CharacterComparator cc = new OffByOne();
+        assertTrue(palindrome.isPalindrome("AcdB", cc));
+    }
+
+    @Test
+    public void TestPalindromeOffByOne4() {
+        CharacterComparator cc = new OffByOne();
+        assertFalse(palindrome.isPalindrome("stttt", cc));
+    }
+
+
+    /** unit tests for isPalindrome with OffByN. */
+    @Test
+    public void TestPalindromeOffByN1() {
+        CharacterComparator cc = new OffByN(5);
+        assertTrue(palindrome.isPalindrome("a", cc));
+    }
+
+    @Test
+    public void TestPalindromeOffByN2() {
+        CharacterComparator cc = new OffByN(5);
+        assertTrue(palindrome.isPalindrome("acf", cc));
+    }
+
+    @Test
+    public void TestPalindromeOffByN3() {
+        CharacterComparator cc = new OffByN(5);
+        assertTrue(palindrome.isPalindrome("AhcF", cc));
+    }
+
+    @Test
+    public void TestPalindromeOffByN4() {
+        CharacterComparator cc = new OffByN(5);
+        assertFalse(palindrome.isPalindrome("stttt", cc));
     }
 
 
