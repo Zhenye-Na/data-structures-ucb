@@ -1,3 +1,11 @@
+/**  Project 1B: Applying and Testing Data Structures version 1.0
+ *
+ *   Task 1: Deque Interface
+ *
+ *   @author Zhenye Na 05/23/2018
+ *
+ * */
+
 public interface Deque<Item> {
 
     /**

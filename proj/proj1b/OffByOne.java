@@ -1,6 +1,10 @@
-/**
+/**  Project 1B: Applying and Testing Data Structures version 1.0
  *
+ *   @author Zhenye Na 05/23/2018
+ *
+ *   Task 5: OffByOne
  * */
+
 public class OffByOne implements CharacterComparator {
 
 

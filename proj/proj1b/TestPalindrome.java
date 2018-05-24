@@ -18,7 +18,11 @@ public class TestPalindrome {
     }
 
 
-    /** unit tests for isPalindrome. */
+    /**  Unit Tests for isPalindrome.
+     *
+     *   Task 3A: isPalindrome Testing
+     *
+     * */
     @Test
     public void TestPalindrome1() {
         assertTrue(palindrome.isPalindrome("a"));
