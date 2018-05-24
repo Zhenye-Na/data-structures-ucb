@@ -1,4 +1,4 @@
-# Project 1A: Data Structures
+# [Project 1A: Data Structures](https://sp18.datastructur.es/materials/proj/proj1a/proj1a)
 
 > *Rather than simulating the glorious gravitational physics of our universe, we’ll instead be building data structures. Not the most glamorous thing, but this will provide you with plenty of opportunities to practice everything we’ve been doing in lecture before our midterm rolls around.*
 
