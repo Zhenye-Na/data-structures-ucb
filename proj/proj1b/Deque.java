@@ -8,39 +8,41 @@
 
 public interface Deque<Item> {
 
+    // Interface methods must be `public`, so add `public` to the front is redundant.
+
     /**
      * Add one item to the front of the list.
      */
-    public void addFirst(Item i);
+    void addFirst(Item i);
 
     /**
      * Remove the last item of the queue.
      */
-    public void addLast(Item i);
+    void addLast(Item i);
 
     /**
      * Return a boolean to tell if a queue is empty.
      */
-    public boolean isEmpty();
+    boolean isEmpty();
 
     /**
      * Returns the size of a queue.
      */
-    public int size();
+    int size();
 
     /**
      * Print every elements in a queue, separated by a space.
      */
-    public void printDeque();
+    void printDeque();
 
     /**
      * Delete the first item and return it.
      */
-    public Item removeFirst();
+    Item removeFirst();
 
     /**
      * Delete the last item and return it.
      */
-    public Item removeLast();
+    Item removeLast();
 
 }
