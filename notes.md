@@ -1264,44 +1264,358 @@ How do we differentiate between "interface inheritance" and "implementation inhe
 > When you are creating these hierarchies, remember that the relationship between a subclass and a superclass should be an "is-a" relationship. AKA Cat should only implement Animal Cat is an Animal. You should not be defining them using a "has-a" relationship. Cat has-a Claw, but Cat definitely should not be implementing Claw.
 
 
+## 4.1 Extends, Casting, Higher Order Functions
+
+### Extends
+
+Remember that inheritance allows subclasses to reuse code from an already defined class. So let's define our `RotatingSLList` class to inherit from `SLList`.
+
+We can set up this inheritance relationship in the class header, using the extends keyword like so:
+
+```java
+public class RotatingSLList<Item> extends SLList<Item>
+```
+
+In the same way that AList shares an "is-a" relationship with List61B, RotatingSLList shares an "is-a" relationship SLList. The extends keyword lets us keep the original functionality of SLList, while enabling us to make modifications and add additional functionality.
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/list_subclasses.png)
+
+Here's what we came up with.
+
+```java
+public void rotateRight() {
+    Item x = removeLast();
+    addFirst(x);
+}
+```
+
+By using the extends keyword, subclasses inherit all members of the parent class. "Members" includes:
+
+- All instance and static variables
+- All methods
+- All nested classes
+
+**Note** that constructors are not inherited, and private members cannot be directly accessed by subclasses.
+
+### VengefulSLList
+
+We create a new class, `VengefulSLList`, that remembers all items that have been banished by removeLast.
+
+Like before, we specify in VengefulSLList's class header that it should inherit from SLList.
+
+```java
+public class VengefulSLList<Item> extends SLList<Item>
+```
+
+Now, let's give `VengefulSLList` a method to print out all of the items that have been removed by a call to the removeLast method, `printLostItems()`. We can do this by adding an instance variable that can keep track of all the deleted items. If we use an `SLList` to keep track of our items, then we can simply make a call to the print() method to print out all the items.
+So far this is what we have:
+
+```java
+public class VengefulSLList<Item> extends SLList<Item> {
+    SLList<Item> deletedItems;
+
+    public void printLostItems() {
+        deletedItems.print();
+    }
+}
+```
+
+VengefulSLList's `removeLast` should do exactly the same thing that SLList's does, except with one additional operation - adding the removed item to the deletedItems list. 
+
+In an effort to reuse code, we can **override** the removeLast method to modify it to fit our needs, and call the removeLast method defined in the parent class, SLList, using the `super` keyword.
+
+> We cannot direcctly copy the `removeLast` function to our VengefulSLList because variable are declared as `private` in `SLList` class. Even though sub-class has no access to those varaibles. So we need the `super` keyword to use the removeLast method in the super-class `SLList`.
 
 
+```java
+public class VengefulSLList<Item> extends SLList<Item> {
+    SLList<Item> deletedItems;
+
+    public VengefulSLList() {
+        deletedItems = new SLList<Item>();
+    }
+
+    @Override
+    public Item removeLast() {
+        Item x = super.removeLast();
+        deletedItems.addLast(x);
+        return x;
+    }
+
+    /** Prints deleted items. */
+    public void printLostItems() {
+        deletedItems.print();
+    }
+}
+```
+
+### Constructors Are Not Inherited
+
+Subclasses inherit all members of the parent class, which includes instance and static variables, methods, and nested classes, but does not include constructors.
+
+To gain some intuition on why that it is, recall that the extends keywords defines an "is-a" relationship between a subclass and a parent class. If a VengefulSLList "is-an" SLList, then it follows that every VengefulSLList must be set up like an SLList.
+
+Here's a more in-depth explanation. Let's say we have two classes:
+
+```java
+public class Human {...}
+```
+```java
+public class TA extends Human {...}
+```
+
+It is logical for TA to extend Human, **because all TA's are Human**. Thus, we want TA's to inherit the attributes and behaviors of Humans.
+
+We can either explicitly make a call to the superclass's constructor, using the `super` keyword:
+
+```java
+public VengefulSLList() {
+    super();
+    deletedItems = new SLList<Item>();
+}
+```
+
+Or, if we choose not to, Java will automatically make a call to the superclass's no-argument constructor for us.
+
+In this case, adding `super()` has no difference from the constructor we wrote before. It just makes explicit what was done implicitly by Java before. However, if we were to *define another constructor in VengefulSLList, Java's implicit call may not be what we intend to call*.
+
+Suppose we had a one-argument constructor that took in an item. If we had relied on an implicit call to the superclass's no-argument constructor, `super()`, the item passed in as an argument wouldn't be placed anywhere!
+
+So, we must _*make an explicit call*_ to the correct constructor by passing in the item as a parameter to super.
+
+```java
+public VengefulSLList(Item x) {
+    super(x);
+    deletedItems = new SLList<Item>();
+}
+```
+
+> If we do not make an explicit call of `super(x)`, Java will automatically call the default constructor (the one without arguments)
 
 
+### The Object Class
+
+Every class in Java is a descendant of the `Object` class, or `extends` the Object class. Even classes that do not have an explicit `extends` in their class still implicitly extend the `Object` class.
+
+For example,
+
+- VengefulSLList extends SLList explicitly in its class declaration
+- SLList extends Object implicitly
+
+This means that since SLList inherits all members of Object, VengefulSLList inherits all members of SLList and Object, transitively.
 
 
+### Is-a vs. Has-a
+
+Important Note: The extends keyword defines "is-a", or hypernymic relationships. A common mistake is to instead use it for "has-a", or meronymic relationships.
+
+**When extending a class, a wise thing to do would be to ask yourself if the "is-a" relationship makes sense.**
 
 
+### Encapsulation
+
+Encapsulation is one of the fundamental principles of object oriented programming, and is one of the approaches that we take as programmers to resist our biggest enemy: complexity. Managing complexity is one of the major challenges we must face when writing large programs.
+
+Some of the tools we can use to fight complexity include hierarchical abstraction (abstraction barriers!) and a concept known as "Design for change". This revolves around the idea that *programs should be built into modular, interchangeable pieces* that can be swapped around without breaking the system. Additionally, hiding information that others don't need is another fundamental approach when managing a large system.
+
+Take the `ArrayDeque` class, for example. The outside world is able to utilize and interact with an `ArrayDeque` through its defined methods, like `addLast` and `removeLast`. However, they need not understand the complex details of how the data structure was implemented in order to be able to use it effectively.
+
+### Abstraction Barriers
+
+Ideally, a user should not be able to observe the internal workings of, say, a data structure they are using. Fortunately, Java makes it easy to enforce *abstraction barriers*. Using the `private` keyword in Java, it becomes virtually impossible to look inside an object - ensuring that the underlying complexity isn't exposed to the outside world.
+
+### How Inheritance Breaks Encapsulation
+
+Suppose we had the following two methods in a `Dog` class. We could have implemented `bark` and `barkMany` like so:
+
+```java
+public void bark() {
+    System.out.println("bark");
+}
+
+public void barkMany(int N) {
+    for (int i = 0; i < N; i += 1) {
+        bark();
+    }
+}
+```
+
+Or, alternatively, we could have implemented it like so:
+
+```java
+public void bark() {
+    barkMany(1);
+}
+
+public void barkMany(int N) {
+    for (int i = 0; i < N; i += 1) {
+        System.out.println("bark");
+    }
+}
+```
+
+From a user's perspective, the functionality of either of these implementations is exactly the same. However, observe the effect if we were to define a a subclass of `Dog` called `VerboseDog`, and override its `barkMany` method as such:
+
+```java
+@Override
+public void barkMany(int N) {
+    System.out.println("As a dog, I say: ");
+    for (int i = 0; i < N; i += 1) {
+        bark();
+    }
+}
+```
+
+**Quiz:** Given a `VerboseDog vd`, what would `vd.barkMany(3)` output, given the first implementation above? The second implementation?
+
+- a: As a dog, I say: bark bark bark
+- b: bark bark bark
+- c: Something else
 
 
+### Type Checking and Casting
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/dynamic_selection.png)
+
+```java
+sl.addLast(50);
+sl.removeLast();
+```
+
+These lines above also compile. The call to addLast is unambiguous, as VengefulSLList did not override or implement it, so the method executed is in SLList. _*The removeLast method is overridden by VengefulSLList*_, however, so we take a look at the dynamic type of sl. Its *_dynamic type_* is VengefulSLList, and so *_dynamic method selection_* chooses the *_overridden method_* in the VengefulSLList class.
+
+##### Dynamic Method Selection
+If overridden, decide which method to call based on _**run-time type**_ (or dynamic-type) of variable.
+
+![dynamic-method-selection]()
+
+##### Compile-Time Type Checking
+Compiler allows method calls based on _**compile-time type**_ (or static-type) of variable.
+
+![compile-time-type-checking]()
+
+Compiler also allows assignments based on compile-time types.
+
+- Even though sl’s runtime-type is VengefulSLList, cannot assign to vsl2.
+- Compiler plays it as safe as possible with type checking.
 
 
+#### Expressions
 
+Like variables as seen above, expressions using the `new` keyword also have *_compile-time types_*.
 
+```java
+SLList<Integer> sl = new VengefulSLList<Integer>();
+```
 
+Above, the *_compile-time type_* of the right-hand side of the expression is `VengefulSLList`. The compiler checks to make sure that _VengefulSLList "is-a" SLList_, and allows this assignment,
 
+```java
+VengefulSLList<Integer> vsl = new SLList<Integer>();
+```
 
+Above, the _*compile-time type*_ of the right-hand side of the expression is `SLList`. The compiler checks if **SLList "is-a" VengefulSLList**, which it is **not** in all cases, and thus a compilation error results.
 
+Further, method calls have compile-time types equal to their declared type. Suppose we have this method:
 
+```java
+public static Dog maxDog(Dog d1, Dog d2) { ... }
+```
 
+Since the _return type_ of maxDog is _Dog_, any call to maxDog will have _compile-time type Dog_.
 
+```java
+Poodle frank = new Poodle("Frank", 5);
+Poodle frankJr = new Poodle("Frank Jr.", 15);
 
+Dog largerDog = maxDog(frank, frankJr);
+Poodle largerPoodle = maxDog(frank, frankJr); //does not compile! RHS has compile-time type Dog, LHS is Poodle.
+```
 
+Assigning a Dog object to a Poodle variable, like in the SLList case, results in a compilation error. A Poodle "is-a" Dog, but a more general Dog object may not always be a Poodle, even if it clearly is to you and me (we know that frank and frankJr are both Poodles!).
 
+#### Casting
 
+Java has a special syntax where you can tell the compiler that a specific expression has a specific compile-time type. This is called "casting". With casting, we can tell the compiler to view an expression as a different compile-time type.
 
+```java
+Poodle largerPoodle = (Poodle) maxDog(frank, frankJr);
+// compiles! Right hand side has compile-time type Poodle after casting
+```
 
+### Higher Order Functions
 
+Taking a little bit of a detour, we are going to introduce higher order functions. *_A higher order function is a function that treats other functions as data_*. For example, take this Python program `do_twice` that takes in another function as input, and applies it to the input x twice.
 
+```python
+def tenX(x):
+    return 10*x
 
+def do_twice(f, x):
+    return f(f(x))
+```
 
+A call to `print(do_twice(tenX, 2))` would apply `tenX` to `2`, and apply `tenX` again to its result, `20`, resulting in `200`. How would we do something like this in Java?
 
+In old school Java (Java 7 and earlier), memory boxes (variables) could not contain pointers to functions. What that means is that we could not write a function that has a "Function" type, as there was simply no type for functions.
 
+To get around this we can take advantage of _*interface inheritance*_. Let's write an interface that defines any function that _takes in an integer and returns an integer - an IntUnaryFunction_.
 
+```java
+public interface IntUnaryFunction {
+    int apply(int x);
+}
+```
 
+Now we can write a class which implements `IntUnaryFunction` to represent a concrete function. Let's make a function that takes in an integer and returns 10 times that integer.
 
+```java
+public class TenX implements IntUnaryFunction {
+    /* Returns ten times the argument. */
+    public int apply(int x) {
+        return 10 * x;
+    }
+}
+```
 
+At this point, we've written in Java the Python equivalent of the tenX function. Let's write `do_twice` now.
 
+```java
+public static int do_twice(IntUnaryFunction f, int x) {
+    return f.apply(f.apply(x));
+}
+```
 
+A call to `print(do_twice(tenX, 2))` in Java would look like this:
+`System.out.println(do_twice(new TenX(), 2));`
 
+* * *
 
+**Notes:**
+> **Interaces are types**. We can *_use the names of interfaces to declare variables_*: local and parameter variables in methods, and instance variables in classes. This simple statement leads to some extremely interesting and deep ideas in object-oriented programming. What can we do with a variable whose type is declared by the name of an interface?
+> 
+- We can store into it a reference to an object constructed from any class that says that it implements the interface.
+- We can use it to call any of the methods specified in the interface. The actual method called is the one defined in the object that such a variable refers to.
+>
+So, both of the following declaratins, and their pictures (Image source: Interfaces-Advanced Programming/Practicum 15-200), make sense.
+
+![](https://www.cs.cmu.edu/~pattis/15-1XX/15-200/lectures/interfaces/images/decisionint.gif)
+
+more details please refer this [tutorial](https://www.cs.cmu.edu/~pattis/15-1XX/15-200/lectures/interfaces/lecture.html).
+
+Check out this wonderful video explanation of interface in Java by [Navin Reddy](https://www.youtube.com/watch?v=Yaa3QroWe7Q) at 6:40.
+
+* * *
+
+### Inheritance Cheatsheet
+
+1. VengefulSLList extends SLList means VengefulSLList *_"is-an"_* SLList, and inherits all of SLList's members:
+
+    - Variables, methods nested classes
+    - **Not** constructors Subclass constructors must invoke superclass constructor first. The `super` keyword can be used to *_invoke overridden superclass methods_* and constructors.
+
+2. Invocation of overridden methods follows two simple rules:
+
+    - Compiler plays it safe and only allows us to do things according to the `static type`.
+    - For *_overridden_* methods (not _*overloaded*_ methods), the actual method invoked is based on the `dynamic type` of the invoking expression
+    - Can use casting to overrule compiler type checking.
