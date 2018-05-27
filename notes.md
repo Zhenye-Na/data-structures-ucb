@@ -2391,6 +2391,37 @@ Here we've seen **`Iterable`, the interface that makes a class able to be iterat
 
 ### Packages and JAR files
 
+Any Java class without an explicit package name at the top of the file is automatically considered to be part of the **_"default"_** package. Therefore, your Java files should generally start with an explicit package declaration.
+
+
+### Access Control
+
+**Private** Only code from the _given class_ can access private members. It is truly private from everything else, as subclasses, packages, and other external classes cannot access private members. TL;DR: only the class needs this piece of code.
+
+**Package Private** This is the default access given to Java members if there is no explicit modifier written. Package private entails that classes that belong _in the same package can access_, but _not subclasses_! Why is this useful? Usually, packages are handled and modified by the same (group of) people. It is also common for people to extend classes that they didn't initially write. The original owners of the class that's being extended may not want certain features or members to be tampered with, if people choose to extend it — hence, package-private allows those who are familiar with the inner workings of the program to access and modify certain members, whereas it blocks those who are subclassing from doing the same. 
+> *_TL;DR: only classes that live in the same package can access_*.
+
+**Protected** Protected members are protected from the "outside" world, so _classes within the same package and subclasses can access_ these members, but the rest of the world (e.g. classes external to the package or non-subclasses) cannot! 
+> *_TL;DR: subtypes might need it, but subtype clients will not_*.
+
+**Public** This keyword opens up the access to everyone! This is generally what clients of the package can rely on to use, and once deployed, the public members' signatures should not change. It's like a promise and contract to people using this public code that it will always be accessible to them. Usually if developers want to "get rid of" something that's public, rather than removing it, they would call it "deprecated" instead.
+> _*TL;DR: open and promised to the world*_
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/access_modifiers.png)
+
+
+### Access Control Subtleties
+
+
+
+
+
+
+
+
+
+
+
 
 
 
