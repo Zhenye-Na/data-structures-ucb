@@ -1487,12 +1487,12 @@ These lines above also compile. The call to addLast is unambiguous, as VengefulS
 ##### Dynamic Method Selection
 If overridden, decide which method to call based on _**run-time type**_ (or dynamic-type) of variable.
 
-![dynamic-method-selection]()
+![dynamic-method-selection](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/fig/dynamic-method-selection.jpg?raw=true)
 
 ##### Compile-Time Type Checking
 Compiler allows method calls based on _**compile-time type**_ (or static-type) of variable.
 
-![compile-time-type-checking]()
+![compile-time-type-checking](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/fig/dynamic-method-selection.jpg?raw=true)
 
 Compiler also allows assignments based on compile-time types.
 
@@ -1619,3 +1619,785 @@ Check out this wonderful video explanation of interface in Java by [Navin Reddy]
     - Compiler plays it safe and only allows us to do things according to the `static type`.
     - For *_overridden_* methods (not _*overloaded*_ methods), the actual method invoked is based on the `dynamic type` of the invoking expression
     - Can use casting to overrule compiler type checking.
+
+
+## 4.2 Subtype Polymorphism vs. HoFs
+
+### Subtype Polymorphism
+
+We've seen how inheritance lets us reuse existing code in a superclass while implementing small modifications by *_overriding_* a superclass's methods or writing brand new methods in the subclass. _Inheritance also makes it possible to design general data structures and methods using polymorphism._
+
+`Polymorphism`, at its core, means _'many forms'_. In Java, polymorphism refers to how objects can have many forms or types. In object-oriented programming, polymorphism relates to how an object can be regarded as an instance of its own class, an instance of its superclass, an instance of its superclass's superclass, and so on.
+
+Consider a variable `deque` of static type `Deque`. A call to `deque.addFirst()` will be determined at the time of execution, depending on the _run-time type_, or _dynamic type_, of deque when `addFirst` is called. As we saw in the last chapter, Java picks which method to call using `dynamic method selection`.
+
+Suppose we want to write a python program that prints a string representation of the larger of two objects. There are two approaches to this.
+
+1. Explicit HoF Approach
+
+    ```python
+    def print_larger(x, y, compare, stringify):
+        if compare(x, y):
+            return stringify(x)
+        return stringify(y)
+    ```
+
+2. Subtype Polymorphism Approach
+
+    ```python
+    def print_larger(x, y):
+        if x.largerThan(y):
+            return x.str()
+        return y.str()
+    ```
+
+
+
+
+
+
+### Interfaces Quiz
+
+```java
+public class DogLauncher {
+    public static void main(String[] args) {
+        ...
+        Dog[] dogs = new Dog[]{d1, d2, d3};
+        System.out.println(Maximizer.max(dogs));
+    }
+}
+
+public class Dog implements OurComparable {
+    ...
+    public int compareTo(Object o) {
+        Dog uddaDog = (Dog) o;
+        if (this.size < uddaDog.size) {
+            return -1;
+        } else if (this.size == uddaDog.size) {
+            return 0;
+        }
+        return 1;
+    }
+    ...
+}
+
+public class Maximizer {
+    public static OurComparable max(OurComparable[] items) {
+        ...
+        int cmp = items[i].compareTo(items[maxDex]);
+        ...
+    }
+}
+```
+
+
+
+![](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/fig/interfaces-quiz1.jpg?raw=true)
+
+In this case, the **Dog class fails to compile**. By declaring that it `implements OurComparable`, the Dog class _*makes a claim that it "is-an" OurComparable*_. As a result, the compiler checks that this claim is actually true, but sees that *_Dog doesn't implement compareTo_*.
+
+![](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/fig/interfaces-quiz2.jpg?raw=true)
+
+What if we were to omit implements OurComparable from the Dog class header? This would cause a compile error in **DogLauncher** due to this line:
+
+```java
+System.out.println(Maximizer.max(dogs));
+```
+
+If Dog does not implement the OurComparable interface, then trying to pass in an array of Dogs to Maximizer's max function wouldn't be approved by the compiler. max only accepts an array of _*OurComparable objects*_.
+
+
+> Problem 1: **Dog will fail** to compile because it does not implement all abstract methods required by OurComparable interface. (And I suppose *DogLauncher will fail as well since Dog.class doesn’t exist*)
+
+> Problem 2: **DogLauncher will fail**, because it tries to pass things that are not OurComparables, and Maximizer expects OurComparables.
+
+
+### Comparables
+
+We'll take advantage of an interface that already exists called `Comparable`. Comparable is already defined by Java and is used by countless libraries.
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/comparable_interface.png)
+
+Notice that `Comparable<T>` means that it takes a _*generic type*_. This will help us avoid having to cast an object to a specific type!
+
+
+### Comparator
+
+We've just learned about the comparable interface, which imbeds into each Dog the ability to compare itself to another Dog. Now, we will introduce a new interface that looks very similar called `Comparator`.
+Let's start off by defining some terminology.
+
+> **Natural order** - used to refer to the ordering implied in the compareTo method of a particular class.
+
+What if we'd like to sort Dogs in a different way than their natural ordering, such as by alphabetical order of their name? Java's way of doing this is by using _Comparator's_. Since a `comparator` is an object, the way we'll use Comparator is by _writing a nested class inside Dog that implements the Comparator interface._
+
+```java
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+}
+```
+
+This shows that the Comparator interface requires that any implementing class implements the compare method. The rule for compare is just like `compareTo`:
+
+- Return negative number if o1 < o2.
+- Return 0 if o1 equals o2.
+- Return positive number if o1 > o2.
+
+Let's give Dog a `NameComparator`. To do this, we can simply defer to `String`'s already defined `compareTo` method.
+
+```java
+import java.util.Comparator;
+
+public class Dog implements Comparable<Dog> {
+    ...
+    public int compareTo(Dog uddaDog) {
+        return this.size - uddaDog.size;
+    }
+
+    /** private nested class that implements Comparator<Dog>. */
+    private static class NameComparator implements Comparator<Dog> {
+        public int compare(Dog a, Dog b) {
+            return a.name.compareTo(b.name);
+        }
+    }
+
+    public static Comparator<Dog> getNameComparator() {
+        return new NameComparator();
+    }
+}
+```
+
+Note that we've declared `NameComparator` to be a `static` class. A minor difference, but we do so because _**we do not need to instantiate a Dog to get a NameComparator**_. Let's see how this Comparator works in action.
+
+To summarize, interfaces in Java provide us with the ability to make **callbacks**. Sometimes, a function needs the help of another function that might not have been written yet (e.g. `max` needs `compareTo`). _*A callback function is the helping function*_ (in the scenario, compareTo). In some languages, this is accomplished using explicit function passing; in Java, we wrap the needed function in an interface.
+
+
+## 4.3 Libraries, Abstract Classes, Packages
+
+### Abstract Data Types (ADTS)
+
+We have this interface deque that both `ArrayDeque` and `LinkedListDeque` implement. What is the relationship between Deque and its implementing classes? Well, deque simply provides a list of methods (behaviors):
+
+```java
+public void addFirst(T item);
+public void addLast(T item);
+public boolean isEmpty();
+public int size();
+public void printDeque();
+public T removeFirst();
+public T removeLast();
+public T get(int index);
+```
+
+These methods are actually implemented by ArrayDeque and LinkedListDeque.
+
+In Java, _Deque is called an interface_. Conceptually, we call deque an `Abstract data type`. Deque only comes with behaviors, not any concrete ways to exhibit those behaviors. In this way, it is abstract.
+
+
+> We can characterize the situation in the abstract by describing sets of operations that are supported by different data structures—that is by describing possible abstract data types. From the point of view of a program that needs to represent some kind of collection of data, this set of operations is all that one needs to know.
+
+
+### Java Libraries
+
+Java has certain built-in Abstract data types that you can use. These are packaged in Java Libraries.
+The three most important ADTs come in the java.util library:
+
+- [List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html): an ordered collection of items
+    - A popular implementation is the [`ArrayList`](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
+- [Set](https://docs.oracle.com/javase/7/docs/api/java/util/Set.html): an unordered collection of strictly unique items (no repeats)
+    - A popular implementation is the [`HashSet`](https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html)
+- [Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html): a collection of key/value pairs. You access the value via the key.
+    - A popular implementation is the [`HashMap`](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html)
+
+Finish the exercises below by using the above three ADT's. Reading the documentations linked above will help immensely.
+
+```java
+public static List<String> getWords(String inputFileName) {
+    List<String> lst = new ArrayList<String>();
+    In in = new In();
+    while (!in.isEmpty()) {
+        lst.add(in.readString()); //optionally, define a cleanString() method that cleans the string first.       
+    }
+    return lst;
+}
+
+public static int countUniqueWords(List<String> words) {
+    Set<String> ss = new HashSet<>();
+    for (String s : words) { // equivalent to python syntax: for s in words
+           ss.add(s);        
+    }
+    return ss.size();
+}
+```
+
+> Write a method collectWordCount that takes in a `List<String> targets` and a `List<String> words` and finds the _number of times_ each target word appears in the word list.
+
+```java
+public static Map<String, Integer> collectWordCount(List<String> words), List<String> targets {
+    Map<String, Integer> counts = new HashMap<String, Integer>();
+    for (String t: target) {
+        counts.put(s, 0);
+    }
+    for (String s: words) {
+        if (counts.containsKey(s)) {
+            counts.put(word, counts.get(s)+1);
+        }
+    }
+    return counts;
+}
+```
+
+The interface body can contain `abstract methods`, `default methods`, and `static methods`. 
+
+- `Abstract method` within an interface is followed by a semicolon, but no braces (an abstract method does not contain an implementation).
+- `Default methods` are defined with the default modifier.
+- `Static methods` with the static keyword. 
+
+All abstract, default, and static methods in an interface are _implicitly public_, so _you can omit the public modifier_.
+
+In addition, an interface can contain constant declarations. All constant values defined in an interface are _implicitly public, static, and final (cannot be changed) _. Once again, you can omit these modifiers.
+
+**Notes:**
+
+Interfaces:
+
+- All methods must be public.
+- All variables must be public static final.
+- Cannot be instantiated
+- All methods are by default abstract unless specified to be default
+- Can implement more than one interface per class
+
+abstract classes:
+
+- Methods can be public or private
+- Can have any types of variables
+- Cannot be instantiated
+- Methods are by default concrete unless specified to be abstract
+- Can only implement one per class
+
+Basically, abstract classes can do everything interfaces can do and more.
+
+
+## 5.2 Generics, Autoboxing
+
+### Autoboxing and Unboxing
+As we saw in the previous chapter, we can define classes which have generic type variables using the `<>` syntax, e.g. `LinkedListDeque<Item>` and `ArrayDeque<Item>`. When we want to instantiate an object whose class uses _generics_, we have to substitute the generic with a concrete class, i.e. specify what type of items are going to go into that class.
+
+Recall that Java has 8 primitive types -- all other types are reference types. One particular feature of Java is that we cannot provide a primitive type as an actual type argument for generics, e.g. `ArrayDeque<int>` is a syntax error. Instead, we use `ArrayDeque<Integer>`. _For each primitive type, we use the corresponding reference type as shown in the table below. These reference types are called "wrapper classes"._
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/wrapper_classes.png)
+
+There are a few things to keep in mind when it comes to autoboxing and unboxing:
+
+- **Arrays are never autoboxes or auto-unboxed**, e.g. if you have an array of integers `int[] x`, and try to put its address into a variable of type `Integer[]`, the compiler will **not** allow your program to compile.
+- Autoboxing and unboxing also has a measurable performance impact. That is, **code that relies on autoboxing and unboxing will be slower than code that eschews such automatic conversions**.
+- Additionally, **wrapper types use much more memory than primitive types**. On most modern comptuers, not only must your code _hold a 64 bit reference to the object_, but _every object also requires 64 bits of overhead_ used to store things like the dynamic type of the object.
+
+
+### Widening
+
+Similar to the autoboxing/unboxing process, Java will also automatically widen a primitive if needed. Specifically, if a program expects a primitive of type T2 and is given a variable of type T1, and type T2 can take on a wider range of values than T1, the the variable will be implicitly cast to type T2.
+For example, doubles in Java are wider than ints. If we have the function shown below:
+
+```java
+public static void blahDouble(double x) {
+    System.out.println("double: " + x);
+}
+```
+
+We can call it with an `int` argument:
+
+```java
+int x = 20;
+blahDouble(x);
+```
+
+If you want to go from a wider type to a narrower type, you must manually cast. For example, if you have the method below:
+
+```java
+public static void blahInt(int x) {
+    System.out.println("int: " + x);
+}
+```
+
+Then we'd need to use a cast if we want to call this method using a double value, e.g.
+
+```java
+double x = 20;
+blahInt((int) x);
+```
+
+For more details on widening, including a full description of what types are wider than others, see the official Java documentation.
+
+
+### Immutability
+
+The final keyword is a keyword for variables that prevents the variable from being changed after its first assignment. For example, consider the Date class below:
+
+```java
+public class Date {
+    public final int month;
+    public final int day;
+    public final int year;
+    private boolean contrived = true;
+    public Date(int m, int d, int y) {
+        month = m; day = d; year = y;
+    }
+}
+```
+
+
+### Creating Another Generic Class
+
+#### ArrayMap
+
+```
+put(key, value): Associate key with value.
+containsKey(key): Checks if map contains the key.
+get(key): Returns value, assuming key exists.
+keys(): Returns a list of all keys.
+size(): Returns number of keys.
+```
+
+Feel free to try building an ArrayMap on your own, but for reference, the full implementation is below.
+
+```java
+package Map61B;
+
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+ * An array-based implementation of Map61B.
+ */
+public class ArrayMap<K, V> implements Map61B<K, V> {
+
+    private K[] keys;
+    private V[] values;
+    int size;
+
+    public ArrayMap() {
+        keys = (K[]) new Object[100];
+        values = (V[]) new Object[100];
+        size = 0;
+    }
+
+    /**
+    * Returns the index of the key, if it exists. Otherwise returns -1.
+    **/
+    private int keyIndex(K key) {
+        for (int i = 0; i < size; i++) {
+            if (keys[i].equals(key)) {
+            return i;
+        }
+        return -1;
+    }
+
+    public boolean containsKey(K key) {
+        int index = keyIndex(key);
+        return index > -1;
+    }
+
+    public void put(K key, V value) {
+        int index = keyIndex(key);
+        if (index == -1) {
+            keys[size] = key;
+            values[size] = value;
+            size += 1;
+        } else {
+            values[index] = value;
+        }
+    }
+
+    public V get(K key) {
+        int index = keyIndex(key);
+        return values[index];
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public List<K> keys() {
+        List<K> keyList = new ArrayList<>();
+        for (int i = 0; i <= size; i++) {
+            keyList.add(keys[i]);
+        }
+        return keyList;
+    }
+}
+```
+
+### ArrayMap and Autoboxing Puzzle
+
+If we write a test as shown below:
+
+```java
+@Test
+public void test() { 
+    ArrayMap<Integer, Integer> am = new ArrayMap<Integer, Integer>();
+    am.put(2, 5);
+    int expected = 5;
+    assertEquals(expected, am.get(2));
+}
+```
+
+You will find that we get a compile-time error!
+
+```java
+$ javac ArrayMapTest.java
+ArrayMapTest.java:11: error: reference to assertEquals is ambiguous
+    assertEquals(expected, am.get(2));
+    ^
+    both method assertEquals(long, long) in Assert and method assertEquals(Object, Object) in Assert match
+```
+
+We get this error because JUnit's `assertEquals` method is overloaded, eg. `assertEquals(int expected, int actual)`, `assertEquals(Object expected, Object actual)`, etc. Thus, Java is unsure which method to call for `assertEquals(expected, am.get(2))`, which requires one argument to be _autoboxed/unboxed_.
+
+#### Quiz
+
+What would we need to do in order to call `assertEquals(long, long)`?  
+A.) Widen expected to a `long`  
+B.) Autobox expected to a `Long`  
+C.) Unbox `am.get(2)`  
+D.) Widen the unboxed `am.get(2)` to long
+
+_*Answer A, C, and D all work.*_
+
+How would we make it work with `assertEquals(Object, Object)`?
+
+*_Answer Autobox expected to an Integer because `Integers` are `Objects`._*
+
+### Generic Methods
+
+`get` is a static method that takes in a `Map61B` instance and a key and returns the value that corresponds to the key if it exists, otherwise returns `null`.
+
+![](https://github.com/Zhenye-Na/cs61b-ucb/blob/master/fig/generic-methods.jpg?raw=true)
+
+
+Compared to Generic Class `public class CS61B<Item>`, we add the "reference type" in front of return type.
+
+
+The `>` operator can't be used to compare `K` objects. This only works on primitives and map may not hold primitives
+
+```java
+public static <K extends Comparable<K>, V> K maxKey(Map61B<K, V> map) {
+    List<K> keylist = map.keys();
+    K largest = map.get(0);
+    for (K k: keylist) {
+        if (k.compareTo(largest)) {
+            largest = k;
+        }
+    }
+    return largest;
+}
+```
+
+
+```java
+public static <K extends Comparable<K>, V> K maxKey(Map61B<K, V> map) {...}
+```
+
+The `K extends Comparable<K>` means keys must implement the comparable interface and can be compared to other `K`'s. We need to include the `<K>` after Comparable because _Comparable itself is a generic interface_! Therefore, we must specify what kind of comparable we want. In this case, we want to compare `K`'s with `K`'s.
+
+
+### Type upper bounds
+
+You might be wondering, why does it "extend" comparable and not "implement"? Comparable is an interface after all. Well, it turns out, "extends" in this context has a different meaning than in the polymorphism context.
+
+When we say that the `Dog` class extends the `Animal` class, we are saying that Dogs can do anything that animals can do and more! We are giving `Dog` the abilities of an animal. 
+
+When we say that `K extends Comparable`, we are simply stating a fact. We aren't giving K the abilities of a Comparable, _we are just saying that K must be Comparable_. This different use of extends is called **type upper bounding**. 
+
+In the context of generics, `extends` simply states a fact: **_You must be a subclass of whatever you're extending_**. When used with generics (like in generic method headers), `extends` imposes a constraint rather than grants new abilities.
+
+
+
+## 5.3 Exceptions, Iterators, Iterables
+
+### Throwing Exceptions
+
+When something goes really wrong in a program, we want to break the normal flow of control. It may not make sense to continue on, or it may not be possible at all. In these cases, the program throws an exception.
+Let's look at what might be a familiar case: an `IndexOutOfBounds` exception. The code below inserts the value 5 into an ArrayMap under the key "hello", then tries to print out the value when getting "yolp".
+
+```java
+public static void main (String[] args) {
+    ArrayMap<String, Integer> am = new ArrayMap<String, Integer>();
+    am.put("hello", 5);
+    System.out.println(am.get("yolp"));
+}
+```
+
+The program attempts to access a key which doesn't exist, and crashes! This results in the following error message:
+
+```java
+$ java ExceptionDemo
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: -1
+at ArrayMap.get(ArrayMap.java:38)
+at ExceptionDemo.main(ExceptionDemo.java:6)
+```
+
+We can throw our own exceptions, using the `throw` keyword. This lets us provide our own error messages which may be more informative to the user. We can also provide information to error-handling code within our program. This is an explicit exception because we purposefully threw it as the programmer.
+
+In the case above, we might implement get with a check for a missing key, that throws a more informative exception:
+
+```java
+public V get(K key) {
+    intlocation = findKey(key);
+if(location < 0) {
+    throw newIllegalArgumentException("Key " + key + " does not exist in map."\); 
+}
+    return values[findKey(key)];
+}
+```
+
+Now, instead of `java.lang.ArrayIndexOutOfBoundsException: -1`, we see:
+
+```java
+$java ExceptionDemo
+Exception in thread "main" java.lang.IllegalArgumentException: Key yolp does not exist in map.
+at ArrayMap.get(ArrayMap.java:40)
+at ExceptionDemo.main(ExceptionDemo.java:6)
+```
+
+
+### Catching Exceptions
+
+```java
+public static void main(String[] args) {
+    System.out.println("ayyy lmao");
+    throw new RuntimeException("For no reason.");
+}
+```
+
+which produces the error:
+
+```java
+$ java Alien
+ayyy lmao
+Exception in thread "main" java.lang.RuntimeException: For no reason.
+at Alien.main(Alien.java:4)
+```
+
+In this example, note a familiar construction: `new RuntimeException("For no reason.")`. This looks a lot like instantiating a class -- because that's exactly what it is. **_A RuntimeException is just a Java Object, like any other._**
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/exceptions.png)
+
+
+```java
+Dog d = new Dog("Lucy", "Retriever", 80);
+d.becomeAngry();
+
+try {
+    d.receivePat();
+} catch (Exception e) {
+    System.out.println("Tried to pat: " + e);
+}
+System.out.println(d);
+```
+
+It seems silimar to someone who is familiar with `python` syntax.
+
+```python
+try:
+    blablabla
+    blablabla
+except:
+    blablabla
+    blablabla
+
+```
+
+### Uncaught Exceptions
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/callstack.png)
+
+If the `peek()` method does not explicitly catch the exception, the exception will propagate to the calling function, `sample()`. We can think of this as popping the current method off the stack, and moving to the next method below it. If `sample()` also fails to catch the exception, it moves to `main()`.
+
+If the exception reaches the bottom of the stack without being caught, the program crashes and Java provides a message for the user, printing out the stack trace. Ideally the user is a programmer with the power to do something about it.
+
+```java
+java.lang.RuntimeException in thread "main": 
+at ArrayRingBuffer.peek:63 
+at GuitarString.sample:48 
+at GuitarHeroLite.java:110
+```
+
+### Checked vs Unchecked Exceptions
+
+The basic idea is that some exceptions are considered so disgusting by the compiler that you **MUST** handle them somehow. We call these **"checked"** exceptions. (You might think of that as shorthand for **"must be checked"** exceptions.)
+
+
+Let's consider this example:
+
+```java
+public static void main(String[] args) {
+    Eagle.gulgate();
+}
+```
+
+It looks reasonable enough. But when we attempt to compile, we receive this error:
+
+```java
+$ javac What.java
+What.java:2: error: unreported exception IOException; must be caught or declared to be thrown
+Eagle.gulgate();
+^
+```
+
+We can't compile, because of an _"unreported IOException."_ Let's look a little deeper into the Eagle class:
+
+```java
+public class Eagle {
+    public static void gulgate() {
+        if (today == “Thursday”) { 
+            throw new IOException("hi"); }
+        }
+    }
+}
+```
+
+On Thursdays, the `gulgate()` method is programmed to throw an `IOException`. If we try and compile `Eagle.java`, we receive a similar error to the one we saw when compiling the calling class above:
+
+```java
+$ javac Eagle
+Eagle.java:4: error: unreported exception IOException; must be caught or declared to be thrown
+throw new IOException("hi"); }
+^
+```
+
+It's clear that Java isn't happy about this `IOException`. This is because `IOExceptions` are "checked' exceptions and must be handled accordingly. 
+
+```java
+public class UncheckedExceptionDemo {
+    public static void main(String[] args) {
+        if (today == “Thursday”) { 
+            throw new RuntimeException("as a joke"); 
+        }    
+    }
+}
+```
+
+`RuntimeExceptions` are considered **"unchecked"** exceptions, and do not have the same requirements as the checked exceptions. The code above will compile just fine -- though it will crash at runtime on Thursdays:
+
+```
+$ javac UncheckedExceptionDemo.java
+$ java UncheckedExceptionDemo
+Exception in thread "main" java.lang.RuntimeException: as a joke.
+at UncheckedExceptionDemo.main(UncheckedExceptionDemo.java:3)
+```
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/checked_exceptions.png)
+
+1. Catch
+
+    ```java
+    public static void main(String[] args) {
+        try {
+            gulgate();
+        } catch(IOException e) {
+            System.out.println("Averted!");
+        }
+    }
+    ```
+
+2. Specify
+
+    ```java
+    public static void main(String[] args) throws IOException {
+        gulgate();
+    }
+    ```
+
+- **Catch** the error when you can handle the problem there.
+- **Specify** the error when someone else should handle the error.
+
+
+## Iteration
+
+`Iterator` is an `Object`.
+
+in `List.java` we might define an `iterator()` method that returns an `iterator` object.
+
+```java
+public Iterator<E> iterator();
+```
+
+then:
+
+```java
+List<Integer> friends = new ArrayList<Integer>();
+...
+Iterator<Integer> seer = friends.iterator();
+
+while (seer.hasNext()) {
+    System.out.println(seer.next());
+}
+```
+
+> It advances the iterator by one item. In this way, _the iterator will only inspect each item once_.
+
+
+### Implementing Iterators
+
+When instatiating a nested-class, which is not static, we should add the instance name before the `new` keyword, like:
+
+```java
+blablah.nestedblabla nbl= bl.new nestedblabla();
+```
+`bl` is the instance name
+
+```java
+List<Integer> friends = new ArrayList<Integer>();
+Iterator<Integer> seer = friends.iterator();
+
+while(seer.hasNext()) {
+    System.out.println(seer.next());
+}
+```
+
+- Does the List interface have an iterator() method?
+- Does the Iterator interface have next/hasNext() methods?
+
+
+The `List` interface extends the `Iterable` interface, inheriting the abstract `iterator()` method. (Actually, `List` extends `Collection` which extends `Iterable`, but it's easier to codethink of this way to start.)
+
+```java
+public interface Iterable<T> {
+    Iterator<T> iterator();
+}
+```
+```java
+public interface List<T> extends Iterable<T>{
+...
+}
+```
+
+Next, the compiler checks that Iterators have `hasNext()` and `next()`. The Iterator interface specifies these abstract methods explicitly:
+
+```java
+package java.util;
+public interface Iterator<T> {
+    boolean hasNext();
+    T next();
+}
+```
+
+
+Here we've seen **`Iterable`, the interface that makes a class able to be iterated on**, and requires the method `iterator()`, which returns an **Iterator object**. And we've seen **`Iterator`, the interface that defines the object with methods to actually do that iteration**. You can think of an Iterator as a machine that you put onto an iterable that facilitates the iteration. Any iterable is the object on which the iterator is performing.
+
+
+
+## 6.1 Packages, Access Control, Objects
+
+### Packages and JAR files
+
+
+
+
+
+
+
+
+
+
+
