@@ -1856,25 +1856,25 @@ All abstract, default, and static methods in an interface are _implicitly public
 
 In addition, an interface can contain constant declarations. All constant values defined in an interface are _implicitly public, static, and final (cannot be changed) _. Once again, you can omit these modifiers.
 
-**Notes:**
+#### Notes:
 
-Interfaces:
+**Interfaces:**
 
-- All methods must be public.
-- All variables must be public static final.
+- All methods must be `public`.
+- All variables must be `public static final`.
 - Cannot be instantiated
-- All methods are by default abstract unless specified to be default
+- All methods are by default `abstract` unless specified to be `default`
 - Can implement more than one interface per class
 
-abstract classes:
+**Abstract Classes:**
 
-- Methods can be public or private
+- Methods can be `public` or `private`
 - Can have any types of variables
 - Cannot be instantiated
-- Methods are by default concrete unless specified to be abstract
-- Can only implement one per class
+- Methods are _by default concrete_ unless specified to be `abstract`
+- _Can only implement one per class_
 
-Basically, abstract classes can do everything interfaces can do and more.
+**_Basically, abstract classes can do everything interfaces can do and more._**
 
 
 ## 5.2 Generics, Autoboxing
@@ -2410,18 +2410,59 @@ Any Java class without an explicit package name at the top of the file is automa
 ![](https://joshhug.gitbooks.io/hug61b/content/assets/access_modifiers.png)
 
 
-### Access Control Subtleties
+## 6.2 Encapsulation, Lists, Delegation vs. Extension
+
+### Encapsulation
+
+We will first define a few terms:
+
+- **Module**: A set of methods that work together as a whole to perform some task or set of related tasks.
+- **Encapsulated**: A module is said to be encapsulated if its implementation is completely hidden, and it can be accessed only through a documented interface.
+
+### API's
+
+An API(*_Application Programming Interface_*) of an `ADT` is the list of constructors and methods and a short description of each.
+
+_API consists of syntactic and semantic specification._
+
+- Compiler verifies that syntax is met.
+    - AKA, everything specified in the API is present.
+- Tests help verify that semantics are correct.
+    - AKA everything actually works the way it should.
+    - Semantic specification usually written out in English (possibly including usage examples). Mathematically precise formal specifications are somewhat possible but not widespread.
+
+### ADT's
+
+ADT's (Abstract Data Structures) are high-level types that are defined by their behaviors, not their implementations.
+
+> `Deque` in _Proj1_ was an `ADT` that had certain behaviors (`addFirst`, `addLast`, etc.). But, the data structures we actually used to implement it was `ArrayDeque` and `LinkedListDeque`
+
+Some `ADT`'s are actually special cases of other ADT's. For example, `Stacks` and `Queues` are just _lists_ that have _even more specific behavior_.
+
+
+## 7.1 Asymptotics I
+
+Execution Cost (everything in the course from this point on)
+
+- **Time complexity**: How much time does it take for your program to execute?
+- **Space complexity**: How much memory does your program require?
 
 
 
+## 7.2 Asymptotics II
 
+```java
+public static void printParty(int N) {
+   for (int i = 1; i <= N; i = i * 2) {
+      for (int j = 0; j < i; j += 1) {
+         System.out.println("hello");   
+         int ZUG = 1 + 1;
+      }
+   }
+}
+```
 
-
-
-
-
-
-
+$$C(N) \in \Theta(N) $$
 
 
 
