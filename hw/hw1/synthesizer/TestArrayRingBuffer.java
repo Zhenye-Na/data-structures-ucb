@@ -97,20 +97,23 @@ public class TestArrayRingBuffer {
         ArrayRingBuffer arb = new ArrayRingBuffer(10);
 
         for (int i = 0; i < arb.capacity(); i += 1) {
-            arb.enqueue(i);
+            arb.enqueue(i * 2);
         }
 
-//        ArrayRingBuffer.BufferIterator iterator = arb.new BufferIterator();
-//
-//        Iterator iterator = arb.iterator();
-//
-//        while (iterator.hasNext()) {
-//            System.out.print(iterator.next() + ", ");
-//        }
+        /* Test
+        ArrayRingBuffer.BufferIterator iterator = arb.new BufferIterator();
 
-        for (double x : arb) {
-            for (double y : arb) {
-                System.out.println("x: " + x + "; y : " + y);
+        Iterator iterator = arb.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next() + ", ");
+        }
+        */
+
+        // Nested Iterator test
+        for (Object x : arb) {
+            for (Object y : arb) {
+                System.out.println("x: " + x + "; y: " + y);
             }
         }
 
