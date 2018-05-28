@@ -1,5 +1,8 @@
 package synthesizer;
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 /** Tests the ArrayRingBuffer class.
@@ -65,6 +68,52 @@ public class TestArrayRingBuffer {
         }
 
         assertTrue(arb.isEmpty());
+    }
+
+    /* Make sure it throws Exception
+    @Test
+    public void testThrowException() {
+        ArrayRingBuffer arb = new ArrayRingBuffer(10);
+
+        for (int i = 0; i < arb.capacity(); i += 1) {
+            arb.enqueue(i);
+        }
+
+        arb.enqueue(666);   // java.lang.RuntimeException: Ring buffer overflow
+
+        for (int i = 0; i < arb.capacity(); i += 1) {
+            arb.dequeue();
+        }
+
+        arb.dequeue();      // java.lang.RuntimeException: Ring buffer underflow
+        arb.peek();         // java.lang.RuntimeException: Ring buffer underflow
+
+    }
+    */
+
+
+    @Test
+    public void testIterator() {
+        ArrayRingBuffer arb = new ArrayRingBuffer(10);
+
+        for (int i = 0; i < arb.capacity(); i += 1) {
+            arb.enqueue(i);
+        }
+
+//        ArrayRingBuffer.BufferIterator iterator = arb.new BufferIterator();
+//
+//        Iterator iterator = arb.iterator();
+//
+//        while (iterator.hasNext()) {
+//            System.out.print(iterator.next() + ", ");
+//        }
+
+        for (double x : arb) {
+            for (double y : arb) {
+                System.out.println("x: " + x + "; y : " + y);
+            }
+        }
+
     }
 
 

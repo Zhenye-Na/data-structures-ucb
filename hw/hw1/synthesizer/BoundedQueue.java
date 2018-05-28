@@ -1,9 +1,14 @@
 package synthesizer;
 
+import java.util.Iterator;
+
 /**
  * Created by Zhenye Na on May, 2018
  */
-public interface BoundedQueue<T> {
+public interface BoundedQueue<T> extends Iterable<T> {
+
+    @Override
+    Iterator<T> iterator();
 
     /** return size of the buffer. */
     int capacity();
