@@ -2465,11 +2465,55 @@ public static void printParty(int N) {
 $$C(N) \in \Theta(N) $$
 
 
+### Recursion
+
+```java
+public static int f3(int n) {
+   if (n <= 1) 
+      return 1;
+   return f3(n-1) + f3(n-1);
+}
+```
+
+Let's think of an example. If we call `f3(4)`, it will return `f3(4-1) + f3(4-1)` which are each `f3(3-1) + f3(3-1)`, which are each `f3(2-1) + f3(2-1)`, which each return `1`. So we see that in the end we have `f3(2-1)` summed `8` times, which equals 8. We can visualize this as a tree, where each level is the argument to the function:
+
+![](https://joshhug.gitbooks.io/hug61b/content/assets/asymptotics2_tree.png)
+
+### Binary Search
+
+### Merge Sort
+
+Selection sort works off two basic steps:
+
+- Find the smallest item among the unsorted items, move it to the front, and 'fix' it in place.
+- Sort the remaining unsorted/unfixed items using selection sort.
+
+If we analyze selection sort, we see that it's $\Theta (N^2)$.
+
+Let's introduce one other idea here: **_arbitrary units of time_**. While the exact time something will take will depend on the machine, on the particular operations, etc., we can get a general sense of time through our _arbitrary units (AU)_.
+
+If we run an N=6 selection sort, and the runtime is order $N^2$, it will take ~36 AU to run. If N=64, it'll take ~2048 AU to run. Now we don't know if that's 2048 nanoseconds, or seconds, or years, but we can get a relative sense of the time needed for each size of N.
+
+**merge sort:**
+
+- If the list is size 1, return. Otherwise:
+- Mergesort the left half
+- Mergesort the right half
+- Merge the results
 
 
+## 7.3 Asymptotics III
 
+**Summary**
 
-
+- Big O is an upper bound ("less than or equals")
+- Big Omega is a lower bound ("greater than or equals")
+- Big Theta is both an upper and lower bound ("equals")
+- Big O does NOT mean "worst case". We can still describe worst cases using Big Theta
+- Big Omega does NOT mean "best case". We can still describe best cases using Big Theta
+- Big O is sometimes colloquially used in cases where Big Theta would provide a more precise statement
+- Amortized analysis provides a way to prove the average cost of operations.
+- If we chose $a_i$ such that $\Phi_i$ is never negative and $a_i$ is constant for all $i$, then the amortized cost is an upper bound on the true cost.
 
 
 
