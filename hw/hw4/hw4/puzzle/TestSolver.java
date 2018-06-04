@@ -62,7 +62,7 @@ public class TestSolver {
         }
     }
 
-/* Uncomment once you've written Solver.
+
     @Test(timeout = 10000)
     public void testWordPuzzles() {
         In in = new In("input/word_puzzles.txt");
@@ -79,9 +79,9 @@ public class TestSolver {
             assertEquals(errorMessage, wps.numMoves, s.moves());
         }
     }
- */
 
- /* Uncomment everything in this block once you've written Board.
+
+
      public static Board readBoard(String filename) {
         In in = new In(filename);
         int N = in.readInt();
@@ -105,10 +105,11 @@ public class TestSolver {
             BoardPuzzleSolution bps = new BoardPuzzleSolution(puzzleName, b, numMoves);
             Solver s = new Solver(b);
             assertEquals("Wrong number of moves on " + puzzleName, bps.numMoves, s.moves());
+            System.out.println("Solved 2x2 Board Puzzles: " + (i+1));
         }
     }
-
-    @Test(timeout = 40000)
+    // (timeout = 40000)
+    @Test
     public void test3x3BoardPuzzles() {
         for (int i = 0; i <= 30; i += 1) {
             String pnum = String.format("%02d", i);
@@ -118,10 +119,11 @@ public class TestSolver {
             BoardPuzzleSolution bps = new BoardPuzzleSolution(puzzleName, b, numMoves);
             Solver s = new Solver(b);
             assertEquals("Wrong number of moves on " + puzzleName, bps.numMoves, s.moves());
+            System.out.println("Solved 3x3 Board Puzzles: " + (i+1));
         }
     }
-
-    @Test(timeout = 20000)
+    // (timeout = 20000)
+    @Test
     public void test4x4BoardPuzzles() {
         for (int i = 0; i <= 30; i += 1) {
             String pnum = String.format("%02d", i);
@@ -131,10 +133,11 @@ public class TestSolver {
             BoardPuzzleSolution bps = new BoardPuzzleSolution(puzzleName, b, numMoves);
             Solver s = new Solver(b);
             assertEquals("Wrong number of moves on " + puzzleName, bps.numMoves, s.moves());
+            System.out.println("Solved 4x4 Board Puzzles: " + (i+1));
         }
     }
-
-    @Test(timeout = 20000)
+    // (timeout = 20000)
+    @Test
     public void testVariousPuzzles() {
         for (int i = 0; i <= 31; i += 1) {
             String pnum = String.format("%02d", i);
@@ -144,6 +147,7 @@ public class TestSolver {
             BoardPuzzleSolution bps = new BoardPuzzleSolution(puzzleName, b, numMoves);
             Solver s = new Solver(b);
             assertEquals("Wrong number of moves on " + puzzleName, bps.numMoves, s.moves());
+            System.out.println("Solved Various Puzzles: " + (i+1));
         }
-    }*/
+    }
 }
