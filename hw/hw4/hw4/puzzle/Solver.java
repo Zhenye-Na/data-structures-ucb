@@ -10,9 +10,8 @@ import edu.princeton.cs.algs4.MinPQ;
 
 public class Solver {
 
-    // private int capacity;
-    private Node[] items;
-    private ArrayList solution;
+
+    private ArrayList<WorldState> solution;
 
 
     /**
@@ -25,33 +24,73 @@ public class Solver {
      */
     public Solver(WorldState initial) {
 
+        // solution ArrayList
+        solution = new ArrayList<>();
 
+        // Priority Queue
+        MinPQ<SNode> pq = new MinPQ<>();
+
+        // Insert initial WorldState
+        pq.insert(new SNode(initial, 0, null));
+
+        // Remove the search node with minimum priority `X`. If it is the goal node, then we’re done.
+        // Otherwise, for each neighbor of X’s world state, create a new search node that obeys
+        // the description above and insert it into the priority queue.
+        while (!pq.min().getWorldState().isGoal()) {
+
+            SNode X = pq.delMin();
+
+            for (WorldState neighbor : X.getWorldState().neighbors()) {
+
+                // critical optimization
+                if ( X.getPrev() == null || !(neighbor.equals(X.getPrev().getWorldState())) ) {
+                    pq.insert(new SNode(neighbor, X.getMoves() + 1, X));
+                }
+
+            }
+
+        }
+
+
+        SNode s = pq.min();
+        while (s != null) {
+            solution.add(0, s.getWorldState());
+            s = s.getPrev();
+        }
 
 
     }
 
 
-    private class Node<T> {
-        private T myItem;
-        private double myPriority;
+    private class SNode implements Comparable<SNode> {
+        private WorldState ws;
+        private int numOfMoves;        // number of moves made to reach this world state from the initial state.
+        private SNode prev;            // a reference to the previous search node.
 
-        private Node(T item, double priority) {
-            myItem = item;
-            myPriority = priority;
+
+        private SNode(WorldState ws, int m, SNode p) {
+            this.ws = ws;
+            this.numOfMoves = m;
+            this.prev = p;
         }
 
-        public T item(){
-            return myItem;
+        public WorldState getWorldState() {
+            return ws;
         }
 
-        public double priority() {
-            return myPriority;
+        public int getMoves() {
+            return numOfMoves;
+        }
+
+        public SNode getPrev() {
+            return prev;
         }
 
         @Override
-        public String toString() {
-            return myItem.toString() + ", " + myPriority;
+        public int compareTo(SNode sn) {
+            return ( ( this.numOfMoves + ws.estimatedDistanceToGoal() ) - ( sn.numOfMoves + sn.ws.estimatedDistanceToGoal() ) );
         }
+
     }
 
 
@@ -59,7 +98,7 @@ public class Solver {
      *  Returns the minimum number of moves to solve the puzzle starting at the initial WorldState.
      */
     public int moves() {
-        return 0;
+        return solution.size() - 1;
     }
 
 
@@ -67,7 +106,7 @@ public class Solver {
      * Returns a sequence of WorldStates from the initial WorldState to the solution.
      */
     public Iterable<WorldState> solution() {
-        return null;
+        return solution;
     }
 
 

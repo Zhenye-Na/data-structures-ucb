@@ -7,8 +7,11 @@ public class WordPuzzleSolver {
      * your basic functionality.
      **********************************************************************/
     public static void main(String[] args) {
-        String start = "cube";
-        String goal = "tubes";
+//        String start = "cube";
+//        String goal = "tubes";
+
+        String start = "horse";
+        String goal = "nurse";
 
         Word startState = new Word(start, goal);
         Solver solver = new Solver(startState);
