@@ -454,7 +454,7 @@ public class Maze implements Observer {
 
 
     // a test client
-   /* public static void main(String[] args) {
+   public static void main(String[] args) {
         int N = Integer.parseInt(args[0]);
         int rseed = Integer.parseInt(args[1]);
 
@@ -464,7 +464,7 @@ public class Maze implements Observer {
 //        MazeExplorer mdfp = new MazeAStarPath(maze, 4, 4, N, N);
         MazeExplorer mdfp = new MazeCycles(maze);
         mdfp.solve();
-    }*/
+    }
 
 
     private int N;                 // dimension of maze
@@ -474,5 +474,21 @@ public class Maze implements Observer {
     private boolean[][] west;
     private static Random rgen;
     private static int DRAW_DELAY_MS = 50;
+
+
+
+    /**
+     public int N(): Size of the maze (mazes are N x N)
+     public int V(): Total number of vertices in the maze
+     public Iterable<Integer> adj(int v): Returns the neighbors of v
+     public int toX(int v): Returns the x coordinate of vertex v
+     public int toY(int v): Returns the y coordinate of vertex v
+     public int xyTo1D(int x, int y): Returns the vertex number of x, y
+     */
+
+
+
+
+
 }
 
