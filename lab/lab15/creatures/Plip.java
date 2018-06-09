@@ -20,6 +20,8 @@ public class Plip extends Creature {
     /** blue color. */
     private int b;
 
+    private double MAX_ENERGY = 2.0;
+
     /** creates plip with energy equal to E. */
     public Plip(double e) {
         super("plip");
@@ -42,7 +44,9 @@ public class Plip extends Creature {
      *  that you get this exactly correct.
      */
     public Color color() {
-        g = 63;
+        r = 99;
+        g = (int) (63 + (1 / MAX_ENERGY) * (energy * (255 - 63)));
+        b = 76;
         return color(r, g, b);
     }
 
@@ -55,11 +59,14 @@ public class Plip extends Creature {
      *  private static final variable. This is not required for this lab.
      */
     public void move() {
+        energy -= 0.15;
     }
 
 
     /** Plips gain 0.2 energy when staying due to photosynthesis. */
     public void stay() {
+        energy += 0.2;
+        if (energy > MAX_ENERGY) energy = 2;
     }
 
     /** Plips and their offspring each get 50% of the energy, with none
@@ -67,21 +74,46 @@ public class Plip extends Creature {
      *  Plip.
      */
     public Plip replicate() {
-        return this;
+        this.energy *= 0.5;
+        Plip replica = new Plip(this.energy);
+        return replica;
     }
 
     /** Plips take exactly the following actions based on NEIGHBORS:
      *  1. If no empty adjacent spaces, STAY.
      *  2. Otherwise, if energy >= 1, REPLICATE.
      *  3. Otherwise, if any Cloruses, MOVE with 50% probability.
-     *  4. Otherwise, if nothing else, STAY
+     *  4. Otherwise, if nothing else, STAY.
      *
      *  Returns an object of type Action. See Action.java for the
      *  scoop on how Actions work. See SampleCreature.chooseAction()
      *  for an example to follow.
      */
     public Action chooseAction(Map<Direction, Occupant> neighbors) {
+        List<Direction> empties = getNeighborsOfType(neighbors, "empty");
+        List<Direction> enemies = getNeighborsOfType(neighbors, "clorus");
+
+        // If no empty adjacent spaces, STAY.
+        if (empties.size() == 0) {
+            return new Action(Action.ActionType.STAY);
+        } else {
+            if (energy >= 1) {
+                // Otherwise, if energy >= 1, REPLICATE.
+                Direction moveDir = HugLifeUtils.randomEntry(empties);
+                return new Action(Action.ActionType.REPLICATE, moveDir);
+            }
+            if (enemies.size() > 0) {
+                // Otherwise, if any Cloruses, MOVE with 50% probability.
+                if (HugLifeUtils.random() < 0.5) {
+                    Direction moveDir = HugLifeUtils.randomEntry(empties);
+                    return new Action(Action.ActionType.MOVE, moveDir);
+                }
+            }
+        }
+        // Otherwise, if nothing else, STAY.
         return new Action(Action.ActionType.STAY);
     }
+
+
 
 }

@@ -119,9 +119,9 @@ public class HugLife {
             int y = in.readInt();
             switch (creature) {
                 //Uncomment this when you're ready to test out your clorus class
-                // case "clorus":
-                //     h.addCreature(x, y, new Clorus(1));
-                //     break;
+                case "clorus":
+                    h.addCreature(x, y, new Clorus(1));
+                    break;
                 case "plip":
                     h.addCreature(x, y, new Plip());
                     break;
@@ -135,11 +135,11 @@ public class HugLife {
 
     /** Runs world name specified by ARGS[0]. */
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Usage: java huglife.HugLife [worldname]");
-            return;
-        }
-        HugLife h = readWorld(args[0]);
+//        if (args.length != 1) {
+//            System.out.println("Usage: java huglife.HugLife [worldname]");
+//            return;
+//        }
+        HugLife h = readWorld("strugggz");
         // HugLife h = new HugLife(WORLD_SIZE);
         // h.initialize(args[0]); DON'T USE ME
 
