@@ -1,21 +1,21 @@
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
-import edu.princeton.cs.algs4.MinPQ;
-
-
 /**
  * Created by Zhenye Na on Jun, 2018
  */
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import edu.princeton.cs.algs4.MinPQ;
 
 
 public class BinaryTrie implements Serializable {
 
     private Node bt;
+    Map<Character, BitSequence> ref;
 
-    // trie node
-    private static class Node implements Comparable<Node> {
+
+    // BinaryTrie node
+    private static class Node implements Serializable, Comparable<Node> {
         private final char ch;
         private final int freq;
         private final Node left, right;
@@ -29,7 +29,6 @@ public class BinaryTrie implements Serializable {
 
         // is the node a leaf node?
         private boolean isLeaf() {
-            assert ((left == null) && (right == null)) || ((left != null) && (right != null));
             return (left == null) && (right == null);
         }
 
@@ -40,35 +39,6 @@ public class BinaryTrie implements Serializable {
     }
 
 
-//    /**
-//     *  find the key which has the min value in the map
-//     */
-//    private Character getMinKey(Map<Character, Integer> map) {
-//        Character minKey = null;
-//        int minValue = Integer.MAX_VALUE;
-//        List<Character> keys = new ArrayList<>(map.keySet());
-//
-//        for(Character key : keys) {
-//            int value = map.get(key);
-//            if(value < minValue) {
-//                minValue = value;
-//                minKey = key;
-//            }
-//        }
-//        return minKey;
-//    }
-
-
-//    private Map<Character, Integer> sortMap(Map<Character, Integer> frequencyTable) {
-//
-//        HashMap duplicate = new HashMap();
-//        duplicate = (HashMap) ((HashMap) frequencyTable).clone();
-//        Character minKey = getMinKey(duplicate);
-//
-//    }
-
-
-
     public BinaryTrie(Map<Character, Integer> frequencyTable) {
 
         MinPQ<Node> pq = new MinPQ<>();
@@ -76,9 +46,6 @@ public class BinaryTrie implements Serializable {
             if (frequencyTable.get(key) > 0) pq.insert(new Node(key, frequencyTable.get(key), null, null));
         }
 
-        if (pq.size() == 1) {
-            pq.insert(new Node('\0', 0, null, null));
-        }
 
         while (pq.size() > 1) {
             Node left = pq.delMin();
@@ -88,6 +55,7 @@ public class BinaryTrie implements Serializable {
         }
 
         bt = pq.delMin();
+        ref = new HashMap<>();
     }
 
 
@@ -97,44 +65,39 @@ public class BinaryTrie implements Serializable {
      */
     public Match longestPrefixMatch(BitSequence querySequence) {
 
-        Match mt = new Match();
+        Node curr = bt;
 
+        for (int i = 0; i < querySequence.length(); i += 1) {
+            if (curr.isLeaf()) {
+                return new Match(querySequence.firstNBits(i), curr.ch);
+            } else {
+                int bit = querySequence.bitAt(i);
+                if (bit == 0) {
+                    curr = curr.left;
+                } else {
+                    curr = curr.right;
+                }
+            }
+        }
 
-
-
+        return new Match(querySequence, curr.ch);
     }
-
-
-
-
-
 
 
     public Map<Character, BitSequence> buildLookupTable() {
 
-
-        // make a lookup table from symbols and their encodings
-//        private static void buildCode(String[] st, Node x, String s) {
-//            if (!x.isLeaf()) {
-//                buildCode(st, x.left,  s + '0');
-//                buildCode(st, x.right, s + '1');
-//            }
-//            else {
-//                st[x.ch] = s;
-//            }
-//        }
-
-        Map<Character, BitSequence> ref = new HashMap<>();
-
-        while (bt.ch != '\0') {
-            Character symbol;
-            BitSequence sequence;
-
-
-
-        }
-
-
-
+        buildLookupTable(ref, bt, "");
+        return ref;
     }
+
+    private void buildLookupTable(Map<Character, BitSequence> lookupTable, Node x, String s) {
+        if (!x.isLeaf()) {
+            buildLookupTable(lookupTable, x.left, s + '0');
+            buildLookupTable(lookupTable, x.right, s + '1');
+        } else {
+            lookupTable.put(x.ch, new BitSequence(s));
+        }
+    }
+
+
 }
