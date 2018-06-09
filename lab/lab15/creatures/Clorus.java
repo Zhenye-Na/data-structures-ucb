@@ -82,7 +82,7 @@ public class Clorus extends Creature {
      * */
     public Action chooseAction(Map<Direction, Occupant> neighbors) {
         List<Direction> empties = getNeighborsOfType(neighbors, "empty");
-        
+
         // If no empty adjacent spaces, STAY.
         if (empties.size() == 0) {
             return new Action(Action.ActionType.STAY);
