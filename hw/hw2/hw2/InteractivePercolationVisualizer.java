@@ -20,7 +20,7 @@ public class InteractivePercolationVisualizer {
         // N-by-N percolation system (read from command-line, default = 10)
         int N = 10;
         if (args.length == 1) {
-            N = Integer.parseInt(args[0]);
+            N = Integer.parseInt(args[0]); // args[0]
         }
 
         // turn on animation mode
