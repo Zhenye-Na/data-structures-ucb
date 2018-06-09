@@ -135,11 +135,11 @@ public class HugLife {
 
     /** Runs world name specified by ARGS[0]. */
     public static void main(String[] args) {
-//        if (args.length != 1) {
-//            System.out.println("Usage: java huglife.HugLife [worldname]");
-//            return;
-//        }
-        HugLife h = readWorld("strugggz");
+        if (args.length != 1) {
+            System.out.println("Usage: java huglife.HugLife [worldname]");
+            return;
+        }
+        HugLife h = readWorld(args[0]);
         // HugLife h = new HugLife(WORLD_SIZE);
         // h.initialize(args[0]); DON'T USE ME
 
