@@ -66,9 +66,7 @@ public class Percolation {
         validate(col);
 
         // Check whether it is open
-        if (isOpen(row, col)) {
-            throw new IllegalArgumentException("This site is already opened!");
-        } else {
+        if (!isOpen(row, col)) {
             grid[row][col] = 1;
             numOfOpen += 1;
             Connect(row, col);
@@ -107,8 +105,9 @@ public class Percolation {
     }
 
 
-    /** is the site (row, col) open?
-     *  whether click this site?
+    /**
+     *  is the site (row, col) open?
+     *  whether ever clicked this site?
      */
     public boolean isOpen(int row, int col) {
         // validate whether index is legal
@@ -119,8 +118,9 @@ public class Percolation {
     }
 
 
-    /** is the site (row, col) full?
-     *  whether connected to the top?
+    /**
+     *  is the site (row, col) full?
+     *  whether connected to the top / head?
      */
     public boolean isFull(int row, int col) {
         // validate whether index is legal
@@ -133,9 +133,9 @@ public class Percolation {
 
 
     /**
-     * number of open sites.
+     *  number of open sites.
      *
-     * take constant time
+     *  take constant time
      */
     public int numberOfOpenSites() {
         return numOfOpen;
@@ -144,15 +144,6 @@ public class Percolation {
 
     /** does the system percolate? */
     public boolean percolates() {
-
-//        // Dummy version for checking percolation
-//        for (int i = 0; i < grid.length; i += 1) {
-//            if (WQU.connected(0, i)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
 
         // Check tail is connected to head or not
         return WQU.connected(head, tail);
