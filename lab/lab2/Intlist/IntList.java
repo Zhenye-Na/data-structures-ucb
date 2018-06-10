@@ -79,9 +79,7 @@ public class IntList {
      * Returns a list consisting of the elements of A followed by the
      * *  elements of B.  May modify items of A. Don't use 'new'.
      */
-
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
 
         if (A == null) {
             return B;
@@ -94,6 +92,7 @@ public class IntList {
         p.rest = B;
         return A;
     }
+
 
     /**
      * Returns a list consisting of the elements of A followed by the
@@ -122,26 +121,13 @@ public class IntList {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
      * will be introduced later in the course or feature some form of advanced
      * trickery which we implemented to help make your life a little easier for
      * the lab.
      */
+
 
     @Override
     public int hashCode() {
