@@ -269,6 +269,6 @@ public class SeamCarver {
         }
     }
 
-    
+
 
 }
