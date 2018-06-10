@@ -9,6 +9,8 @@ import java.util.Map;
  */
 public class Rasterer {
 
+    private int SL = 288200;
+
     public Rasterer() {
         // YOUR CODE HERE
     }
@@ -44,9 +46,52 @@ public class Rasterer {
     public Map<String, Object> getMapRaster(Map<String, Double> params) {
         // System.out.println(params);
         Map<String, Object> results = new HashMap<>();
+
         System.out.println("Since you haven't implemented getMapRaster, nothing is displayed in "
                            + "your browser.");
-        return results;
+        // return results;
+
+        // variables in params
+        double lrlon  =  params.get(lrlon);
+        double ullon  =  params.get(ullon);
+        double width  =  params.get(w);
+        double height =  params.get(h);
+        double ullat  =  params.get(ullat);
+        double lrlat  =  params.get(lrlat);
+
+        // variables needed to be put into
+        String[][] render_grid;
+        double raster_ul_lon;
+        double raster_ul_lat;
+        double raster_lr_lon;
+        double raster_lr_lat;
+        int depth;
+        boolean query_success;
+
+
+
+
+
+
     }
+
+    // compute the LonDPP of an image file
+    private double LonDPP(double lrlon, double ullon, double width) {
+        return (lrlon - ullon) * SL / MapServer.TILE_SIZE;
+    }
+
+
+    private int getDepth() {
+        double targetRes = 0.355;
+        int depth;
+
+        double
+
+
+        return depth;
+    }
+
+
+
 
 }

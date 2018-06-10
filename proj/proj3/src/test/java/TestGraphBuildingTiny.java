@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class TestGraphBuildingTiny {
     private static GraphDB graphTiny;
     private static final String OSM_DB_PATH_TINY =
-            "../library-sp18/data/tiny-clean.osm.xml";
+            "../../library-sp18/data/tiny-clean.osm.xml";
     private static boolean initialized = false;
 
     /**

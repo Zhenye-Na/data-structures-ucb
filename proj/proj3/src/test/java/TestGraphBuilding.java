@@ -13,7 +13,7 @@ public class TestGraphBuilding {
     private static GraphDB graph;
     private static GraphDB graphSmall;
 
-    private static final String OSM_DB_PATH = "../library-sp18/data/berkeley-2018.osm.xml";
+    private static final String OSM_DB_PATH = "../../library-sp18/data/berkeley-2018.osm.xml";
     private static final String OSM_DB_PATH_SMALL =
             "../library-sp18/data/berkeley-2018-small.osm.xml";
     private static boolean initialized = false;
