@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import edu.princeton.cs.algs4.In;
 
@@ -19,10 +21,42 @@ public class Boggle {
      */
     public static List<String> solve(int k, String boardFilePath) {
         // YOUR CODE HERE
+
+        In dictionary = new In(dictPath);
+        String[] dictWords;
+        dictWords = dictionary.readAllLines();
+
+
+        List<String> solutions = new ArrayList<>();
+        String[] words;
+
+        // Read in Board
+        In in = new In(boardFilePath);
+        words = in.readAllLines();
+        char[][] board = new char[words.length][words[0].length()];
+
+        // Transform to grid, like below
+        // [n, e, s, s]
+        // [t, a, c, k]
+        // [b, m, u, h]
+        // [e, s, f, t]
+        for (int i = 0; i < words.length; i += 1) {
+            for (int j = 0; j < words[0].length(); j += 1) {
+                board[i][j] = words[i].charAt(j);
+            }
+        }
+
         return null;
     }
 
 
 
-    
+
+    public static void main(String[] args) {
+        List<String> la;
+        la = solve(3, "exampleBoard.txt");
+
+    }
+
+
 }
