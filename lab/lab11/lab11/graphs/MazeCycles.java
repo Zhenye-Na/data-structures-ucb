@@ -26,6 +26,8 @@ public class MazeCycles extends MazeExplorer {
     public void solve() {
         // TODO: Your code here!
 
+        // TODO: Not finished yet! See you!
+
         Stack<Integer> st = new Stack<>();
 
         marked[s] = true;
@@ -50,11 +52,7 @@ public class MazeCycles extends MazeExplorer {
                         if ( marked[u] && (edgeTo[w] != u)) flag = true;
                     }
 
-
                 }
-
-
-
 
             }
         }
