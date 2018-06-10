@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version="0.6" generator="osmconvert 0.8.4" timestamp="2018-04-02T02:00:01Z">
+	<bounds minlat="38" minlon="0" maxlat="39" maxlon="1"/>
+	<node id="11" lat="38.1" lon="0.1" version="1"/>
+	<node id="22" lat="38.2" lon="0.2" version="1"/>
+	<node id="41" lat="38.1" lon="0.4" version="1"/>
+	<node id="63" lat="38.3" lon="0.6" version="1"/>
+	<node id="55" lat="38.5" lon="0.5" version="1"/>
+	<node id="46" lat="38.6" lon="0.4" version="1"/>						
+	<node id="66" lat="38.6" lon="0.6" version="1"/>						
+	<way id="114163" version="1">
+		<nd ref="11"/>
+		<nd ref="41"/>
+		<nd ref="63"/>
+		<tag k="name" v="11/41/63 southeast side highway"/>
+		<tag k="oneway" v="no"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="both"/>
+	</way>
+	<way id="1122" version="1">
+		<nd ref="11"/>
+		<nd ref="22"/>
+		<tag k="name" v="11/21 connector road"/>
+		<tag k="oneway" v="no"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="both"/>
+	</way>
+	<way id="224666" version="1">
+		<nd ref="22"/>
+		<nd ref="46"/>
+		<nd ref="66"/>
+		<tag k="name" v="22/46/66 northwest side highway"/>
+		<tag k="oneway" v="no"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="both"/>
+	</way>
+	<way id="22556366" version="1">
+		<nd ref="22"/>
+		<nd ref="55"/>		
+		<nd ref="63"/>
+		<nd ref="66"/>
+		<tag k="name" v="scenic 22/55/63/66 highway"/>
+		<tag k="oneway" v="no"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="both"/>
+	</way>	
+</osm>

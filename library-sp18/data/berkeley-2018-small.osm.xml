@@ -1,0 +1,797 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version="0.6" generator="osmconvert 0.8.4" timestamp="2018-04-02T02:00:01Z">
+	<bounds minlat="37.868" minlon="-122.2539999" maxlat="37.869" maxlon="-122.2519997"/>
+	<node id="53055620" lat="37.8686991" lon="-122.2521165" version="1">
+		<tag k="highway" v="stop"/>
+	</node>
+	<node id="267631975" lat="37.86842" lon="-122.2520469" version="1"/>
+	<node id="267631978" lat="37.8684518" lon="-122.2533957" version="1"/>
+	<node id="267631979" lat="37.868632" lon="-122.2526011" version="1"/>
+	<node id="267631980" lat="37.8684795" lon="-122.2532624" version="1"/>
+	<node id="267631981" lat="37.8689181" lon="-122.252156" version="1"/>
+	<node id="267632000" lat="37.8689436" lon="-122.2523007" version="1"/>
+	<node id="267632001" lat="37.8686794" lon="-122.2522749" version="1">
+		<tag k="highway" v="stop"/>
+	</node>
+	<node id="267632002" lat="37.8683498" lon="-122.2521775" version="1"/>
+	<node id="267632003" lat="37.8680988" lon="-122.2520764" version="1"/>
+	<node id="358858264" lat="37.8681537" lon="-122.2536098" version="1">
+		<tag k="ele" v="98"/>
+		<tag k="name" v="The Wright Institute"/>
+		<tag k="amenity" v="university"/>
+		<tag k="wikidata" v="Q8038222"/>
+		<tag k="gnis:created" v="01/04/2008"/>
+		<tag k="gnis:state_id" v="06"/>
+		<tag k="gnis:county_id" v="001"/>
+		<tag k="gnis:feature_id" v="2370597"/>
+	</node>
+	<node id="1250673138" lat="37.8682915" lon="-122.2539845" version="1"/>
+	<node id="1250673143" lat="37.8680571" lon="-122.2535769" version="1"/>
+	<node id="1250673156" lat="37.8681457" lon="-122.2539537" version="1"/>
+	<node id="1250673157" lat="37.8680609" lon="-122.25398" version="1"/>
+	<node id="1964475018" lat="37.8682688" lon="-122.2527624" version="1"/>
+	<node id="1964475021" lat="37.8682738" lon="-122.2527443" version="1"/>
+	<node id="1964475027" lat="37.8685883" lon="-122.2528179" version="1"/>
+	<node id="1964475040" lat="37.8681243" lon="-122.2527205" version="1"/>
+	<node id="1964475053" lat="37.8684672" lon="-122.2529657" version="1"/>
+	<node id="1964475083" lat="37.8684853" lon="-122.2528272" version="1"/>
+	<node id="1964475085" lat="37.868257" lon="-122.2529379" version="1"/>
+	<node id="1964475099" lat="37.8682187" lon="-122.2529418" version="1"/>
+	<node id="1964475137" lat="37.8680966" lon="-122.2529213" version="1"/>
+	<node id="1964475147" lat="37.8682766" lon="-122.2527871" version="1"/>
+	<node id="1964475159" lat="37.8683472" lon="-122.2529566" version="1"/>
+	<node id="1964475167" lat="37.8683471" lon="-122.2529568" version="1"/>
+	<node id="2252623339" lat="37.868008" lon="-122.2520433" version="1"/>
+	<node id="2252623342" lat="37.8680237" lon="-122.2520456" version="1"/>
+	<node id="2252623344" lat="37.8680558" lon="-122.2520707" version="1"/>
+	<node id="2252623345" lat="37.8680703" lon="-122.252045" version="1"/>
+	<node id="2252623347" lat="37.8681007" lon="-122.2520433" version="1"/>
+	<node id="2252623348" lat="37.868123" lon="-122.2520821" version="1"/>
+	<node id="2252623349" lat="37.8681254" lon="-122.252049" version="1"/>
+	<node id="2252623350" lat="37.8682339" lon="-122.252095" version="1"/>
+	<node id="2252623351" lat="37.8683016" lon="-122.2520399" version="1"/>
+	<node id="2252623353" lat="37.8683612" lon="-122.2521467" version="1"/>
+	<node id="2252623354" lat="37.8683993" lon="-122.2520791" version="1"/>
+	<node id="2252623355" lat="37.8684943" lon="-122.2521915" version="1"/>
+	<node id="2252623356" lat="37.8685085" lon="-122.2522331" version="1"/>
+	<node id="2252623357" lat="37.8685499" lon="-122.2522097" version="1"/>
+	<node id="2252623358" lat="37.8686064" lon="-122.252225" version="1"/>
+	<node id="2252623359" lat="37.8686176" lon="-122.252145" version="1"/>
+	<node id="2542389561" lat="37.8689027" lon="-122.2526369" version="1"/>
+	<node id="2542389562" lat="37.8687523" lon="-122.2526101" version="1"/>
+	<node id="2542389563" lat="37.8687693" lon="-122.2524398" version="1"/>
+	<node id="2542389564" lat="37.868819" lon="-122.2524491" version="1"/>
+	<node id="2542389565" lat="37.8688275" lon="-122.2524022" version="1"/>
+	<node id="2542389566" lat="37.8689238" lon="-122.2524196" version="1"/>
+	<node id="2687909063" lat="37.8681271" lon="-122.2526226" version="1"/>
+	<node id="2687909064" lat="37.8680899" lon="-122.2529237" version="1"/>
+	<node id="2687909065" lat="37.8680195" lon="-122.2529098" version="1"/>
+	<node id="2687909066" lat="37.8680453" lon="-122.2527003" version="1"/>
+	<node id="2687909068" lat="37.8680159" lon="-122.2525269" version="1"/>
+	<node id="2687909069" lat="37.8680551" lon="-122.2525348" version="1"/>
+	<node id="2687909070" lat="37.8680462" lon="-122.2526066" version="1"/>
+	<node id="2769122338" lat="37.8680055" lon="-122.2539683" version="1"/>
+	<node id="3190966751" lat="37.8689987" lon="-122.2538909" version="1"/>
+	<node id="3190967966" lat="37.868965" lon="-122.2534559" version="1"/>
+	<node id="3190967967" lat="37.8689296" lon="-122.2537529" version="1"/>
+	<node id="3190969466" lat="37.8689958" lon="-122.2534136" version="1"/>
+	<node id="3190969467" lat="37.8688771" lon="-122.2533941" version="1"/>
+	<node id="3190969468" lat="37.8689162" lon="-122.2530685" version="1"/>
+	<node id="3264470131" lat="37.8680118" lon="-122.2539206" version="1"/>
+	<node id="3955064809" lat="37.8680219" lon="-122.2539163" version="1"/>
+	<node id="3955064811" lat="37.8680706" lon="-122.2535581" version="1"/>
+	<node id="3955064813" lat="37.8682969" lon="-122.2539785" version="1"/>
+	<node id="4305381561" lat="37.8686295" lon="-122.2539655" version="1"/>
+	<node id="4305382033" lat="37.8684752" lon="-122.2538751" version="1"/>
+	<node id="4305382078" lat="37.8686005" lon="-122.253902" version="1"/>
+	<node id="4305382141" lat="37.8687129" lon="-122.253979" version="1"/>
+	<node id="4333613086" lat="37.8684228" lon="-122.2535805" version="1"/>
+	<node id="4333613087" lat="37.8685548" lon="-122.2529686" version="1"/>
+	<node id="4333613088" lat="37.8686094" lon="-122.2522578" version="1">
+		<tag k="highway" v="crossing"/>
+		<tag k="crossing" v="island"/>
+	</node>
+	<node id="4333613289" lat="37.8686319" lon="-122.2520998" version="1">
+		<tag k="highway" v="crossing"/>
+		<tag k="crossing" v="island"/>
+	</node>
+	<node id="4333613290" lat="37.8686698" lon="-122.252341" version="1">
+		<tag k="highway" v="crossing"/>
+		<tag k="crossing" v="uncontrolled"/>
+	</node>
+	<node id="4676764549" lat="37.8682816" lon="-122.2530112" version="1"/>
+	<node id="4676764560" lat="37.8682603" lon="-122.2535149" version="1"/>
+	<node id="4676764570" lat="37.8682256" lon="-122.2535833" version="1"/>
+	<node id="4676764580" lat="37.8686764" lon="-122.2528549" version="1"/>
+	<node id="4676764581" lat="37.868178" lon="-122.2538494" version="1"/>
+	<node id="4676765338" lat="37.8681443" lon="-122.2529828" version="1"/>
+	<node id="4676765348" lat="37.8683218" lon="-122.2535264" version="1"/>
+	<node id="4676765357" lat="37.8688216" lon="-122.253189" version="1"/>
+	<node id="4676765358" lat="37.8683585" lon="-122.2529589" version="1"/>
+	<node id="4676765369" lat="37.8680834" lon="-122.2523549" version="1"/>
+	<node id="4676765576" lat="37.8687458" lon="-122.2533872" version="1"/>
+	<node id="4676765577" lat="37.8684685" lon="-122.2527696" version="1"/>
+	<node id="4676765588" lat="37.8680348" lon="-122.252392" version="1"/>
+	<node id="4676765858" lat="37.868166" lon="-122.2529749" version="1"/>
+	<node id="4676765868" lat="37.8683084" lon="-122.253587" version="1"/>
+	<node id="4676765878" lat="37.8688238" lon="-122.253036" version="1"/>
+	<node id="4676765879" lat="37.8681674" lon="-122.2539472" version="1"/>
+	<node id="4676765886" lat="37.8680889" lon="-122.2537228" version="1"/>
+	<node id="4676765909" lat="37.868213" lon="-122.2531015" version="1"/>
+	<node id="4676765920" lat="37.8689884" lon="-122.2524326" version="1"/>
+	<node id="4676765921" lat="37.8682612" lon="-122.2535072" version="1"/>
+	<node id="4676765930" lat="37.8686985" lon="-122.2529802" version="1"/>
+	<node id="4676765931" lat="37.8682919" lon="-122.253838" version="1"/>
+	<node id="4676765941" lat="37.8686671" lon="-122.2529324" version="1"/>
+	<node id="4676765942" lat="37.8682195" lon="-122.2523205" version="1"/>
+	<node id="4676765973" lat="37.8680666" lon="-122.2532456" version="1"/>
+	<node id="4676765983" lat="37.8681547" lon="-122.2535416" version="1"/>
+	<node id="4676765994" lat="37.8686656" lon="-122.253486" version="1"/>
+	<node id="4676766006" lat="37.8685262" lon="-122.2524404" version="1"/>
+	<node id="4676766045" lat="37.8681644" lon="-122.252987" version="1"/>
+	<node id="4676766055" lat="37.8682026" lon="-122.2535044" version="1"/>
+	<node id="4676766065" lat="37.8689" lon="-122.2529898" version="1"/>
+	<node id="4676766066" lat="37.8682679" lon="-122.2538253" version="1"/>
+	<node id="4676766073" lat="37.8681904" lon="-122.2536163" version="1"/>
+	<node id="4676766078" lat="37.8680589" lon="-122.2525957" version="1"/>
+	<node id="4676766091" lat="37.8680411" lon="-122.252532" version="1"/>
+	<node id="4676766110" lat="37.8682121" lon="-122.2526241" version="1"/>
+	<node id="4676766120" lat="37.8683061" lon="-122.2535167" version="1"/>
+	<node id="4676766131" lat="37.8688068" lon="-122.2533989" version="1"/>
+	<node id="4676766143" lat="37.8685104" lon="-122.2527696" version="1"/>
+	<node id="4676766231" lat="37.8682833" lon="-122.252998" version="1"/>
+	<node id="4676766242" lat="37.8682088" lon="-122.2529837" version="1"/>
+	<node id="4676766252" lat="37.868307" lon="-122.2535991" version="1"/>
+	<node id="4676766262" lat="37.868828" lon="-122.2529773" version="1"/>
+	<node id="4676766263" lat="37.8681515" lon="-122.2538051" version="1"/>
+	<node id="4676766270" lat="37.8681032" lon="-122.2536" version="1"/>
+	<node id="4676766275" lat="37.8681729" lon="-122.2525422" version="1"/>
+	<node id="4676766289" lat="37.8684493" lon="-122.2528233" version="1"/>
+	<node id="4676766300" lat="37.8689379" lon="-122.252546" version="1"/>
+	<node id="4676766301" lat="37.8682663" lon="-122.2535097" version="1"/>
+	<node id="4676766306" lat="37.8688302" lon="-122.2529776" version="1"/>
+	<node id="4676766311" lat="37.8687973" lon="-122.2529992" version="1"/>
+	<node id="4676766312" lat="37.8686475" lon="-122.2538545" version="1"/>
+	<node id="4676766323" lat="37.8682941" lon="-122.2524049" version="1"/>
+	<node id="4676766352" lat="37.8681205" lon="-122.253431" version="1"/>
+	<node id="4676766362" lat="37.8680996" lon="-122.2535311" version="1"/>
+	<node id="4676766372" lat="37.8687905" lon="-122.2535349" version="1"/>
+	<node id="4676766373" lat="37.8683937" lon="-122.2526758" version="1"/>
+	<node id="4676766383" lat="37.8681356" lon="-122.2526122" version="1"/>
+	<node id="4676766404" lat="37.8682798" lon="-122.2530793" version="1"/>
+	<node id="4676766415" lat="37.8682429" lon="-122.2535123" version="1"/>
+	<node id="4676766425" lat="37.868267" lon="-122.2538337" version="1"/>
+	<node id="4676766435" lat="37.8688418" lon="-122.2528624" version="1"/>
+	<node id="4676766436" lat="37.8681473" lon="-122.2538441" version="1"/>
+	<node id="4676766448" lat="37.8683022" lon="-122.2523362" version="1"/>
+	<node id="4676766455" lat="37.8680247" lon="-122.2527565" version="1"/>
+	<node id="4676766467" lat="37.8681736" lon="-122.252722" version="1"/>
+	<node id="4676766477" lat="37.8683481" lon="-122.253314" version="1"/>
+	<node id="4676766487" lat="37.8689798" lon="-122.252661" version="1"/>
+	<node id="4676766488" lat="37.8686395" lon="-122.253481" version="1"/>
+	<node id="4676766500" lat="37.8685557" lon="-122.2525556" version="1"/>
+	<node id="4676766518" lat="37.868661" lon="-122.2537486" version="1"/>
+	<node id="4676766530" lat="37.8682844" lon="-122.2524869" version="1"/>
+	<node id="4676766559" lat="37.8681227" lon="-122.2534113" version="1"/>
+	<node id="4676766571" lat="37.8683008" lon="-122.2536298" version="1"/>
+	<node id="4676766581" lat="37.8687621" lon="-122.2535294" version="1"/>
+	<node id="4676766582" lat="37.8683834" lon="-122.2526734" version="1"/>
+	<node id="4676766597" lat="37.8682666" lon="-122.252636" version="1"/>
+	<node id="4676766607" lat="37.8689302" lon="-122.2525445" version="1"/>
+	<node id="4676766608" lat="37.8682891" lon="-122.2535204" version="1"/>
+	<node id="4676766618" lat="37.8689451" lon="-122.2524241" version="1"/>
+	<node id="4676766619" lat="37.8686157" lon="-122.2536795" version="1"/>
+	<node id="4676766630" lat="37.8682919" lon="-122.2524883" version="1"/>
+	<node id="4676766659" lat="37.8683497" lon="-122.2532744" version="1"/>
+	<node id="4676766671" lat="37.8681946" lon="-122.2537538" version="1"/>
+	<node id="4676766680" lat="37.8687417" lon="-122.2534217" version="1"/>
+	<node id="4676766681" lat="37.8684699" lon="-122.2527601" version="1"/>
+	<node id="4676766693" lat="37.8681217" lon="-122.2524057" version="1"/>
+	<node id="4676766713" lat="37.8682178" lon="-122.253066" version="1"/>
+	<node id="4676766724" lat="37.8689417" lon="-122.2525154" version="1"/>
+	<node id="4676766725" lat="37.8682823" lon="-122.2535191" version="1"/>
+	<node id="4676766734" lat="37.8687034" lon="-122.2529394" version="1"/>
+	<node id="4676766735" lat="37.8682826" lon="-122.2539238" version="1"/>
+	<node id="4676766746" lat="37.8681776" lon="-122.2524572" version="1"/>
+	<node id="4676766777" lat="37.868142" lon="-122.2532593" version="1"/>
+	<node id="4676766787" lat="37.868148" lon="-122.2535972" version="1"/>
+	<node id="4676766798" lat="37.8684158" lon="-122.2525239" version="1"/>
+	<node id="4676766809" lat="37.8685335" lon="-122.2523899" version="1"/>
+	<node id="4676766857" lat="37.8682511" lon="-122.2532403" version="1"/>
+	<node id="4676766867" lat="37.8683143" lon="-122.2535882" version="1"/>
+	<node id="4676766877" lat="37.8686575" lon="-122.2531596" version="1"/>
+	<node id="4676766878" lat="37.8684213" lon="-122.2529561" version="1"/>
+	<node id="4676766894" lat="37.8682176" lon="-122.2525839" version="1"/>
+	<node id="4676766904" lat="37.8682213" lon="-122.2535557" version="1"/>
+	<node id="4676766914" lat="37.8689173" lon="-122.2526487" version="1"/>
+	<node id="4676766915" lat="37.8686488" lon="-122.2534039" version="1"/>
+	<node id="4676766927" lat="37.8683151" lon="-122.2525005" version="1"/>
+	<node id="4676766939" lat="37.8683378" lon="-122.2523443" version="1"/>
+	<node id="4676766971" lat="37.8682493" lon="-122.2532537" version="1"/>
+	<node id="4676766981" lat="37.8681969" lon="-122.253551" version="1"/>
+	<node id="4676766990" lat="37.8681273" lon="-122.2523643" version="1"/>
+	<node id="4676767010" lat="37.8681314" lon="-122.2527128" version="1"/>
+	<node id="4676767021" lat="37.868934" lon="-122.2525139" version="1"/>
+	<node id="4676767022" lat="37.8682831" lon="-122.253513" version="1"/>
+	<node id="4676767028" lat="37.8682751" lon="-122.2531149" version="1"/>
+	<node id="4676767040" lat="37.8682439" lon="-122.2535038" version="1"/>
+	<node id="4676767050" lat="37.8682577" lon="-122.2539195" version="1"/>
+	<node id="4676767060" lat="37.8688006" lon="-122.252972" version="1"/>
+	<node id="4676767061" lat="37.8682133" lon="-122.2523731" version="1"/>
+	<node id="4676767073" lat="37.8681881" lon="-122.2523683" version="1"/>
+	<node id="4676767080" lat="37.8680072" lon="-122.252898" version="1"/>
+	<node id="4676767093" lat="37.8680185" lon="-122.252514" version="1"/>
+	<node id="4676767150" lat="37.8682073" lon="-122.2529958" version="1"/>
+	<node id="4676767160" lat="37.868227" lon="-122.2535712" version="1"/>
+	<node id="4676767170" lat="37.8688936" lon="-122.2530482" version="1"/>
+	<node id="4676767171" lat="37.8682531" lon="-122.2539621" version="1"/>
+	<node id="4676767178" lat="37.8681761" lon="-122.2537391" version="1"/>
+	<node id="4676767183" lat="37.8680411" lon="-122.2525319" version="1"/>
+	<node id="4676767192" lat="37.8680471" lon="-122.2534176" version="1"/>
+	<node id="4676767202" lat="37.8683328" lon="-122.2534495" version="1"/>
+	<node id="4676767213" lat="37.8686506" lon="-122.2536105" version="1"/>
+	<node id="4676767224" lat="37.8685419" lon="-122.2525524" version="1"/>
+	<node id="4676767230" lat="37.8687412" lon="-122.2537036" version="1"/>
+	<node id="4676767242" lat="37.8685709" lon="-122.2524508" version="1"/>
+	<node id="4676767272" lat="37.8681148" lon="-122.2532121" version="1"/>
+	<node id="4676767284" lat="37.8682134" lon="-122.2536113" version="1"/>
+	<node id="4676767302" lat="37.8682539" lon="-122.2527291" version="1"/>
+	<node id="4676767313" lat="37.8682899" lon="-122.2535136" version="1"/>
+	<node id="4676767330" lat="37.8689873" lon="-122.2524415" version="1"/>
+	<node id="4676767331" lat="37.8682656" lon="-122.253516" version="1"/>
+	<node id="4676767341" lat="37.8687143" lon="-122.2528379" version="1"/>
+	<node id="4676767342" lat="37.8685326" lon="-122.253831" version="1"/>
+	<node id="4676767353" lat="37.8681828" lon="-122.2524582" version="1"/>
+	<node id="4676767383" lat="37.8681401" lon="-122.2532762" version="1"/>
+	<node id="4676767393" lat="37.868837" lon="-122.2530515" version="1"/>
+	<node id="4676767394" lat="37.8683595" lon="-122.2529515" version="1"/>
+	<node id="4676767405" lat="37.8680772" lon="-122.2524011" version="1"/>
+	<node id="4676767425" lat="37.8684498" lon="-122.2528197" version="1"/>
+	<node id="4676767433" lat="37.8683053" lon="-122.2535232" version="1"/>
+	<node id="4676767443" lat="37.8687115" lon="-122.2528616" version="1"/>
+	<node id="4676767444" lat="37.8685461" lon="-122.2537251" version="1"/>
+	<node id="4676767455" lat="37.8683015" lon="-122.2524063" version="1"/>
+	<node id="4676767484" lat="37.8683826" lon="-122.2530185" version="1"/>
+	<node id="4676767494" lat="37.868093" lon="-122.2535867" version="1"/>
+	<node id="4676767505" lat="37.8683727" lon="-122.2527472" version="1"/>
+	<node id="4676767515" lat="37.8681621" lon="-122.2524144" version="1"/>
+	<node id="4676767593" lat="37.8682756" lon="-122.2525617" version="1"/>
+	<node id="4676767612" lat="37.868175" lon="-122.2527118" version="1"/>
+	<node id="4676767622" lat="37.8682196" lon="-122.2535697" version="1"/>
+	<node id="4676767632" lat="37.8689585" lon="-122.252834" version="1"/>
+	<node id="4676767633" lat="37.8686246" lon="-122.2536055" version="1"/>
+	<node id="4676767691" lat="37.8686728" lon="-122.2530221" version="1"/>
+	<node id="4676767692" lat="37.8684203" lon="-122.2529643" version="1"/>
+	<node id="4676767704" lat="37.8680684" lon="-122.2525247" version="1"/>
+	<node id="4676767724" lat="37.8681509" lon="-122.2525693" version="1"/>
+	<node id="4676767796" lat="37.868282" lon="-122.2537722" version="1"/>
+	<node id="4927407471" lat="37.8688088" lon="-122.2532851" version="1"/>
+	<node id="4927407472" lat="37.8684914" lon="-122.2532159" version="1"/>
+	<node id="5483223604" lat="37.8689144" lon="-122.2527748" version="1"/>
+	<node id="5483223605" lat="37.8686084" lon="-122.2527182" version="1"/>
+	<node id="5483223617" lat="37.8688657" lon="-122.2536787" version="1"/>
+	<node id="5483223618" lat="37.8688911" lon="-122.2534293" version="1">
+		<tag k="barrier" v="gate"/>
+	</node>
+	<node id="5483223619" lat="37.8688175" lon="-122.2539958" version="1"/>
+	<node id="5483223620" lat="37.8688465" lon="-122.2537767" version="1"/>
+	<way id="21458298" version="1">
+		<nd ref="4333613086"/>
+		<nd ref="267631978"/>
+		<nd ref="267631980"/>
+		<nd ref="4927407472"/>
+		<nd ref="4333613087"/>
+		<nd ref="1964475027"/>
+		<nd ref="5483223605"/>
+		<nd ref="267631979"/>
+		<tag k="name" v="Durant Avenue"/>
+		<tag k="oneway" v="yes"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="both"/>
+		<tag k="tiger:cfcc" v="A41"/>
+		<tag k="tiger:county" v="Alameda, CA"/>
+		<tag k="tiger:name_base" v="Durant"/>
+		<tag k="tiger:name_type" v="Ave"/>
+	</way>
+	<way id="24620174" version="1">
+		<nd ref="267631975"/>
+		<nd ref="4333613289"/>
+		<nd ref="53055620"/>
+		<nd ref="267631981"/>
+		<tag k="name" v="Piedmont Avenue"/>
+		<tag k="oneway" v="yes"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="right"/>
+		<tag k="tiger:cfcc" v="A41"/>
+		<tag k="tiger:county" v="Alameda, CA"/>
+		<tag k="tiger:name_base" v="Piedmont"/>
+		<tag k="tiger:name_type" v="Ave"/>
+	</way>
+	<way id="109193724" version="1">
+		<nd ref="1250673143"/>
+		<nd ref="3264470131"/>
+		<nd ref="2769122338"/>
+		<nd ref="1250673157"/>
+		<nd ref="1250673156"/>
+		<nd ref="1250673138"/>
+		<tag k="name" v="Ida Louise Jackson Graduate House"/>
+		<tag k="building" v="yes"/>
+		<tag k="addr:city" v="Berkeley"/>
+		<tag k="addr:street" v="College Avenue"/>
+		<tag k="survey:date" v="2014-12-22"/>
+		<tag k="addr:housenumber" v="2333"/>
+	</way>
+	<way id="185769359" version="1">
+		<nd ref="1964475137"/>
+		<nd ref="1964475040"/>
+		<nd ref="1964475021"/>
+		<nd ref="1964475018"/>
+		<nd ref="1964475099"/>
+		<nd ref="1964475137"/>
+		<tag k="amenity" v="parking"/>
+		<tag k="parking" v="surface"/>
+		<tag k="cooperative" v="yes"/>
+	</way>
+	<way id="185769362" version="1">
+		<nd ref="1964475053"/>
+		<nd ref="1964475083"/>
+		<nd ref="4676767425"/>
+		<nd ref="4676766289"/>
+		<nd ref="1964475147"/>
+		<nd ref="1964475085"/>
+		<nd ref="1964475167"/>
+		<nd ref="1964475159"/>
+		<nd ref="4676765358"/>
+		<nd ref="4676767394"/>
+		<nd ref="4676767692"/>
+		<nd ref="4676766878"/>
+		<nd ref="1964475053"/>
+		<tag k="name" v="Wolf House"/>
+		<tag k="building" v="dormitory"/>
+		<tag k="addr:street" v="Durant Avenue"/>
+		<tag k="cooperative" v="yes"/>
+		<tag k="addr:housename" v="WOL"/>
+		<tag k="addr:housenumber" v="2732"/>
+	</way>
+	<way id="185769370" version="1">
+		<nd ref="1964475027"/>
+		<nd ref="1964475018"/>
+		<tag k="lanes" v="1"/>
+		<tag k="access" v="private"/>
+		<tag k="highway" v="service"/>
+		<tag k="service" v="driveway"/>
+		<tag k="cooperative" v="yes"/>
+	</way>
+	<way id="195433876" version="1">
+		<nd ref="267632000"/>
+		<nd ref="267632001"/>
+		<tag k="name" v="Piedmont Avenue"/>
+		<tag k="oneway" v="yes"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="right"/>
+		<tag k="tiger:cfcc" v="A41"/>
+		<tag k="tiger:county" v="Alameda, CA"/>
+		<tag k="tiger:name_base" v="Piedmont"/>
+		<tag k="tiger:name_type" v="Ave"/>
+	</way>
+	<way id="201989361" version="1">
+		<nd ref="267632001"/>
+		<nd ref="53055620"/>
+		<tag k="name" v="Durant Avenue"/>
+		<tag k="oneway" v="yes"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="right"/>
+		<tag k="tiger:cfcc" v="A41"/>
+		<tag k="tiger:county" v="Alameda, CA"/>
+		<tag k="tiger:name_base" v="Durant"/>
+		<tag k="tiger:name_type" v="Ave"/>
+	</way>
+	<way id="201989368" version="1">
+		<nd ref="267632001"/>
+		<nd ref="4333613088"/>
+		<nd ref="2252623356"/>
+		<nd ref="267632002"/>
+		<nd ref="2252623348"/>
+		<nd ref="267632003"/>
+		<nd ref="2252623344"/>
+		<tag k="name" v="Piedmont Avenue"/>
+		<tag k="lanes" v="1"/>
+		<tag k="oneway" v="yes"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="surface" v="asphalt"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="right"/>
+		<tag k="tiger:cfcc" v="A41"/>
+		<tag k="tiger:county" v="Alameda, CA"/>
+		<tag k="tiger:name_base" v="Piedmont"/>
+		<tag k="tiger:name_type" v="Ave"/>
+	</way>
+	<way id="215827735" version="1">
+		<nd ref="2252623351"/>
+		<nd ref="2252623354"/>
+		<nd ref="2252623359"/>
+		<nd ref="2252623358"/>
+		<nd ref="2252623357"/>
+		<nd ref="2252623355"/>
+		<nd ref="2252623353"/>
+		<nd ref="2252623350"/>
+		<nd ref="2252623349"/>
+		<nd ref="2252623347"/>
+		<nd ref="2252623345"/>
+		<nd ref="2252623342"/>
+		<nd ref="2252623339"/>
+		<tag k="source" v="bing"/>
+		<tag k="landuse" v="grass"/>
+	</way>
+	<way id="247336859" version="1">
+		<nd ref="2542389561"/>
+		<nd ref="2542389562"/>
+		<nd ref="2542389563"/>
+		<nd ref="2542389564"/>
+		<nd ref="2542389565"/>
+		<nd ref="2542389566"/>
+		<nd ref="2542389561"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="263156800" version="1">
+		<nd ref="2687909063"/>
+		<nd ref="2687909064"/>
+		<nd ref="2687909065"/>
+		<nd ref="2687909066"/>
+		<nd ref="2687909068"/>
+		<nd ref="4676767183"/>
+		<nd ref="4676766091"/>
+		<nd ref="2687909069"/>
+		<nd ref="2687909070"/>
+		<nd ref="2687909063"/>
+		<tag k="access" v="private"/>
+		<tag k="amenity" v="parking"/>
+		<tag k="parking" v="surface"/>
+		<tag k="capacity" v="14"/>
+		<tag k="park_ride" v="no"/>
+		<tag k="supervised" v="no"/>
+	</way>
+	<way id="313188630" version="1">
+		<nd ref="3190966751"/>
+		<tag k="building" v="house"/>
+	</way>
+	<way id="313188631" version="1">
+		<nd ref="3190967966"/>
+		<nd ref="3190967967"/>
+	</way>
+	<way id="313188874" version="1">
+		<nd ref="3190969466"/>
+		<nd ref="3190969467"/>
+		<nd ref="3190969468"/>
+		<tag k="building" v="house"/>
+	</way>
+	<way id="319949917" version="1">
+		<nd ref="3955064813"/>
+		<nd ref="3955064811"/>
+		<nd ref="3955064809"/>
+		<nd ref="3955064813"/>
+	</way>
+	<way id="416113297" version="1">
+		<nd ref="267631979"/>
+		<nd ref="4333613290"/>
+		<nd ref="267632001"/>
+		<tag k="name" v="Durant Avenue"/>
+		<tag k="lanes" v="2"/>
+		<tag k="oneway" v="yes"/>
+		<tag k="highway" v="tertiary"/>
+		<tag k="maxspeed" v="25 mph"/>
+		<tag k="sidewalk" v="both"/>
+		<tag k="tiger:cfcc" v="A41"/>
+		<tag k="turn:lanes" v="left|right"/>
+		<tag k="tiger:county" v="Alameda, CA"/>
+		<tag k="tiger:name_base" v="Durant"/>
+		<tag k="tiger:name_type" v="Ave"/>
+	</way>
+	<way id="431330557" version="1">
+		<nd ref="4305382141"/>
+		<nd ref="4305381561"/>
+		<nd ref="4305382141"/>
+		<tag k="source" v="Bing"/>
+		<tag k="building" v="yes"/>
+		<tag k="addr:city" v="Berkeley"/>
+		<tag k="addr:street" v="College Avenue"/>
+		<tag k="survey:date" v="2014-12-22"/>
+		<tag k="addr:housenumber" v="2319"/>
+	</way>
+	<way id="431330570" version="1">
+		<nd ref="4305382033"/>
+		<nd ref="4305382078"/>
+		<tag k="source" v="Bing"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598407" version="1">
+		<nd ref="4676766867"/>
+		<nd ref="4676765348"/>
+		<nd ref="4676767433"/>
+		<nd ref="4676766120"/>
+		<nd ref="4676767313"/>
+		<nd ref="4676766608"/>
+		<nd ref="4676766725"/>
+		<nd ref="4676767022"/>
+		<nd ref="4676766301"/>
+		<nd ref="4676767331"/>
+		<nd ref="4676764560"/>
+		<nd ref="4676765921"/>
+		<nd ref="4676767040"/>
+		<nd ref="4676766415"/>
+		<nd ref="4676766055"/>
+		<nd ref="4676766981"/>
+		<nd ref="4676766904"/>
+		<nd ref="4676767622"/>
+		<nd ref="4676767160"/>
+		<nd ref="4676764570"/>
+		<nd ref="4676766252"/>
+		<nd ref="4676765868"/>
+		<nd ref="4676766867"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598413" version="1">
+		<nd ref="4676767330"/>
+		<nd ref="4676765920"/>
+		<nd ref="4676766618"/>
+		<nd ref="4676767021"/>
+		<nd ref="4676766724"/>
+		<nd ref="4676766300"/>
+		<nd ref="4676766607"/>
+		<nd ref="4676766914"/>
+		<nd ref="4676766487"/>
+		<nd ref="4676767632"/>
+		<tag k="building" v="yes"/>
+		<tag k="addr:street" v="Piedmont Avenue"/>
+		<tag k="addr:housenumber" v="2310"/>
+	</way>
+	<way id="473598421" version="1">
+		<nd ref="4676765357"/>
+		<nd ref="4676767393"/>
+		<nd ref="4676767691"/>
+		<nd ref="4676766877"/>
+		<nd ref="4676765357"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598433" version="1">
+		<nd ref="4676767593"/>
+		<nd ref="4676766530"/>
+		<nd ref="4676766630"/>
+		<nd ref="4676767455"/>
+		<nd ref="4676766323"/>
+		<nd ref="4676766448"/>
+		<nd ref="4676765942"/>
+		<nd ref="4676767061"/>
+		<nd ref="4676767073"/>
+		<nd ref="4676766746"/>
+		<nd ref="4676767353"/>
+		<nd ref="4676766275"/>
+		<nd ref="4676767593"/>
+		<tag k="ele" v="105"/>
+		<tag k="name" v="Casa Joaquin Murieta"/>
+		<tag k="source" v="USGS Geonames"/>
+		<tag k="building" v="yes"/>
+		<tag k="addr:state" v="CA"/>
+		<tag k="gnis:reviewed" v="no"/>
+		<tag k="gnis:feature_id" v="1656679"/>
+		<tag k="gnis:county_name" v="Alameda"/>
+		<tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+	</way>
+	<way id="473598439" version="1">
+		<nd ref="4676767028"/>
+		<nd ref="4676766404"/>
+		<nd ref="4676766713"/>
+		<nd ref="4676765909"/>
+		<nd ref="4676767028"/>
+	</way>
+	<way id="473598451" version="1">
+		<nd ref="4676766787"/>
+		<nd ref="4676765983"/>
+		<nd ref="4676766362"/>
+		<nd ref="4676767494"/>
+		<nd ref="4676766787"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598457" version="1">
+		<nd ref="4676767170"/>
+		<nd ref="4676766065"/>
+		<nd ref="4676766306"/>
+		<nd ref="4676765878"/>
+		<nd ref="4676767170"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598465" version="1">
+		<nd ref="4676766312"/>
+		<nd ref="4676766518"/>
+		<nd ref="4676767444"/>
+		<nd ref="4676767342"/>
+		<nd ref="4676766312"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598471" version="1">
+		<nd ref="4676767080"/>
+		<nd ref="4676766455"/>
+		<nd ref="4676767080"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598477" version="1">
+		<nd ref="4676767724"/>
+		<nd ref="4676767010"/>
+		<nd ref="4676766467"/>
+		<nd ref="4676767612"/>
+		<nd ref="4676767302"/>
+		<nd ref="4676766597"/>
+		<nd ref="4676766110"/>
+		<nd ref="4676766894"/>
+		<nd ref="4676767724"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598483" version="1">
+		<nd ref="4676767202"/>
+		<nd ref="4676766477"/>
+		<nd ref="4676767383"/>
+		<nd ref="4676766777"/>
+		<nd ref="4676765973"/>
+		<nd ref="4676767192"/>
+		<nd ref="4676766352"/>
+		<nd ref="4676766559"/>
+		<nd ref="4676767202"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598508" version="1">
+		<nd ref="4676766143"/>
+		<nd ref="4676767224"/>
+		<nd ref="4676766500"/>
+		<nd ref="4676767242"/>
+		<nd ref="4676766006"/>
+		<nd ref="4676766809"/>
+		<nd ref="4676766939"/>
+		<nd ref="4676766927"/>
+		<nd ref="4676766798"/>
+		<nd ref="4676766373"/>
+		<nd ref="4676766582"/>
+		<nd ref="4676767505"/>
+		<nd ref="4676765577"/>
+		<nd ref="4676766681"/>
+		<nd ref="4676766143"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598526" version="1">
+		<nd ref="4676767796"/>
+		<nd ref="4676766571"/>
+		<nd ref="4676767284"/>
+		<nd ref="4676766671"/>
+		<nd ref="4676767796"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598532" version="1">
+		<nd ref="4676766262"/>
+		<nd ref="4676766435"/>
+		<nd ref="4676767341"/>
+		<nd ref="4676767443"/>
+		<nd ref="4676764580"/>
+		<nd ref="4676765941"/>
+		<nd ref="4676766734"/>
+		<nd ref="4676765930"/>
+		<nd ref="4676766311"/>
+		<nd ref="4676767060"/>
+		<nd ref="4676766262"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598539" version="1">
+		<nd ref="4676767230"/>
+		<nd ref="4676766581"/>
+		<nd ref="4676766372"/>
+		<nd ref="4676766131"/>
+		<nd ref="4676765576"/>
+		<nd ref="4676766680"/>
+		<nd ref="4676766915"/>
+		<nd ref="4676766488"/>
+		<nd ref="4676765994"/>
+		<nd ref="4676767213"/>
+		<nd ref="4676767633"/>
+		<nd ref="4676766619"/>
+		<nd ref="4676767230"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598552" version="1">
+		<nd ref="4676766383"/>
+		<nd ref="4676767515"/>
+		<nd ref="4676766693"/>
+		<nd ref="4676766990"/>
+		<nd ref="4676765369"/>
+		<nd ref="4676767405"/>
+		<nd ref="4676765588"/>
+		<nd ref="4676767093"/>
+		<nd ref="4676767704"/>
+		<nd ref="4676766078"/>
+		<nd ref="4676766383"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598558" version="1">
+		<nd ref="4676766659"/>
+		<nd ref="4676767484"/>
+		<nd ref="4676766231"/>
+		<nd ref="4676764549"/>
+		<nd ref="4676767150"/>
+		<nd ref="4676766242"/>
+		<nd ref="4676765858"/>
+		<nd ref="4676766045"/>
+		<nd ref="4676765338"/>
+		<nd ref="4676767272"/>
+		<nd ref="4676766857"/>
+		<nd ref="4676766971"/>
+		<nd ref="4676766659"/>
+	</way>
+	<way id="473598570" version="1">
+		<nd ref="4676767178"/>
+		<nd ref="4676766073"/>
+		<nd ref="4676766270"/>
+		<nd ref="4676765886"/>
+		<nd ref="4676767178"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="473598583" version="1">
+		<nd ref="4676767171"/>
+		<nd ref="4676767050"/>
+		<nd ref="4676766735"/>
+		<nd ref="4676765931"/>
+		<nd ref="4676766425"/>
+		<nd ref="4676766066"/>
+		<nd ref="4676766263"/>
+		<nd ref="4676766436"/>
+		<nd ref="4676764581"/>
+		<nd ref="4676765879"/>
+		<nd ref="4676767171"/>
+		<tag k="building" v="yes"/>
+	</way>
+	<way id="502179752" version="1">
+		<nd ref="4927407472"/>
+		<nd ref="4927407471"/>
+		<nd ref="5483223618"/>
+		<nd ref="5483223617"/>
+		<tag k="highway" v="service"/>
+	</way>
+	<way id="570334336" version="1">
+		<nd ref="5483223605"/>
+		<nd ref="5483223604"/>
+		<tag k="highway" v="service"/>
+	</way>
+	<way id="570334341" version="1">
+		<nd ref="5483223620"/>
+		<nd ref="5483223619"/>
+		<tag k="highway" v="service"/>
+	</way>
+	<relation id="2814221" version="1">
+		<member type="way" ref="319949917" role="outer"/>
+		<tag k="name" v="University of California, Berkeley"/>
+		<tag k="type" v="multipolygon"/>
+		<tag k="source" v="local knowledge, outlines east of Piedmon Ave are very approx"/>
+		<tag k="amenity" v="university"/>
+		<tag k="name:de" v="Universität von Kalifornien, Berkeley"/>
+		<tag k="name:ja" v="カリフォルニア大学バークレー校"/>
+		<tag k="wikidata" v="Q168756"/>
+		<tag k="wikipedia" v="en:University of California, Berkeley"/>
+		<tag k="short_name" v="UC Berkeley"/>
+		<tag k="gnis:edited" v="01/04/2008"/>
+		<tag k="gnis:created" v="06/14/2000"/>
+		<tag k="gnis:state_id" v="06"/>
+		<tag k="gnis:county_id" v="001"/>
+		<tag k="gnis:feature_id" v="236863"/>
+	</relation>
+	<relation id="4202073" version="1">
+		<member type="way" ref="313188631" role="outer"/>
+		<tag k="type" v="multipolygon"/>
+		<tag k="building" v="house"/>
+	</relation>
+	<relation id="6963702" version="1">
+		<member type="way" ref="473598558" role="outer"/>
+		<member type="way" ref="473598439" role="inner"/>
+		<tag k="type" v="multipolygon"/>
+		<tag k="building" v="yes"/>
+	</relation>
+</osm>
